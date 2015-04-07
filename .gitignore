@@ -1,0 +1,11 @@
+# Unix-like files
+*~
+*.swp
+.Trashes
+.DS_Store
+.directory
+
+# MS Windows files
+Thumbs.db
+Desktop.ini
+

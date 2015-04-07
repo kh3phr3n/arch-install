@@ -1,0 +1,62 @@
+# File: ~/.bash_aliases
+
+# Search / List
+alias grep='grep --color=auto'
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ll -a'
+
+# Interactive
+alias cp='cp -i'
+alias rm='rm -i'
+alias mv='mv -i'
+
+# Utilities
+alias df='df -h'
+alias du='du -h'
+alias ds='du -s'
+
+# Pacman
+alias pcm='pacman'
+alias aur='cower -vc'
+
+# Miscs
+alias sudo='sudo '
+alias hclear='history -c'
+
+# Remove packages
+alias remove='pcm -R'
+alias remove-all='pcm -Rsn'
+alias remove-hard='pcm -Rcs'
+
+# Search packages
+alias search-aur='pcm -Qm'
+alias search-local='pcm -Qs'
+alias search-online='pcm -Ss'
+
+# Install packages
+alias install-local='pcm -U'
+alias install-online='pcm -Syu'
+
+# Packages informations
+alias show-local='pcm -Qi'
+alias show-online='pcm -Si'
+alias list-local-files='pcm -Ql'
+
+# Update and Upgrade system
+alias update-system='pcm -Sy'
+alias upgrade-system='pcm -Syu'
+
+# Clean cache packages (Use with caution)
+alias clean-cache='pcm -Sc'
+alias clean-cache-hard='pcm -Scc'
+
+# System administration commands
+alias xread='xrdb ~/.Xresources'
+alias mklinux='mkinitcpio -p linux'
+alias grubcfg='grub-mkconfig -o /boot/grub/grub.cfg'
+
+# Cleanup
+alias rmpyc='find . -name "*.pyc" -type f -delete'
+alias rmdss='find . -name "*.DS_Store" -type f -delete'
+
