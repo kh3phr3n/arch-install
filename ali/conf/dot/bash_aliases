@@ -29,14 +29,14 @@ alias remove='pcm -R'
 alias remove-all='pcm -Rsn'
 alias remove-hard='pcm -Rcs'
 
+# Install packages
+alias install-local='pcm -U'
+alias install-online='pcm -S'
+
 # Search packages
 alias search-aur='pcm -Qm'
 alias search-local='pcm -Qs'
 alias search-online='pcm -Ss'
-
-# Install packages
-alias install-local='pcm -U'
-alias install-online='pcm -S'
 
 # Packages informations
 alias show-local='pcm -Qi'
@@ -48,7 +48,7 @@ alias which-package='pcm -Qo'
 alias update-system='pcm -Sy'
 alias upgrade-system='pcm -Syu'
 
-# Clean cache packages (Use with caution)
+# Clean cache packages (Caution)
 alias clean-cache='pcm -Sc'
 alias clean-cache-hard='pcm -Scc'
 
