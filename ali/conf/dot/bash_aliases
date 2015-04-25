@@ -41,7 +41,8 @@ alias install-online='pcm -Syu'
 # Packages informations
 alias show-local='pcm -Qi'
 alias show-online='pcm -Si'
-alias list-local-files='pcm -Ql'
+alias which-files='pcm -Ql'
+alias which-package='pcm -Qo'
 
 # Update and Upgrade system
 alias update-system='pcm -Sy'
