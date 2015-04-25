@@ -36,7 +36,7 @@ alias search-online='pcm -Ss'
 
 # Install packages
 alias install-local='pcm -U'
-alias install-online='pcm -Syu'
+alias install-online='pcm -S'
 
 # Packages informations
 alias show-local='pcm -Qi'
