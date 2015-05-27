@@ -138,6 +138,8 @@ cat > ${XCONFDIR}/20-nouveau.conf << EOF
 Section "Device"
     Identifier "Nvidia Card"
     Driver     "nouveau"
+    Option     "SwapLimit" "2"
+    Option     "GLXVBlank" "true"
 EndSection
 EOF
 }
