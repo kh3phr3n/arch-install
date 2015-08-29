@@ -15,15 +15,15 @@ url='arch.tuxico.com/aur'
 # Packages list
 packages=(
     # Aur helper
-    'cower/cower-12-2-x86_64.pkg.tar.xz'
+    'cower/cower-13-1-x86_64.pkg.tar.xz'
     # Extras fonts
     'ttf-apple/ttf-apple-1.0-1-any.pkg.tar.xz'
     'ttf-seven/ttf-seven-1.0-1-any.pkg.tar.xz'
-    'ttf-awesome/ttf-font-awesome-4.3.0-2-any.pkg.tar.xz'
+    'ttf-awesome/ttf-font-awesome-4.4.0-1-any.pkg.tar.xz'
     # i3wm 3rd party
-    'i3wm/i3blocks-1.3-2-any.pkg.tar.xz'
+    'i3wm/i3blocks-1.4-2-x86_64.pkg.tar.xz'
     'i3wm/dmenu-xft-4.5-5-x86_64.pkg.tar.xz'
-    'i3wm/compton-git-0.1_beta2.59.g23d1dd1-1-x86_64.pkg.tar.xz'
+    'i3wm/compton-git-0.1_beta2.72.g86266e0-1-x86_64.pkg.tar.xz'
 )
 
 # Get/Install packages
