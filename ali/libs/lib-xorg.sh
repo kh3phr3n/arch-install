@@ -15,7 +15,7 @@ installXorg ()
     # Install xorg-* packages
     installPkg 'xorg-server xorg-server-utils xorg-xinit xorg-fonts-type1 gsfonts gamin'
     # Install misc fonts
-    installPkg 'ttf-dejavu ttf-freefont ttf-liberation ttf-bitstream-vera'
+    installPkg 'ttf-dejavu ttf-freefont ttf-liberation ttf-fira-mono ttf-bitstream-vera'
     # Install Alsa/PulseAudio utilities
     installPkg 'alsa-utils pulseaudio pulseaudio-alsa'
     # Touchpad driver
