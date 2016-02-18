@@ -146,7 +146,7 @@ configureBootloader ()
     if [ "${BOOTLOADER}" == "grub" ]
     then
         # Grub2 installation
-        modprobe dm-mod; grub-install --recheck ${HARDDISK}
+        grub-install --target=i386-pc --recheck ${HARDDISK}
 
         # Enable Grub2 logs
         sed -i "s/\<quiet\>//g" /etc/default/grub
