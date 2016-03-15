@@ -22,14 +22,14 @@ echo -e "${BLUE}:: Zero-fill device: ${CYAN}${HARDDISK}\n${OFF}"
 dd if=/dev/zero of=${HARDDISK} bs=1M status=progress
 
 # Diagnostic
-echo -e "${BLUE}\n:: Smart diagnostic: ${CYAN}${HARDDISK}\n${OFF}"
+echo -e "${BLUE}:: Smart diagnostic: ${CYAN}${HARDDISK}\n${OFF}"
 smartctl --test=short ${HARDDISK} && while [[ $(smartctl --all ${HARDDISK}) =~ 'progress' ]]; do sleep 10; done
 
 # Statistics
-echo -e "${BLUE}:: Smart statistics: ${CYAN}${HARDDISK}\n${OFF}"
+echo -e "${BLUE}\n:: Smart statistics: ${CYAN}${HARDDISK}\n${OFF}"
 smartctl --health ${HARDDISK}
 smartctl --log=error ${HARDDISK}
-smartctl --log=selftest ${HARDDISK}
+smartctl --log=xselftest,1 ${HARDDISK}
 
 # Status
 echo -e "${BLUE}:: Smart support: ${CYAN}${HARDDISK}\n${OFF}"
