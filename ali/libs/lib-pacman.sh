@@ -19,18 +19,18 @@ installPkg ()
     for package in "$@"
     do
         title -c ":: Package(s): ${CYAN}$package"
-        pacman --sync --logfile ${LOGFILE} $package; sleep 1
+        pacman --sync $package; sleep 1
     done
 }
 
-# Install packages without [Y/n] confirmation
+# Install packages without confirmation
 # $@: cf. installPkg()
 installNcPkg ()
 {
     for package in "$@"
     do
         title -c ":: Package(s): ${CYAN}$package"
-        pacman --sync --noconfirm --logfile ${LOGFILE} $package; sleep 1
+        pacman --sync --noconfirm $package; sleep 1
     done
 }
 
