@@ -13,13 +13,14 @@
 OFF='\e[0m'
 CYAN='\e[0;36m'
 BLUE='\e[1;34m'
+YELLOW='\e[1;33m'
 
 # Hard Disk Drive label
 HARDDISK='/dev/sda'
 
 # Zero-fill
 echo -e "${BLUE}:: Zero-fill device: ${CYAN}${HARDDISK}\n${OFF}"
-dd if=/dev/zero of=${HARDDISK} bs=1M status=progress
+dd if=/dev/zero of=${HARDDISK} bs=1M status=progress && echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read
 
 # Diagnostic
 echo -e "${BLUE}:: Smart diagnostic: ${CYAN}${HARDDISK}\n${OFF}"
