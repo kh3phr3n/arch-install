@@ -27,9 +27,7 @@ smartctl --test=short ${HARDDISK} && while [[ $(smartctl --all ${HARDDISK}) =~ '
 
 # Statistics
 echo -e "${BLUE}\n:: Smart statistics: ${CYAN}${HARDDISK}\n${OFF}"
-smartctl --health ${HARDDISK}
-smartctl --log=error ${HARDDISK}
-smartctl --log=xselftest,1 ${HARDDISK}
+smartctl --health --log=error --log=xselftest,1 ${HARDDISK}
 
 # Status
 echo -e "${BLUE}:: Smart support: ${CYAN}${HARDDISK}\n${OFF}"
