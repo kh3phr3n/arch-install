@@ -7,7 +7,7 @@
 # +--------------------------------------------+
 
 # Root privileges required
-[[ "${UID}" -ne 0 ]] && exit 0
+[[ "${UID}" -ne 0 ]] && exit 0 || clear
 
 # Packages url
 url='arch.tuxico.com/aur'
