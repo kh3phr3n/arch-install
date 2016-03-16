@@ -17,10 +17,12 @@ YELLOW='\e[1;33m'
 
 # Hard Disk Drive label
 HARDDISK='/dev/sda'
+# Hard Disk Drive size (B)
+HARDDISKSIZE=$(blockdev --getsize64 ${HARDDISK})
 
 # Zero-fill
 echo -e "${BLUE}:: Zero-fill device: ${CYAN}${HARDDISK}\n${OFF}"
-dd if=/dev/zero of=${HARDDISK} bs=1M status=progress && echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read
+dd if=/dev/zero of=${HARDDISK} bs=4096 count=${HARDDISKSIZE} iflag=count_bytes status=progress && echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read
 
 # Diagnostic
 echo -e "${BLUE}:: Smart diagnostic: ${CYAN}${HARDDISK}\n${OFF}"
