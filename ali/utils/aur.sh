@@ -9,11 +9,17 @@
 # Root privileges required
 [[ "${UID}" -ne 0 ]] && exit 0 || clear
 
+# Colors
+OFF='\e[0m'
+CYAN='\e[0;36m'
+BLUE='\e[1;34m'
+YELLOW='\e[1;33m'
+
 # Packages url
-url='arch.tuxico.com/aur'
+URL='arch.tuxico.com/aur'
 
 # Packages list
-packages=(
+PACKAGES=(
     # Aur helper
     'cower/cower-14-2-x86_64.pkg.tar.xz'
     # i3wm 3rd party
@@ -25,10 +31,10 @@ packages=(
 )
 
 # Get/Install packages
-for package in "${packages[@]}"
+for package in "${PACKAGES[@]}"
 do
     clear
-    echo ":: Get ${package}" && curl -O -# ${url}/${package} && echo -e "\n:: Install ${package##*/}" && pacman -U ${package##*/} && rm ${package##*/}
-    echo -e "\n:: Press any key to continue..."; read
+    echo -e "${BLUE}:: Get package: ${CYAN}${package}${OFF}\n" && curl -O -# ${URL}/${package} && echo -e "${BLUE}\n:: Install package: ${CYAN}${package##*/}${OFF}\n" && pacman -U ${package##*/} && rm ${package##*/}
+    echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read
 done
 
