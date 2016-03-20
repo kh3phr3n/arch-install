@@ -68,6 +68,7 @@ fontConfiguration ()
 
     for link in "${FCGLINKS[@]}"
     do
+        link+='.conf'
         ln -s /etc/fonts/conf.avail/$link /etc/fonts/conf.d && cecho ":: Link added: ${CYAN}$link"
     done
 
