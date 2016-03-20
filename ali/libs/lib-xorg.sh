@@ -64,7 +64,7 @@ xorgConfiguration ()
 
 fontConfiguration ()
 {
-    title -j ":: Configure Fontconfig links"
+    title -j ":: Configure Fontconfig presets"
 
     for link in "${FCGLINKS[@]}"
     do
