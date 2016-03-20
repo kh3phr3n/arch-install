@@ -86,6 +86,16 @@ setQtStyleOverride ()
     echo "export QT_STYLE_OVERRIDE=$1" > $file && chmod 755 $file && cecho ":: File updated: ${CYAN}$file"
 }
 
+# wiki.archlinux.org/index.php/Font_configuration#Subpixel_rendering
+setFt2SubpixelHinting ()
+{
+    title -j ":: Set FT2_SUBPIXEL_HINTING"
+
+    local file='/etc/environment'
+    # Enable Freetype2 subpixel hinting
+    echo "FT2_SUBPIXEL_HINTING=1" > $file && cecho ":: File updated: ${CYAN}$file"
+}
+
 # wiki.archlinux.org/index.php/Disable_PC_speaker_beep
 disableSpeakerBeep ()
 {

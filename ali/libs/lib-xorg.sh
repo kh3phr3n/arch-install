@@ -69,7 +69,10 @@ fontConfiguration ()
     for link in "${FCGLINKS[@]}"
     do
         ln -s /etc/fonts/conf.avail/$link /etc/fonts/conf.d && cecho ":: Link added: ${CYAN}$link"
-    done; pause
+    done
+
+    # Enable subpixel hinting
+    setFt2SubpixelHinting; pause
 }
 
 # Basic configuration files
