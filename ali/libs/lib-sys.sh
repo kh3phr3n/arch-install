@@ -92,7 +92,7 @@ setFt2SubpixelHinting ()
     title -j ":: Set FT2_SUBPIXEL_HINTING"
 
     local file='/etc/environment'
-    # Enable Freetype2 subpixel hinting
+    # Freetype2 subpixel hinting
     echo "FT2_SUBPIXEL_HINTING=1" > $file && cecho ":: File updated: ${CYAN}$file"
 }
 

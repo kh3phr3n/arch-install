@@ -71,7 +71,7 @@ fontConfiguration ()
         ln -s /etc/fonts/conf.avail/$link /etc/fonts/conf.d && cecho ":: Link added: ${CYAN}$link"
     done
 
-    # Enable subpixel hinting
+    # Freetype2 subpixel hinting
     setFt2SubpixelHinting; pause
 }
 
