@@ -10,7 +10,7 @@
 # -------------
 
 # Current pc
-PC='hp'
+PC='msi'
 # DHCP interface
 NET='dhcpcd'
 # Proc architecture
