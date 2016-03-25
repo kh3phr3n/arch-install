@@ -16,6 +16,14 @@ cd ali && chmod +x ali.sh
 
 ```
 
+Or
+
+```
+curl -u user:pass -O git.tuxico.com/arch-installer.git/tarball/master
+mkdir installer && tar xf master -C installer/
+mv installer/ali /root
+```
+
 ##### FHS Installation
 
     ali/
