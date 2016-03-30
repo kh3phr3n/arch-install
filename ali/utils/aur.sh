@@ -21,7 +21,7 @@ URL='arch.tuxico.com/aur'
 # Packages list
 PACKAGES=(
     # Aur helper
-    'cower/cower-14-2-x86_64.pkg.tar.xz'
+    'cower/cower-16-1-x86_64.pkg.tar.xz'
     # i3wm 3rd party
     'i3wm/i3blocks-1.4-2-x86_64.pkg.tar.xz'
     'i3wm/xcursor-oxygen-5.6.0-1-any.pkg.tar.xz'
