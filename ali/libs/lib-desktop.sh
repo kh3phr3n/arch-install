@@ -64,7 +64,7 @@ installI3 ()
     addUnits 'sddm.service' 'connman.service'
 
     # Force GTK+ style for Qt5
-    setQtStyleOverride 'gtk'
+    setQtStyleOverride 'GTK+'
     # Disable PC speaker
     disableSpeakerBeep
 }
