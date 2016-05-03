@@ -28,7 +28,7 @@ PACKAGES=(
     # Extras fonts
     'ttf-apple/ttf-apple-1.0-1-any.pkg.tar.xz'
     'ttf-seven/ttf-seven-1.0-1-any.pkg.tar.xz'
-    'ttf-awesome/ttf-font-awesome-4.5.0-2-any.pkg.tar.xz'
+    'ttf-awesome/ttf-font-awesome-4.6.1-1-any.pkg.tar.xz'
 )
 
 # Get/Install packages
