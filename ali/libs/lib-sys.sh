@@ -76,7 +76,7 @@ secureMySQL ()
 }
 
 # wiki.archlinux.org/index.php/Qt
-# $1: 'GTK+', 'Fusion', 'Windows'
+# wiki.archlinux.org/index.php/Uniform_Look_for_Qt_and_GTK_Applications
 setQtStyleOverride ()
 {
     title -c ":: Set GTK+ style for Qt5"

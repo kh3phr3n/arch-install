@@ -63,8 +63,8 @@ installI3 ()
     # Enable systemd bootup units
     addUnits 'sddm.service' 'connman.service'
 
-    # Force GTK+ style for Qt5
-    setQtStyleOverride 'GTK+'
+    # Force style for Qt5
+    setQtStyleOverride 'gtk2'
     # Disable PC speaker
     disableSpeakerBeep
 }
