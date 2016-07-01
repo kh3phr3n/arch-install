@@ -2,7 +2,7 @@
 
 # +--------------------------------------------+
 # | File    : wipe.sh                          |
-# | Email   : rcs[dot]devel[at]gmail[dot]com   |
+# | Email   : rc[dot]dev[at]tuxico[dot]com     |
 # | Licence : GPLv3 GNU General Public License |
 # +--------------------------------------------+
 
@@ -24,15 +24,18 @@ HARDDISKSIZE=$(blockdev --getsize64 ${HARDDISK})
 echo -e "${BLUE}:: Zero-fill device: ${CYAN}${HARDDISK}\n${OFF}"
 dd if=/dev/zero of=${HARDDISK} bs=4096 count=${HARDDISKSIZE} iflag=count_bytes status=progress && echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read
 
-# Diagnostic
-echo -e "${BLUE}:: Smart diagnostic: ${CYAN}${HARDDISK}\n${OFF}"
-smartctl --test=short ${HARDDISK} && while [[ $(smartctl --all ${HARDDISK}) =~ 'progress' ]]; do sleep 10; done
+if [ "${HARDDISK}" == "/dev/sda" ]
+then
+    # Diagnostic
+    echo -e "${BLUE}:: Smart diagnostic: ${CYAN}${HARDDISK}\n${OFF}"
+    smartctl --test=short ${HARDDISK} && while [[ $(smartctl --all ${HARDDISK}) =~ 'progress' ]]; do sleep 10; done
 
-# Statistics
-echo -e "${BLUE}\n:: Smart statistics: ${CYAN}${HARDDISK}\n${OFF}"
-smartctl --health --log=error --log=xselftest,1 ${HARDDISK}
+    # Statistics
+    echo -e "${BLUE}\n:: Smart statistics: ${CYAN}${HARDDISK}\n${OFF}"
+    smartctl --health --log=error --log=xselftest,1 ${HARDDISK}
 
-# Status
-echo -e "${BLUE}:: Smart support: ${CYAN}${HARDDISK}\n${OFF}"
-smartctl --info ${HARDDISK} | grep 'SMART support'
+    # Status
+    echo -e "${BLUE}:: Smart support: ${CYAN}${HARDDISK}\n${OFF}"
+    smartctl --info ${HARDDISK} | grep 'SMART support'
+fi
 
