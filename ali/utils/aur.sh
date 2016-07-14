@@ -24,12 +24,12 @@ PACKAGES=(
     'cower/cower-16-1-x86_64.pkg.tar.xz'
     # i3wm 3rd party
     'i3wm/i3blocks-1.4-2-x86_64.pkg.tar.xz'
-    'i3wm/xcursor-oxygen-5.6.1-1-any.pkg.tar.xz'
+    'i3wm/xcursor-oxygen-5.7.1-1-any.pkg.tar.xz'
     'i3wm/qt5-styleplugins-5.0.0-1-x86_64.pkg.tar.xz'
     # Extras fonts
     'ttf-apple/ttf-apple-1.0-1-any.pkg.tar.xz'
     'ttf-seven/ttf-seven-1.0-1-any.pkg.tar.xz'
-    'ttf-awesome/ttf-font-awesome-4.6.1-1-any.pkg.tar.xz'
+    'ttf-awesome/ttf-font-awesome-4.6.3-1-any.pkg.tar.xz'
 )
 
 # Get/Install packages
