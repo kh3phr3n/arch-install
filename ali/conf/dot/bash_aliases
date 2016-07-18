@@ -53,6 +53,7 @@ alias clean-cache='pcm -Sc'
 alias clean-cache-hard='pcm -Scc'
 
 # System administration commands
+alias trim='fstrim -av'
 alias xread='xrdb ~/.Xresources'
 alias mklinux='mkinitcpio -p linux'
 alias srcinfo='makepkg --printsrcinfo > .SRCINFO'
