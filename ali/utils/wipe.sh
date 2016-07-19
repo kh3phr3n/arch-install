@@ -30,8 +30,8 @@ dd if=/dev/zero of=${HARDDISK} bs=4096 count=${HARDDISKSIZE} iflag=count_bytes s
 if [ "${HARDDISKTYPE}" -eq 0 ]
 then
     echo -e "${BLUE}:: ATA Secure Erase: ${CYAN}${HARDDISK}\n${OFF}"
-    hdparm --user-master u --security-set-pass NULL ${HARDDISK} | sed -n '/Issuing/s/^[ \t]*//;4,$p' && \
-    hdparm --user-master u --security-erase-enhanced NULL ${HARDDISK} | sed -n '/Issuing/s/^[ \t]*//;4,$p' && echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read
+    hdparm --user-master u --security-set-pass NULL ${HARDDISK}       | sed -n '/Issuing/s/^[ \t]*//;4p' && \
+    hdparm --user-master u --security-erase-enhanced NULL ${HARDDISK} | sed -n '/Issuing/s/^[ \t]*//;4p' && echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read
 fi
 
 # Smartctl tool
