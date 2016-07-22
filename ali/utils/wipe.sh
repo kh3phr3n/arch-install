@@ -46,7 +46,7 @@ fi
 if [ "${HARDDISK}" == "/dev/sda" ]
 then
     title 'SMART diagnostic'
-    smartctl --test=short −−quietmode=errorsonly ${HARDDISK} && while [[ $(smartctl --all ${HARDDISK}) =~ 'progress' ]]; do sleep 10; done
+    smartctl --test=short --quietmode=errorsonly ${HARDDISK} && while [[ $(smartctl --all ${HARDDISK}) =~ 'progress' ]]; do sleep 10; done
     smartctl --health --log=error --log=xselftest,1 ${HARDDISK}
     smartctl --info ${HARDDISK} | grep 'SMART support'
 fi
