@@ -6,9 +6,6 @@
 # | Licence : GPLv3 GNU General Public License |
 # +--------------------------------------------+
 
-# Root privileges required
-[[ "${UID}" -ne 0 ]] && exit 0 || clear
-
 # Colors
 OFF='\e[0m'
 CYAN='\e[0;36m'
@@ -21,6 +18,13 @@ HARDDISK='/dev/sda'
 HARDDISKSIZE=$(blockdev --getsize64 ${HARDDISK})
 # Hard Disk Drive type (0 = SSD)
 HARDDISKTYPE=$(cat /sys/block/${HARDDISK##*/}/queue/rotational)
+# Hard Disk Drive state ("" = frozen)
+HARDDISKSTATE=$(hdparm -I ${HARDDISK} | grep -P 'not[ \t]frozen')
+
+# Root privileges required
+[[ "${UID}" -ne 0 ]] && exit 0 || clear
+# SSD 'not frozen' required
+[[ "${HARDDISKTYPE}" -eq 0 ]] && [[ -z "${HARDDISKSTATE}" ]] && exit 0
 
 # Zero-fill
 echo -e "${BLUE}:: Zero-fill device: ${CYAN}${HARDDISK}\n${OFF}"
