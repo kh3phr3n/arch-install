@@ -26,28 +26,32 @@ HARDDISKSTATE=$(hdparm -I ${HARDDISK} | grep -P 'not[ \t]frozen')
 # SSD 'not frozen' required
 [[ "${HARDDISKTYPE}" -eq 0 ]] && [[ -z "${HARDDISKSTATE}" ]] && exit 0
 
+# Util functions
+title () { echo -e "${BLUE}:: $1: ${CYAN}${HARDDISK}\n${OFF}"; }
+pause () { echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read; }
+
 # Zero-fill
-echo -e "${BLUE}:: Zero-fill device: ${CYAN}${HARDDISK}\n${OFF}"
-dd if=/dev/zero of=${HARDDISK} bs=4096 count=${HARDDISKSIZE} iflag=count_bytes status=progress && echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read
+title 'Zero-fill device'
+dd if=/dev/zero of=${HARDDISK} bs=4096 count=${HARDDISKSIZE} iflag=count_bytes status=progress && pause
 
 # Hdparm tool
 if [ "${HARDDISKTYPE}" -eq 0 ]
 then
-    echo -e "${BLUE}:: ATA Secure Erase: ${CYAN}${HARDDISK}\n${OFF}"
+    title 'ATA Secure Erase'
     hdparm --user-master u --security-set-pass NULL ${HARDDISK}       | sed -n '/Issuing/s/^[ \t]*//;4p' && \
-    hdparm --user-master u --security-erase-enhanced NULL ${HARDDISK} | sed -n '/Issuing/s/^[ \t]*//;4p' && echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read
+    hdparm --user-master u --security-erase-enhanced NULL ${HARDDISK} | sed -n '/Issuing/s/^[ \t]*//;4p' && pause
 fi
 
 # Smartctl tool
 if [ "${HARDDISK}" == "/dev/sda" ]
 then
-    echo -e "${BLUE}:: Smart diagnostic: ${CYAN}${HARDDISK}\n${OFF}"
+    title 'Smart diagnostic'
     smartctl --test=short ${HARDDISK} && while [[ $(smartctl --all ${HARDDISK}) =~ 'progress' ]]; do sleep 10; done
 
-    echo -e "${BLUE}\n:: Smart statistics: ${CYAN}${HARDDISK}\n${OFF}"
+    title 'Smart statistics'
     smartctl --health --log=error --log=xselftest,1 ${HARDDISK}
 
-    echo -e "${BLUE}:: Smart support: ${CYAN}${HARDDISK}\n${OFF}"
+    title 'Smart support'
     smartctl --info ${HARDDISK} | grep 'SMART support'
 fi
 
