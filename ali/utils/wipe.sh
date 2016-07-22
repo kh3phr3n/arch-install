@@ -37,7 +37,7 @@ dd if=/dev/zero of=${HARDDISK} bs=4096 count=${HARDDISKSIZE} iflag=count_bytes s
 # Hdparm tool
 if [ "${HARDDISKTYPE}" -eq 0 ]
 then
-    title 'ATA Secure Erase'
+    title 'SSD Secure Erase'
     hdparm --user-master u --security-set-pass NULL ${HARDDISK}       | sed -n '/Issuing/s/^[ \t]*//;4p' && \
     hdparm --user-master u --security-erase-enhanced NULL ${HARDDISK} | sed -n '/Issuing/s/^[ \t]*//;4p' && pause
 fi
@@ -45,13 +45,9 @@ fi
 # Smartctl tool
 if [ "${HARDDISK}" == "/dev/sda" ]
 then
-    title 'Smart diagnostic'
-    smartctl --test=short ${HARDDISK} && while [[ $(smartctl --all ${HARDDISK}) =~ 'progress' ]]; do sleep 10; done
-
-    title 'Smart statistics'
+    title 'SMART diagnostic'
+    smartctl --test=short −−quietmode=errorsonly ${HARDDISK} && while [[ $(smartctl --all ${HARDDISK}) =~ 'progress' ]]; do sleep 10; done
     smartctl --health --log=error --log=xselftest,1 ${HARDDISK}
-
-    title 'Smart support'
     smartctl --info ${HARDDISK} | grep 'SMART support'
 fi
 
