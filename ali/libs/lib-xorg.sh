@@ -94,8 +94,8 @@ xorg_10_keyboard_conf ()
 {
 cat > ${XCONFDIR}/10-keyboard.conf << EOF
 Section "InputClass"
-    Identifier      "Keyboard Layout"
-    MatchIsKeyboard "yes"
+    Identifier      "Keyboard"
+    MatchIsKeyboard "on"
     Option          "XkbLayout"  "${XKBLAYOUT}"
     Option          "XkbVariant" "${XKBVARIANT}"
     Option          "XkbOptions" "compose:menu,terminate:ctrl_alt_bksp"
@@ -126,7 +126,7 @@ xorg_20_nvidia_conf ()
 {
 cat > ${XCONFDIR}/20-nvidia.conf << EOF
 Section "Device"
-    Identifier "Device0"
+    Identifier "Nvidia Card"
     VendorName "NVIDIA Corporation"
     Driver     "nvidia"
     Option     "NoLogo" "true"
