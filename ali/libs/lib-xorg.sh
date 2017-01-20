@@ -19,8 +19,6 @@ installXorg ()
     installPkg 'ttf-fira-sans ttf-fira-mono'
     # Install Alsa/PulseAudio utilities
     installPkg 'alsa-utils pulseaudio pulseaudio-alsa'
-    # Touchpad driver
-    installPkg 'xf86-input-synaptics'
 
     # Install X.Org drivers
     installGraphicsDriver
