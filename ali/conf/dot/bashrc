@@ -50,14 +50,14 @@ setPrompt ()
     local yellow='\[\e[0;33m\]'
     local purple='\[\e[0;35m\]'
 
-    # Define '\W' colors
+    # Define '\w' colors
     [[ "$UID" -eq 0 ]] && local cwd=${red} || local cwd=${green}
 
     # Check-Add Python virtual environments
     [[ "$VIRTUAL_ENV" != "" ]] && PS1+="${cyan}(${VIRTUAL_ENV##*/})${off} "
 
     # Finalize PS1 (User, Directory, Prompt symbols: $/#)
-    PS1+="${blue}\u${off} ${purple}in${off} ${cwd}\W${off} ${yellow}\\\$${off} "
+    PS1+="${blue}\u${off} ${purple}in${off} ${cwd}\w${off} ${yellow}\\\$${off} "
 }
 
 PROMPT_COMMAND=setPrompt
