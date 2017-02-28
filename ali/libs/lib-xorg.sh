@@ -56,6 +56,9 @@ xorgConfiguration ()
     # Create keyboard configuration file
     xorg_10_keyboard_conf && cecho ":: Keyboard configured: ${CYAN}${XKBLAYOUT}, ${XKBVARIANT}"
 
+    # Create touchpad configuration file
+    [[ ${TOUCHPAD} -ne 0 ]] && xorg_10_touchpad_conf && cecho ":: Touchpad configured: ${CYAN}${ACCELSPEED}, ${CLICKMETHOD}"
+
     # Check graphics drivers configuration file
     [[ -f ${XCONFDIR}/20-${XDRIVER}.conf ]] && cecho ":: Graphic driver configured: ${CYAN}${XDRIVER}"
 }
@@ -76,6 +79,7 @@ fontConfiguration ()
 
 # Monitor : 10-monitor.conf
 # Keyboard: 10-keyboard.conf
+# Touchpad: 10-touchpad.conf
 
 xorg_10_monitor_conf ()
 {
@@ -91,11 +95,26 @@ xorg_10_keyboard_conf ()
 {
 cat > ${XCONFDIR}/10-keyboard.conf << EOF
 Section "InputClass"
-    Identifier      "Keyboard"
     MatchIsKeyboard "on"
+    Identifier      "Keyboard"
     Option          "XkbLayout"  "${XKBLAYOUT}"
     Option          "XkbVariant" "${XKBVARIANT}"
     Option          "XkbOptions" "compose:menu,terminate:ctrl_alt_bksp"
+EndSection
+EOF
+}
+
+xorg_10_touchpad_conf ()
+{
+cat > ${XCONFDIR}/10-touchpad.conf << EOF
+Section "InputClass"
+    MatchIsTouchpad "on"
+    Identifier      "Touchpad"
+    Driver          "libinput"
+    Option          "Tapping" "on"
+    Option          "AccelSpeed" "${ACCELSPEED}"
+    Option          "DisableWhileTyping" "on"
+    Option          "ClickMethod" "${CLICKMETHOD}"
 EndSection
 EOF
 }
