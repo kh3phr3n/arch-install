@@ -23,7 +23,6 @@ PACKAGES=(
     # Aur helper
     'cower/cower-16-1-x86_64.pkg.tar.xz'
     # i3wm 3rd party
-    'i3wm/i3blocks-1.4-3-x86_64.pkg.tar.xz'
     'i3wm/xcursor-oxygen-5.9.1-1-any.pkg.tar.xz'
     'i3wm/qt5-styleplugins-5.0.0-7-x86_64.pkg.tar.xz'
     # Extras fonts
