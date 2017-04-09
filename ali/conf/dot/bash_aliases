@@ -26,8 +26,7 @@ alias hclear='history -c'
 
 # Remove packages
 alias remove='pcm -R'
-alias remove-all='pcm -Rsn'
-alias remove-hard='pcm -Rsc'
+alias remove-all='pcm -Rscn'
 
 # Install packages
 alias install-local='pcm -U'
