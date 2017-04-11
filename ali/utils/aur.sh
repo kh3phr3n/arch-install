@@ -22,13 +22,17 @@ URL='arch.tuxico.com/aur'
 PACKAGES=(
     # Aur helper
     'cower/cower-16-1-x86_64.pkg.tar.xz'
-    # i3wm 3rd party
+    # Extras i3wm
     'i3wm/xcursor-oxygen-5.9.1-1-any.pkg.tar.xz'
     'i3wm/qt5-styleplugins-5.0.0-7-x86_64.pkg.tar.xz'
     # Extras fonts
-    'ttf-apple/ttf-apple-1.0-1-any.pkg.tar.xz'
-    'ttf-seven/ttf-seven-1.0-1-any.pkg.tar.xz'
+    'ttf-nonfree/ttf-nonfree-1.0-1-any.pkg.tar.xz'
     'ttf-awesome/ttf-font-awesome-4.7.0-1-any.pkg.tar.xz'
+    'ttf-iosevka/ttf-iosevka-custom-1.12.4-1-any.pkg.tar.xz'
+    # Extras utils
+    'ttf-iosevka/otfcc-0.6.3-1-x86_64.pkg.tar.xz'
+    'ttf-iosevka/ttfautohint-1.6-1-x86_64.pkg.tar.xz'
+    'ttf-iosevka/premake-git-5.0.alpha2.r898.gad6e49c1-1-x86_64.pkg.tar.xz'
 )
 
 # Get/Install packages
