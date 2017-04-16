@@ -16,7 +16,7 @@ BLUE='\e[1;34m'
 YELLOW='\e[1;33m'
 
 # Packages url
-URL='arch.tuxico.com/aur'
+URL='https://aur.tuxico.com'
 
 # Packages list
 PACKAGES=(
