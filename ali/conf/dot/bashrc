@@ -10,7 +10,8 @@ stty -ixon
 complete -cf man
 complete -cf sudo
 
-# Enable 256-color
+# Environment variables
+EDITOR='vim'
 TERM='xterm-256color'
 
 # Python virtual envs
