@@ -21,7 +21,7 @@ URL='https://aur.tuxico.com'
 # Packages list
 PACKAGES=(
     # Aur helper
-    'cower/cower-16-1-x86_64.pkg.tar.xz'
+    'cower/cower-17-2-x86_64.pkg.tar.xz'
     # Extras i3wm
     'i3wm/xcursor-oxygen-5.9.1-1-any.pkg.tar.xz'
     'i3wm/qt5-styleplugins-5.0.0-7-x86_64.pkg.tar.xz'
@@ -30,7 +30,7 @@ PACKAGES=(
     'ttf-awesome/ttf-font-awesome-4.7.0-2-any.pkg.tar.xz'
     'ttf-iosevka/ttf-iosevka-custom-1.12.5-1-any.pkg.tar.xz'
     # Extras utils
-    'ttf-iosevka/otfcc-0.6.3-1-x86_64.pkg.tar.xz'
+    'ttf-iosevka/otfcc-0.7.0-2-x86_64.pkg.tar.xz'
     'ttf-iosevka/ttfautohint-1.6-1-x86_64.pkg.tar.xz'
     'ttf-iosevka/premake-git-5.0.alpha2.r898.gad6e49c1-1-x86_64.pkg.tar.xz'
 )
