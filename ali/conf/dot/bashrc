@@ -11,11 +11,11 @@ complete -cf man
 complete -cf sudo
 
 # Environment variables
-EDITOR='vim'
-TERM='xterm-256color'
+export EDITOR='vim'
+export TERM='xterm-256color'
 
 # Python virtual envs
-[[ -d ~/.venvs ]] && VENVS=$HOME/.venvs
+[[ -d ~/.venvs ]] && export VENVS=$HOME/.venvs
 
 # Custom aliases
 [[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
