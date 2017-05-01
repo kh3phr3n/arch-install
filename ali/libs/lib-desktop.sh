@@ -78,5 +78,10 @@ install3rdParty ()
 
     # Install Additional Applications
     [[ "${#ADDPKGS[@]}" -gt 0 ]] && installPkg "${ADDPKGS[@]}"
+
+    title -c ":: Install development tools"
+
+    # Install Development Tools
+    [[ "${#DEVPKGS[@]}" -gt 0 ]] && installPkg "${DEVPKGS[@]}"
 }
 
