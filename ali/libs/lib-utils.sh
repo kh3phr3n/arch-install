@@ -6,6 +6,11 @@
 # | Licence : GPLv3 GNU General Public License |
 # +--------------------------------------------+
 
+# Pause installation
+pause () { cecho "\n:: Press any key to continue..." Yellow; read; }
+# Check if an element exist in a string -- $1: Choice, $2: List of Choices
+contains () { for e in "${@:2}"; do [[ $e == $1 ]] && break; done; }
+
 # Initialize terminal colors
 colors ()
 {
@@ -48,20 +53,6 @@ title ()
         -j ) cecho "\n$message\n" Blue        ;;
         -c ) clear && cecho "$message\n" Blue ;;
     esac
-}
-
-# Used by 'select' instruction
-# $1: Choice
-# $2: List of Choices
-contains ()
-{
-    #check if an element exist in a string
-    for e in "${@:2}"; do [[ $e == $1 ]] && break; done
-}
-
-pause ()
-{
-    cecho "\n:: Press any key to continue..." Yellow; read
 }
 
 # Pacman utils
