@@ -13,8 +13,6 @@
 PC='msi'
 # DHCP interface
 NET='dhcpcd'
-# Proc architecture
-ARCH=$(uname -m)
 
 # Arch Linux Installer libraries
 MINLIBS=(${PC}.conf 'lib-core.sh' 'lib-utils.sh' 'lib-install.sh')

@@ -68,11 +68,14 @@ dotfiles ()
 {
     title -j ":: Get user's dotfiles"
 
-    for dotfile in "${DOTFILES[@]}"
+    for dotfile in bashrc bash_profile bash_aliases
     do
+        # Download kh3phr3n's dotfile
+        curl --silent --remote-name https://raw.githubusercontent.com/kh3phr3n/dotfiles/master/$dotfile
+
         # Copy and move dotfile to $homeRoot/$homeUser
-        cp conf/dot/$dotfile $homeRoot/.$dotfile && cecho ":: File added: ${CYAN}$homeRoot/.$dotfile"
-        mv conf/dot/$dotfile $homeUser/.$dotfile && cecho ":: File added: ${CYAN}$homeUser/.$dotfile\n"
+        cp $dotfile $homeRoot/.$dotfile && cecho ":: File added: ${CYAN}$homeRoot/.$dotfile"
+        mv $dotfile $homeUser/.$dotfile && cecho ":: File added: ${CYAN}$homeUser/.$dotfile\n"
 
         # Change owner/group to $USERNAME:$USERNAME
         chown ${USERNAME}:${USERNAME} $homeUser/.$dotfile
