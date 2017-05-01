@@ -39,7 +39,8 @@ PACKAGES=(
 for package in "${PACKAGES[@]}"
 do
     clear
-    echo -e "${BLUE}:: Get package: ${CYAN}${package}${OFF}\n" && curl -O -# ${URL}/${package} && echo -e "${BLUE}\n:: Install package: ${CYAN}${package##*/}${OFF}\n" && pacman -U ${package##*/} && rm ${package##*/}
+    echo -e "${BLUE}:: Get package: ${CYAN}${package}${OFF}\n" && curl --progress-bar --remote-name ${URL}/${package}
+    echo -e "${BLUE}\n:: Install package: ${CYAN}${package##*/}${OFF}\n" && pacman -U ${package##*/} && rm ${package##*/}
     echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read
 done
 
