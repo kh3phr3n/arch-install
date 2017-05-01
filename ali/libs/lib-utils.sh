@@ -2,7 +2,7 @@
 
 # +--------------------------------------------+
 # | File    : lib-utils.sh                     |
-# | Email   : rcs[dot]devel[at]gmail[dot]com   |
+# | Email   : rc[dot]dev[at]tuxico[dot]com     |
 # | Licence : GPLv3 GNU General Public License |
 # +--------------------------------------------+
 
