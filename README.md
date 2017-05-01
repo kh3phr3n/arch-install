@@ -29,18 +29,11 @@ mv arch-installer-master/ali /root
     ├── ali.sh               *
     ├── conf
     │   ├── apps.conf        *
-    │   ├── dot
-    │   │   ├── bash_aliases
-    │   │   ├── bash_profile
-    │   │   └── bashrc
     │   └── hp.conf          *
     ├── libs
     │   ├── lib-core.sh
     │   ├── lib-desktop.sh
-    │   ├── lib-devel.sh
     │   ├── lib-install.sh
-    │   ├── lib-pacman.sh
-    │   ├── lib-sys.sh
     │   ├── lib-users.sh
     │   ├── lib-utils.sh
     │   └── lib-xorg.sh
@@ -49,5 +42,5 @@ mv arch-installer-master/ali /root
         └── wipe.sh          **
 
 ***
-\* Check parameters required -- \*\* File not Required
+\* Check/Update settings -- \*\* File not Required
 
