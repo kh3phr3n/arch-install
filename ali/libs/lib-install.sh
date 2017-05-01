@@ -187,7 +187,7 @@ restartArchSystem ()
 {
     title -j ":: Reboot ArchLinux system"
 
-    for (( i=${TIMEOUT} ; i>0 ; i-- ))
+    for (( i=10 ; i>0 ; i-- ))
     do
         echo -n "$i " && sleep 1
     done; reboot

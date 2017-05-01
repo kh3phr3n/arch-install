@@ -44,7 +44,6 @@ configuration ()
 endInstallation ()
 {
     title -c ":: [Part 3] Unmount and reboot Arch"
-    title -t ":: TimeOut  : ${CYAN}${TIMEOUT}"
     title -t ":: HardDisk : ${CYAN}${HARDDISK}"
 
     pause
