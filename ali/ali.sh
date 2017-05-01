@@ -17,7 +17,7 @@ NET='dhcpcd'
 ARCH=$(uname -m)
 
 # Arch Linux Installer libraries
-MINLIBS=(${PC}.conf 'lib-sys.sh' 'lib-core.sh' 'lib-utils.sh' 'lib-install.sh')
+MINLIBS=(${PC}.conf 'lib-core.sh' 'lib-utils.sh' 'lib-install.sh')
 # Additional libraries required by Part 4
 MAXLIBS=(${MINLIBS[@]} 'apps.conf' 'lib-xorg.sh' 'lib-users.sh' 'lib-desktop.sh')
 
