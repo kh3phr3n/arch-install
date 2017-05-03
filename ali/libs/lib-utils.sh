@@ -147,6 +147,18 @@ secureMySQL ()
     fi
 }
 
+# wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
+blacklistMods ()
+{
+    title -j ":: Add Module(s) in /etc/modprobe.d/blacklist.conf"
+
+    # Blacklist Kernel Module(s)
+    for module in "$@"
+    do
+        echo "blacklist $module" >> /etc/modprobe.d/blacklist.conf && cecho ":: Module blacklisted: ${CYAN}$module"
+    done
+}
+
 # wiki.archlinux.org/index.php/Qt
 # wiki.archlinux.org/index.php/Uniform_Look_for_Qt_and_GTK_Applications
 setQtStyleOverride ()
@@ -155,16 +167,6 @@ setQtStyleOverride ()
 
     local file='/etc/profile.d/qt5-style.sh'
     # Force GTK+ style for all Qt5 applications
-    echo "export QT_STYLE_OVERRIDE=$1" > $file && chmod 755 $file && cecho ":: File updated: ${CYAN}$file"
-}
-
-# wiki.archlinux.org/index.php/Disable_PC_speaker_beep
-disableSpeakerBeep ()
-{
-    title -j ":: Disable PC speaker beep"
-
-    local file='/etc/modprobe.d/nobeep.conf'
-    # Blacklist pcspkr kernel module globally
-    echo "blacklist pcspkr" > $file && cecho ":: File updated: ${CYAN}$file"; pause
+    echo "export QT_STYLE_OVERRIDE=$1" > $file && chmod 755 $file && cecho ":: File updated: ${CYAN}$file"; pause
 }
 

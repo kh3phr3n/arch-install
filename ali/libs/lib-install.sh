@@ -129,6 +129,9 @@ configureEtcFiles ()
 
 configureBaseSystem ()
 {
+    # Blacklist Kernel Modules
+    [[ "${#BLKMODS[@]}" -gt 0 ]] && blacklistMods ${BLKMODS[@]}; pause
+
     # Append additionals hooks
     [[ "${#NEWHOOKS[@]}" -gt 0 ]] && addHooks ${NEWHOOKS[@]}; pause
 

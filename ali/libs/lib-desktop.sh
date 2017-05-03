@@ -65,8 +65,6 @@ installI3 ()
 
     # Force style for Qt5
     setQtStyleOverride 'gtk2'
-    # Disable PC speaker
-    disableSpeakerBeep
 }
 
 install3rdParty ()
