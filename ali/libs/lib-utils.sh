@@ -10,19 +10,8 @@
 pause () { cecho "\n:: Press any key to continue..." Yellow; read; }
 # Check if an element exist in a string -- $1: Choice, $2: List of Choices
 contains () { for e in "${@:2}"; do [[ $e == $1 ]] && break; done; }
-
 # Initialize terminal colors
-colors ()
-{
-    # Regular Colors
-    PURPLE='\e[0;35m'
-    YELLOW='\e[1;33m'
-    GREEN='\e[0;32m'
-    CYAN='\e[0;36m'
-    BLUE='\e[1;34m'
-    RED='\e[0;31m'
-    OFF='\e[0m'
-}
+colors () { PURPLE='\e[0;35m' YELLOW='\e[1;33m' GREEN='\e[0;32m' CYAN='\e[0;36m' BLUE='\e[1;34m' RED='\e[0;31m' OFF='\e[0m'; }
 
 # Display colored message
 # $1: Message

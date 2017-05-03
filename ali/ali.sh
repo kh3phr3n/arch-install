@@ -11,9 +11,6 @@
 
 # Current pc
 PC='msi'
-# DHCP interface
-NET='dhcpcd'
-
 # Arch Linux Installer libraries
 MINLIBS=(${PC}.conf 'lib-core.sh' 'lib-utils.sh' 'lib-install.sh')
 # Additional libraries required by Part 4
@@ -83,7 +80,7 @@ else
             e ) loadLibs ${MINLIBS[@]} && endInstallation         ;;
 
             # Start network dhcpcd unit
-            p ) systemctl start ${NET}.service || exit 1
+            p ) systemctl start dhcpcd.service || exit 1
                 loadLibs ${MAXLIBS[@]} && postInstallation        ;;
 
             ? ) echo "$(basename $0): Invalid Option: -${OPTARG}" ;;

@@ -75,12 +75,13 @@ install3rdParty ()
 
     # Sync and upgrade system
     updatePkg
-
     # Install Additional Applications
     [[ "${#ADDPKGS[@]}" -gt 0 ]] && installPkg "${ADDPKGS[@]}"
 
     title -c ":: Install development tools"
 
+    # Sync and upgrade system
+    updatePkg
     # Install Development Tools
     [[ "${#DEVPKGS[@]}" -gt 0 ]] && installPkg "${DEVPKGS[@]}"
 }
