@@ -21,15 +21,12 @@ installPlasma5 ()
     clear
     title ":: Install KDE Plasma Environment\n"
 
-    # Sync and upgrade system
-    updatePkg
     # Install KDE minimal
-    installPkg 'sddm plasma phonon-qt5-gstreamer'
-
+    updatePkg && installPkg 'sddm plasma phonon-qt5-gstreamer'
     # Install Additional Applications
     [[ "${#KDEPKGS[@]}" -gt 0 ]] && installPkg "${KDEPKGS[@]}"
 
-    # Enable systemd bootup units
+    # Enable systemd units
     addUnits 'sddm.service' 'NetworkManager.service'
 }
 
@@ -38,15 +35,12 @@ installGnome3 ()
     clear
     title ":: Install GNOME Environment\n"
 
-    # Sync and upgrade system
-    updatePkg
     # Install GNOME minimal
-    installPkg 'gnome zeitgeist gnome-tweak-tool'
-
+    updatePkg && installPkg 'gnome zeitgeist gnome-tweak-tool'
     # Install Additional Applications
     [[ "${#GNOMEPKGS[@]}" -gt 0 ]] && installPkg "${GNOMEPKGS[@]}"
 
-    # Enable systemd bootup units
+    # Enable systemd units
     addUnits 'gdm.service' 'NetworkManager.service'
 }
 
@@ -55,17 +49,13 @@ installI3 ()
     clear
     title ":: Install i3 Environment\n"
 
-    # Sync and upgrade system
-    updatePkg
-    # Install full i3 environment
-    installPkg 'i3 sddm connman sysstat rxvt-unicode'
-
+    # Install i3 environment
+    updatePkg && installPkg 'i3 sddm connman sysstat rxvt-unicode'
     # Install Additional Applications
     [[ "${#I3PKGS[@]}" -gt 0 ]] && installPkg "${I3PKGS[@]}"
 
-    # Enable systemd bootup units
+    # Enable systemd units
     addUnits 'sddm.service' 'connman.service'
-
     # Force style for Qt5
     setQtStyleOverride 'gtk2'
 }
@@ -74,18 +64,10 @@ install3rdParty ()
 {
     clear
     title ":: Install Third-party applications\n"
-
-    # Sync and upgrade system
-    updatePkg
-    # Install Additional Applications
-    [[ "${#ADDPKGS[@]}" -gt 0 ]] && installPkg "${ADDPKGS[@]}"
+    updatePkg && [[ "${#ADDPKGS[@]}" -gt 0 ]] && installPkg "${ADDPKGS[@]}"
 
     clear
     title ":: Install development tools\n"
-
-    # Sync and upgrade system
-    updatePkg
-    # Install Development Tools
-    [[ "${#DEVPKGS[@]}" -gt 0 ]] && installPkg "${DEVPKGS[@]}"
+    updatePkg && [[ "${#DEVPKGS[@]}" -gt 0 ]] && installPkg "${DEVPKGS[@]}"
 }
 

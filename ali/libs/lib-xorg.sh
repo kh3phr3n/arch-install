@@ -14,7 +14,7 @@ installXorg ()
     # Sync and upgrade system
     updatePkg
     # Install xorg-* packages
-    installPkg 'xorg-server xorg-server-utils xorg-xinit xorg-fonts-type1 gsfonts gamin'
+    installPkg 'xorg-server xorg-server-utils xorg-xinit xorg-fonts-type1 gsfonts'
     # Install misc fonts
     installPkg 'ttf-roboto ttf-dejavu ttf-freefont ttf-liberation ttf-bitstream-vera'
     installPkg 'ttf-fira-sans ttf-fira-mono'
