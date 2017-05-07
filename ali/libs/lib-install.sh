@@ -167,16 +167,6 @@ configureBootloader ()
 
         title "\n:: Generate new /boot/grub/grub.cfg\n"
         grub-mkconfig -o /boot/grub/grub.cfg
-
-    elif [ "${BOOTLOADER}" == "syslinux" ]
-    then
-        # Syslinux installation
-        syslinux-install_update -iam
-
-        title "\n:: Configure syslinux.cfg to point to the root partition\n"
-        read  -p ":: Edit syslinux.cfg ? [Y/n]: " reply
-
-        [[ "$reply" != ["nN"] ]] && nano /boot/syslinux/syslinux.cfg
     fi
     nextPart 3
 }
