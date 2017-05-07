@@ -19,10 +19,10 @@ installDesktop ()
 installPlasma5 ()
 {
     clear
-    title ":: Install KDE Plasma Environment\n"
+    title ":: Install KDE Plasma Environment"; pause
 
     # Install KDE minimal
-    updatePkg && installPkg 'sddm plasma phonon-qt5-gstreamer'
+    installPkg 'sddm plasma phonon-qt5-gstreamer'
     # Install Additional Applications
     [[ "${#KDEPKGS[@]}" -gt 0 ]] && installPkg "${KDEPKGS[@]}"
 
@@ -33,10 +33,10 @@ installPlasma5 ()
 installGnome3 ()
 {
     clear
-    title ":: Install GNOME Environment\n"
+    title ":: Install GNOME Environment"; pause
 
     # Install GNOME minimal
-    updatePkg && installPkg 'gnome zeitgeist gnome-tweak-tool'
+    installPkg 'gnome zeitgeist gnome-tweak-tool'
     # Install Additional Applications
     [[ "${#GNOMEPKGS[@]}" -gt 0 ]] && installPkg "${GNOMEPKGS[@]}"
 
@@ -47,10 +47,10 @@ installGnome3 ()
 installI3 ()
 {
     clear
-    title ":: Install i3 Environment\n"
+    title ":: Install i3 Environment"; pause
 
     # Install i3 environment
-    updatePkg && installPkg 'i3 sddm connman sysstat rxvt-unicode'
+    installPkg 'i3 sddm connman sysstat rxvt-unicode'
     # Install Additional Applications
     [[ "${#I3PKGS[@]}" -gt 0 ]] && installPkg "${I3PKGS[@]}"
 
@@ -63,11 +63,11 @@ installI3 ()
 install3rdParty ()
 {
     clear
-    title ":: Install Third-party applications\n"
-    updatePkg && [[ "${#ADDPKGS[@]}" -gt 0 ]] && installPkg "${ADDPKGS[@]}"
+    title ":: Install Third-party applications"; pause
+    [[ "${#ADDPKGS[@]}" -gt 0 ]] && installPkg "${ADDPKGS[@]}"
 
     clear
-    title ":: Install development tools\n"
-    updatePkg && [[ "${#DEVPKGS[@]}" -gt 0 ]] && installPkg "${DEVPKGS[@]}"
+    title ":: Install development tools"; pause
+    [[ "${#DEVPKGS[@]}" -gt 0 ]] && installPkg "${DEVPKGS[@]}"
 }
 

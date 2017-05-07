@@ -9,10 +9,8 @@
 installXorg ()
 {
     clear
-    title ":: Install X.Org Window System\n"
+    title ":: Install X.Org Window System"; pause
 
-    # Sync and upgrade system
-    updatePkg
     # Install xorg-* packages
     installPkg 'xorg-server xorg-server-utils xorg-xinit xorg-fonts-type1 gsfonts'
     # Install misc fonts
