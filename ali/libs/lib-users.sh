@@ -8,7 +8,8 @@
 
 setupUsers ()
 {
-    title -c ":: Create new user account"
+    clear
+    title ":: Create new user account\n"
 
     # Define home location
     local homeUser="/home/${USERNAME}"
@@ -30,7 +31,7 @@ createNewUser ()
     cecho ":: User  : ${CYAN}${USERNAME}"
     cecho ":: Groups: ${CYAN}${USERGROUPS}"
 
-    title -j ":: Set user password"
+    title "\n:: Set user password\n"
     # Create user/groups and define password
     useradd -m -s ${USERSHELL} ${USERNAME} && usermod -G ${USERGROUPS} ${USERNAME} && passwd ${USERNAME}
 }
@@ -38,7 +39,7 @@ createNewUser ()
 # Allow group wheel to execute any commands
 configureSudo ()
 {
-    title -j ":: Configure sudo"
+    title "\n:: Configure sudo\n"
 
     if [ -f "/etc/sudoers" ]
     then
@@ -54,7 +55,8 @@ configureSudo ()
 # User's directories
 directories ()
 {
-    title -c ":: Create user's directories"
+    clear
+    title ":: Create user's directories\n"
 
     for directory in "${HOMEDIRS[@]}"
     do
@@ -66,7 +68,7 @@ directories ()
 # User's dotfiles
 dotfiles ()
 {
-    title -j ":: Get user's dotfiles"
+    title "\n:: Get user's dotfiles\n"
 
     for dotfile in bashrc bash_profile bash_aliases
     do

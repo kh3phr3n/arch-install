@@ -6,8 +6,10 @@
 # | Licence : GPLv3 GNU General Public License |
 # +--------------------------------------------+
 
+# Display blue message
+title () { cecho "$1" blue; }
 # Pause installation
-pause () { cecho "\n:: Press any key to continue..." Yellow; read; }
+pause () { cecho "\n:: Press any key to continue..." yellow; read; }
 # Check if an element exist in a string -- $1: Choice, $2: List of Choices
 contains () { for e in "${@:2}"; do [[ $e == $1 ]] && break; done; }
 # Initialize terminal colors
@@ -19,28 +21,13 @@ colors () { PURPLE='\e[0;35m' YELLOW='\e[1;33m' GREEN='\e[0;32m' CYAN='\e[0;36m'
 cecho ()
 {
     case "$2" in
-        Purple ) echo -e "${PURPLE}$1 ${OFF}" ;;
-        Yellow ) echo -e "${YELLOW}$1 ${OFF}" ;;
-        Green  ) echo -e "${GREEN}$1  ${OFF}" ;;
-        Cyan   ) echo -e "${CYAN}$1   ${OFF}" ;;
-        Blue   ) echo -e "${BLUE}$1   ${OFF}" ;;
-        Red    ) echo -e "${RED}$1    ${OFF}" ;;
+        purple ) echo -e "${PURPLE}$1 ${OFF}" ;;
+        yellow ) echo -e "${YELLOW}$1 ${OFF}" ;;
+        green  ) echo -e "${GREEN}$1  ${OFF}" ;;
+        cyan   ) echo -e "${CYAN}$1   ${OFF}" ;;
+        blue   ) echo -e "${BLUE}$1   ${OFF}" ;;
+        red    ) echo -e "${RED}$1    ${OFF}" ;;
         *      ) echo -e "${OFF}$1    ${OFF}" ;;
-    esac
-}
-
-# Display message with pause
-# $1: Option
-# $2: Message
-title ()
-{
-    local option="$1" && local message="$2"
-
-    case "$option" in
-        -t ) cecho "$message" Blue            ;;
-        -n ) cecho "$message\n" Blue          ;;
-        -j ) cecho "\n$message\n" Blue        ;;
-        -c ) clear && cecho "$message\n" Blue ;;
     esac
 }
 
@@ -50,7 +37,7 @@ title ()
 # Update/Upgrade system
 updatePkg ()
 {
-    title -n ":: Synchronize and upgrade packages"
+    title ":: Synchronize and upgrade packages\n"
     pacman --sync --refresh --sysupgrade; pause
 }
 
@@ -59,7 +46,8 @@ installPkg ()
 {
     for package in "$@"
     do
-        title -c ":: Package(s): ${CYAN}$package"
+        clear
+        title ":: Package(s): ${CYAN}$package\n"
         pacman --sync $package; sleep 1
     done
 }
@@ -70,7 +58,8 @@ installNcPkg ()
 {
     for package in "$@"
     do
-        title -c ":: Package(s): ${CYAN}$package"
+        clear
+        title ":: Package(s): ${CYAN}$package\n"
         pacman --sync --noconfirm $package; sleep 1
     done
 }
@@ -81,7 +70,7 @@ installNcPkg ()
 # Create an initial ramdisk environment
 initramfs ()
 {
-    title -j ":: Generate new initial ramdisk"
+    title "\n:: Generate new initial ramdisk\n"
 
     # wiki.archlinux.org/index.php/Initramfs
     mkinitcpio -p linux
@@ -91,7 +80,8 @@ initramfs ()
 # $@: Units list: 'kdm.service' 'cronie.service'
 addUnits ()
 {
-    title -c ":: Enable Unit(s) to systemd"
+    clear
+    title ":: Enable Unit(s) to systemd\n"
 
     # Enable *.service, *.target, ...
     for unit in "$@"
@@ -104,7 +94,7 @@ addUnits ()
 # $@: Hooks list: 'consolefont' 'keymap'
 addHooks ()
 {
-    title -j ":: Add Hook(s) in /etc/mkinitcpio.conf"
+    title "\n:: Add Hook(s) in /etc/mkinitcpio.conf\n"
 
     # Append hook(s) in HOOKS="" string
     for hook in "$@"
@@ -117,7 +107,8 @@ addHooks ()
 # wiki.archlinux.org/index.php/Systemd-timesyncd
 setupClock ()
 {
-    title -c ":: Configure Network Time Protocol"
+    clear
+    title ":: Configure Network Time Protocol\n"
 
     # Enable systemd-timesyncd daemon for synchronizing the system clock across the network
     timedatectl set-ntp true && cecho ":: Service enabled: ${CYAN}systemd-timesyncd"; pause
@@ -127,7 +118,8 @@ setupClock ()
 # $1: Module: 'i915', 'nouveau'
 earlyStart ()
 {
-    title -c ":: Add Module in /etc/mkinitcpio.conf"
+    clear
+    title ":: Add Module in /etc/mkinitcpio.conf\n"
 
     # Kernel Mode Setting: wiki.archlinux.org/index.php/KMS
     sed -i "/^MODULES=*/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && initramfs
@@ -140,7 +132,7 @@ secureMySQL ()
 {
     if [ -x /usr/bin/mysql_secure_installation ]
     then
-        title -n ":: Secure MySQL installation"
+        title ":: Secure MySQL installation\n"
 
         # Start MySQL server, securize and reload
         systemctl start mysqld && mysql_secure_installation && systemctl restart mysqld; pause
@@ -150,7 +142,7 @@ secureMySQL ()
 # wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
 blacklistMods ()
 {
-    title -j ":: Add Module(s) in /etc/modprobe.d/blacklist.conf"
+    title "\n:: Add Module(s) in /etc/modprobe.d/blacklist.conf\n"
 
     # Blacklist Kernel Module(s)
     for module in "$@"
@@ -163,7 +155,8 @@ blacklistMods ()
 # wiki.archlinux.org/index.php/Uniform_Look_for_Qt_and_GTK_Applications
 setQtStyleOverride ()
 {
-    title -c ":: Set GTK+ style for Qt5"
+    clear
+    title ":: Set GTK+ style for Qt5\n"
 
     local file='/etc/profile.d/qt5-style.sh'
     # Force GTK+ style for all Qt5 applications

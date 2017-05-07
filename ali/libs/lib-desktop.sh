@@ -18,7 +18,8 @@ installDesktop ()
 
 installPlasma5 ()
 {
-    title -c ":: Install KDE Plasma Environment"
+    clear
+    title ":: Install KDE Plasma Environment\n"
 
     # Sync and upgrade system
     updatePkg
@@ -34,7 +35,8 @@ installPlasma5 ()
 
 installGnome3 ()
 {
-    title -c ":: Install GNOME Environment"
+    clear
+    title ":: Install GNOME Environment\n"
 
     # Sync and upgrade system
     updatePkg
@@ -50,7 +52,8 @@ installGnome3 ()
 
 installI3 ()
 {
-    title -c ":: Install i3 Environment"
+    clear
+    title ":: Install i3 Environment\n"
 
     # Sync and upgrade system
     updatePkg
@@ -69,14 +72,16 @@ installI3 ()
 
 install3rdParty ()
 {
-    title -c ":: Install Third-party applications"
+    clear
+    title ":: Install Third-party applications\n"
 
     # Sync and upgrade system
     updatePkg
     # Install Additional Applications
     [[ "${#ADDPKGS[@]}" -gt 0 ]] && installPkg "${ADDPKGS[@]}"
 
-    title -c ":: Install development tools"
+    clear
+    title ":: Install development tools\n"
 
     # Sync and upgrade system
     updatePkg

@@ -9,13 +9,14 @@
 # [Part 1] Install the base system
 keyboardLayout ()
 {
-    title -c ":: Change keyboard layout"
+    clear
+    title ":: Change keyboard layout\n"
     loadkeys ${KEYBOARD}
 }
 
 diskPartitions ()
 {
-    title -j ":: Create disk partitions"
+    title "\n:: Create disk partitions\n"
 
     partitioningTools=('fdisk' 'gdisk' 'cgdisk' 'parted')
     PS3=":: Enter your option: "
@@ -32,14 +33,15 @@ diskPartitions ()
 
 diskFilesystems ()
 {
-    title -c ":: Format disk partitions"
+    clear
+    title ":: Format disk partitions\n"
 
     for partition in "${PARTITIONS[@]}"
     do
         local hdd=$(echo $partition | cut -d":" -f1)
         local lfs=$(echo $partition | cut -d":" -f3)
 
-        title -n ":: Format partition: ${CYAN}$hdd => $lfs"
+        title ":: Format partition: ${CYAN}$hdd => $lfs\n"
 
         if [ "$lfs" == "swap" ]
             then mkswap $hdd && cecho "\n:: $hdd formated"
@@ -50,7 +52,8 @@ diskFilesystems ()
 
 mountPartitions ()
 {
-    title -c ":: Mount disk partitions"
+    clear
+    title ":: Mount disk partitions\n"
 
     for partition in "${PARTITIONS[@]}"
     do
@@ -67,16 +70,18 @@ mountPartitions ()
 
 installBaseSystem ()
 {
-    title -c ":: Install minimal ArchLinux"
+    clear
+    title ":: Install minimal ArchLinux\n"
     pacstrap /mnt ${BASESYSTEM} ${BOOTLOADER}; pause
 }
 
 generateFstabAndChroot ()
 {
-    title -c ":: Generate new /etc/fstab"
+    clear
+    title ":: Generate new /etc/fstab\n"
     genfstab -U -p /mnt >> /mnt/etc/fstab && cecho ":: File updated: ${CYAN}/etc/fstab"
 
-    title -j ":: Prepare Chroot environment"
+    title "\n:: Prepare Chroot environment\n"
     cp -r /root/ali /mnt/root && cecho ":: ALI updated: ${CYAN}/mnt/root/ali/"
 
     # chroot into our newly system
@@ -86,7 +91,8 @@ generateFstabAndChroot ()
 # [Part 2] Configure the base system
 configureMirrors ()
 {
-    title -c ":: Generate new Pacman mirrorlist"
+    clear
+    title ":: Generate new Pacman mirrorlist\n"
 
     # Enable Pacman colors
     sed -i "/Color/s/^#//" /etc/pacman.conf
@@ -104,7 +110,8 @@ configureMirrors ()
 
 configureEtcFiles ()
 {
-    title -c ":: Update configuration files"
+    clear
+    title ":: Update configuration files\n"
 
     for file in "${ETCFILES[@]}"
     do
@@ -135,16 +142,18 @@ configureBaseSystem ()
     # Append additionals hooks
     [[ "${#NEWHOOKS[@]}" -gt 0 ]] && addHooks ${NEWHOOKS[@]}; pause
 
-    title -c ":: Generate locales system"
+    clear
+    title ":: Generate locales system\n"
     locale-gen && initramfs; pause
 
-    title -c ":: Set root password"
+    clear
+    title ":: Set root password\n"
     passwd; pause
 }
 
 configureBootloader ()
 {
-    title -n ":: Configure bootloader"
+    title ":: Configure bootloader\n"
 
     if [ "${BOOTLOADER}" == "grub" ]
     then
@@ -156,7 +165,7 @@ configureBootloader ()
         # Fix error messages at boot
         cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 
-        title -j ":: Generate new /boot/grub/grub.cfg"
+        title "\n:: Generate new /boot/grub/grub.cfg\n"
         grub-mkconfig -o /boot/grub/grub.cfg
 
     elif [ "${BOOTLOADER}" == "syslinux" ]
@@ -164,7 +173,7 @@ configureBootloader ()
         # Syslinux installation
         syslinux-install_update -iam
 
-        title -j ":: Configure syslinux.cfg to point to the root partition"
+        title "\n:: Configure syslinux.cfg to point to the root partition\n"
         read  -p ":: Edit syslinux.cfg ? [Y/n]: " reply
 
         [[ "$reply" != ["nN"] ]] && nano /boot/syslinux/syslinux.cfg
@@ -175,7 +184,8 @@ configureBootloader ()
 # [Part 3] Unmount and reboot the system
 unmountPartitions ()
 {
-    title -c ":: Unmount disk partitions"
+    clear
+    title ":: Unmount disk partitions\n"
 
     for (( i=${#PARTITIONS[@]}-1 ; i>=0 ; i-- ))
     do
@@ -188,7 +198,7 @@ unmountPartitions ()
 
 restartArchSystem ()
 {
-    title -j ":: Reboot ArchLinux system"
+    title "\n:: Reboot ArchLinux system\n"
 
     for (( i=10 ; i>0 ; i-- ))
     do
@@ -201,16 +211,16 @@ nextPart ()
 {
     case "$1" in
         2 )
-            title -j ":: Next Part: Configuration"
-            cecho    ":: Change directory to /root/ali"
-            cecho    ":: Run $(basename $0) -c or --configuration" ;;
+            title "\n:: Next Part: Configuration\n"
+            cecho ":: Change directory to /root/ali"
+            cecho ":: Run $(basename $0) -c or --configuration" ;;
         3 )
-            title -j ":: Next Part: End-Installation"
-            cecho    ":: Quit Chroot environment with Ctrl-D"
-            cecho    ":: Run $(basename $0) -e or --end-installation" ;;
+            title "\n:: Next Part: End-Installation\n"
+            cecho ":: Quit Chroot environment with Ctrl-D"
+            cecho ":: Run $(basename $0) -e or --end-installation" ;;
         4 )
-            title -j ":: Next Part: Post-Installation"
-            cecho    ":: After reboot, Run $(basename $0) -p or --post-installation" ;;
+            title "\n:: Next Part: Post-Installation\n"
+            cecho ":: After reboot, Run $(basename $0) -p or --post-installation" ;;
     esac
 }
 

@@ -8,7 +8,8 @@
 
 installXorg ()
 {
-    title -c ":: Install X.Org Window System"
+    clear
+    title ":: Install X.Org Window System\n"
 
     # Sync and upgrade system
     updatePkg
@@ -49,7 +50,8 @@ installGraphicsDriver ()
 
 xorgConfiguration ()
 {
-    title -c ":: Configure X.Org Window System"
+    clear
+    title ":: Configure X.Org Window System\n"
 
     # Create monitor configuration file
     xorg_10_monitor_conf  && cecho ":: Monitor configured: ${CYAN}${RESOLUTION}"
@@ -65,7 +67,7 @@ xorgConfiguration ()
 
 fontConfiguration ()
 {
-    title -j ":: Configure Fontconfig presets"
+    title "\n:: Configure Fontconfig presets\n"
 
     for link in "${FCGLINKS[@]}"
     do

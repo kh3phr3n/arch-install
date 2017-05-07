@@ -36,7 +36,7 @@ loadLibs ()
 {
     for library in "$@"
     do
-        [[ "$library" == "apps.conf" ]] && title -j ":: Load 3rd libraries:"
+        [[ "$library" == "apps.conf" ]] && title "\n:: Load 3rd libraries:\n"
 
         if [ "$library" == "${PC}.conf" ] || [ "$library" == "apps.conf" ]
             then source conf/$library && echo ":: Library loaded: $library" || exit 1

@@ -9,12 +9,13 @@
 # [Part 1] Install the base system
 installation ()
 {
-    title -c ":: [Part 1] Install the base system"
-    title -t ":: Computer   : ${CYAN}${PC}"
-    title -t ":: Keyboard   : ${CYAN}${KEYBOARD}"
-    title -t ":: HardDisk   : ${CYAN}${HARDDISK}"
-    title -t ":: BootLoader : ${CYAN}${BOOTLOADER}"
-    title -t ":: BaseSystem : ${CYAN}${BASESYSTEM}"
+    clear
+    title ":: [Part 1] Install the base system\n"
+    title ":: Computer   : ${CYAN}${PC}"
+    title ":: Keyboard   : ${CYAN}${KEYBOARD}"
+    title ":: HardDisk   : ${CYAN}${HARDDISK}"
+    title ":: BootLoader : ${CYAN}${BOOTLOADER}"
+    title ":: BaseSystem : ${CYAN}${BASESYSTEM}"
 
     pause
     keyboardLayout
@@ -28,10 +29,11 @@ installation ()
 # [Part 2] Configure the base system (In chroot)
 configuration ()
 {
-    title -c ":: [Part 2] Configure the base system"
-    title -t ":: Zone       : ${CYAN}${ZONE}"
-    title -t ":: SubZone    : ${CYAN}${SUBZONE}"
-    title -t ":: BootLoader : ${CYAN}${BOOTLOADER}"
+    clear
+    title ":: [Part 2] Configure the base system\n"
+    title ":: Zone       : ${CYAN}${ZONE}"
+    title ":: SubZone    : ${CYAN}${SUBZONE}"
+    title ":: BootLoader : ${CYAN}${BOOTLOADER}"
 
     pause
     configureMirrors
@@ -43,8 +45,9 @@ configuration ()
 # [Part 3] Unmount and reboot the system
 endInstallation ()
 {
-    title -c ":: [Part 3] Unmount and reboot Arch"
-    title -t ":: HardDisk : ${CYAN}${HARDDISK}"
+    clear
+    title ":: [Part 3] Unmount and reboot Arch\n"
+    title ":: HardDisk : ${CYAN}${HARDDISK}"
 
     pause
     unmountPartitions
@@ -54,11 +57,12 @@ endInstallation ()
 # [Part 4] Install X.Org, KDE environment
 postInstallation ()
 {
-    title -c ":: [Part 4] Create new user, install X.Org..."
-    title -t ":: XDriver    : ${CYAN}${XDRIVER}"
-    title -t ":: UserName   : ${CYAN}${USERNAME}"
-    title -t ":: UserShell  : ${CYAN}${USERSHELL}"
-    title -t ":: UserGroups : ${CYAN}${USERGROUPS}"
+    clear
+    title ":: [Part 4] Create new user, install X.Org...\n"
+    title ":: XDriver    : ${CYAN}${XDRIVER}"
+    title ":: UserName   : ${CYAN}${USERNAME}"
+    title ":: UserShell  : ${CYAN}${USERSHELL}"
+    title ":: UserGroups : ${CYAN}${USERGROUPS}"
 
     pause
     setupClock
