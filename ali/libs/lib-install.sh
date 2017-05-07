@@ -71,7 +71,7 @@ mountPartitions ()
 installBaseSystem ()
 {
     clear
-    title ":: Install minimal ArchLinux\n"
+    title ":: Install minimal system\n"
     pacstrap /mnt ${BASESYSTEM} ${BOOTLOADER}; pause
 }
 

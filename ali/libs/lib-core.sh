@@ -10,7 +10,7 @@
 installation ()
 {
     clear
-    title ":: [Part 1] Install the base system\n"
+    title ":: [Part 1] Install base system\n"
     title ":: Computer   : ${CYAN}${PC}"
     title ":: Keyboard   : ${CYAN}${KEYBOARD}"
     title ":: HardDisk   : ${CYAN}${HARDDISK}"
@@ -30,7 +30,7 @@ installation ()
 configuration ()
 {
     clear
-    title ":: [Part 2] Configure the base system\n"
+    title ":: [Part 2] Configure base system\n"
     title ":: Zone       : ${CYAN}${ZONE}"
     title ":: SubZone    : ${CYAN}${SUBZONE}"
     title ":: BootLoader : ${CYAN}${BOOTLOADER}"
@@ -46,7 +46,7 @@ configuration ()
 endInstallation ()
 {
     clear
-    title ":: [Part 3] Unmount and reboot Arch\n"
+    title ":: [Part 3] Unmount and reboot system\n"
     title ":: HardDisk : ${CYAN}${HARDDISK}"
 
     pause
@@ -54,7 +54,7 @@ endInstallation ()
     restartArchSystem
 }
 
-# [Part 4] Install X.Org, KDE environment
+# [Part 4] Install X.Org, Desktop environment
 postInstallation ()
 {
     clear

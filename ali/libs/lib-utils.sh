@@ -81,7 +81,7 @@ initramfs ()
 addUnits ()
 {
     clear
-    title ":: Enable Unit(s) to systemd\n"
+    title ":: Enable systemd unit(s)\n"
 
     # Enable *.service, *.target, ...
     for unit in "$@"
@@ -94,7 +94,7 @@ addUnits ()
 # $@: Hooks list: 'consolefont' 'keymap'
 addHooks ()
 {
-    title "\n:: Add Hook(s) in /etc/mkinitcpio.conf\n"
+    title "\n:: Add hook(s) in /etc/mkinitcpio.conf\n"
 
     # Append hook(s) in HOOKS="" string
     for hook in "$@"
@@ -115,11 +115,11 @@ setupClock ()
 }
 
 # Add driver to mkinitcpio.conf
-# $1: Module: 'i915', 'nouveau'
+# $1: Module: 'i915', 'amdgpu', 'radeon', 'nouveau', 'intel_agp i915'
 earlyStart ()
 {
     clear
-    title ":: Add Module in /etc/mkinitcpio.conf\n"
+    title ":: Add module(s) in /etc/mkinitcpio.conf\n"
 
     # Kernel Mode Setting: wiki.archlinux.org/index.php/KMS
     sed -i "/^MODULES=*/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && initramfs
@@ -142,7 +142,7 @@ secureMySQL ()
 # wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
 blacklistMods ()
 {
-    title "\n:: Add Module(s) in /etc/modprobe.d/blacklist.conf\n"
+    title "\n:: Add module(s) in /etc/modprobe.d/blacklist.conf\n"
 
     # Blacklist Kernel Module(s)
     for module in "$@"

@@ -8,7 +8,6 @@
 
 installDesktop ()
 {
-    # Install Desktop Environment
     case "${DESKTOP}" in
         plasma5 ) installPlasma5 ;;
         gnome3  ) installGnome3  ;;
@@ -19,7 +18,7 @@ installDesktop ()
 installPlasma5 ()
 {
     clear
-    title ":: Install KDE Plasma Environment"; pause
+    title ":: Install Plasma environment"; pause
 
     # Install KDE minimal
     installPkg 'sddm plasma phonon-qt5-gstreamer'
@@ -33,7 +32,7 @@ installPlasma5 ()
 installGnome3 ()
 {
     clear
-    title ":: Install GNOME Environment"; pause
+    title ":: Install GNOME environment"; pause
 
     # Install GNOME minimal
     installPkg 'gnome zeitgeist gnome-tweak-tool'
@@ -47,7 +46,7 @@ installGnome3 ()
 installI3 ()
 {
     clear
-    title ":: Install i3 Environment"; pause
+    title ":: Install i3 environment"; pause
 
     # Install i3 environment
     installPkg 'i3 sddm connman sysstat rxvt-unicode'
@@ -63,11 +62,11 @@ installI3 ()
 install3rdParty ()
 {
     clear
-    title ":: Install Third-party applications"; pause
+    title ":: Install additional applications"; pause
     [[ "${#ADDPKGS[@]}" -gt 0 ]] && installPkg "${ADDPKGS[@]}"
 
     clear
-    title ":: Install development tools"; pause
+    title ":: Install development applications"; pause
     [[ "${#DEVPKGS[@]}" -gt 0 ]] && installPkg "${DEVPKGS[@]}"
 }
 

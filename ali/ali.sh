@@ -24,10 +24,10 @@ information ()
 {
     echo "Syntax : $(basename $0) [Option]..."
     echo "Option :"
-    echo "  -i, --installation       [Part 1] Install the base system"
-    echo "  -c, --configuration      [Part 2] Configure the base system"
-    echo "  -e, --end-installation   [Part 3] Unmount and reboot the system"
-    echo "  -p, --post-installation  [Part 4] Install X.Org, KDE environment..."
+    echo "  -i, --installation       [Part 1] Install base system"
+    echo "  -c, --configuration      [Part 2] Configure base system"
+    echo "  -e, --end-installation   [Part 3] Unmount and reboot system"
+    echo "  -p, --post-installation  [Part 4] Install X.Org, Desktop environment..."
 }
 
 # Download and source ALI's libraries
@@ -45,10 +45,10 @@ loadLibs ()
     done; colors; pause
 }
 
-# Run Arch Linux Installer as root
+# Run Arch Linux Installer
 if [ "${UID}" -ne 0 ]
 then
-    clear; echo "You must have root privileges to run ALI."
+    clear; echo "Root privileges are required for running ALI."
 
 elif [ "$#" -eq 0 ]
 then
