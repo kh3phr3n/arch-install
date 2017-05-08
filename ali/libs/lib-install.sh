@@ -11,7 +11,7 @@ keyboardLayout ()
 {
     clear
     title ":: Change keyboard layout\n"
-    loadkeys ${KEYBOARD}
+    loadkeys ${KEYBOARD} && cecho ":: Layout updated: ${CYAN}${KEYBOARD}"
 }
 
 diskPartitions ()
