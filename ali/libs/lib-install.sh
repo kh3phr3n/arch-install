@@ -136,11 +136,11 @@ configureEtcFiles ()
 
 configureBaseSystem ()
 {
+    # Append additionals hooks
+    [[ "${#NEWHOOKS[@]}" -gt 0 ]] && addHooks ${NEWHOOKS[@]}
+
     # Blacklist Kernel Modules
     [[ "${#BLKMODS[@]}" -gt 0 ]] && blacklistMods ${BLKMODS[@]}; pause
-
-    # Append additionals hooks
-    [[ "${#NEWHOOKS[@]}" -gt 0 ]] && addHooks ${NEWHOOKS[@]}; pause
 
     clear
     title ":: Generate locales system\n"
