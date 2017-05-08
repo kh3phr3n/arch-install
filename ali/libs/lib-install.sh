@@ -113,7 +113,7 @@ configureEtcFiles ()
     clear
     title ":: Update configuration files\n"
 
-    for file in "${ETCFILES[@]}"
+    for file in vconsole.conf locale.conf locale.gen localtime hostname adjtime hosts
     do
         case "$file" in
             adjtime       ) hwclock --systohc --utc                                                   ;;
