@@ -9,10 +9,15 @@
 # Main settings
 # -------------
 
-# Current pc
+# Target machine, this variable is used for:
+# Hostname -> /etc/hostname
+# Optional configuration -> conf/${PC}.conf
 PC='msi'
+
+# Configuration files
+CONFIGS=('core.conf'); [[ -e "conf/${PC}.conf" ]] && CONFIGS+=(${PC}.conf)
 # Arch Linux Installer libraries
-MINLIBS=(${PC}.conf 'lib-core.sh' 'lib-utils.sh' 'lib-install.sh')
+MINLIBS=(${CONFIGS[@]} 'lib-core.sh' 'lib-utils.sh' 'lib-install.sh')
 # Additional libraries required by Part 4
 MAXLIBS=(${MINLIBS[@]} 'apps.conf' 'lib-xorg.sh' 'lib-users.sh' 'lib-desktop.sh')
 
@@ -38,7 +43,7 @@ loadLibs ()
     do
         [[ "$library" == "apps.conf" ]] && title "\n:: Load 3rd libraries:\n"
 
-        if [ "$library" == "${PC}.conf" ] || [ "$library" == "apps.conf" ]
+        if [[ "$library" =~ ".conf" ]]
             then source conf/$library && echo ":: Library loaded: $library" || exit 1
             else source libs/$library && echo ":: Library loaded: $library" || exit 1
         fi
