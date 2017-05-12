@@ -44,3 +44,7 @@ mv arch-installer-master/ali /root
 ***
 \* Check/Update settings -- \*\* File not Required
 
+##### Information
+
+PGP: [0x170FFC6CB3D12B30](https://pgp.mit.edu/pks/lookup?op=vindex&search=0x170FFC6CB3D12B30)
+
