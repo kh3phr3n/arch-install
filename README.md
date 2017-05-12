@@ -2,10 +2,14 @@
 
 1. Get zip archive: [Master](https://git.tuxico.com/arch-installer/snapshot/arch-installer-master.zip)
 2. Extract archive: `unzip arch-installer-master.zip`
-3. Edit configuration: `arch-installer-master/ali/conf/YourPcName.conf`
+3. Edit configuration: `arch-installer-master/ali/conf/core.conf`
 4. Edit your machine name:`PC='YourPcName'` in `arch-installer-master/ali/ali.sh`
 5. Create new installer archive: `cd arch-installer-master && tar czf ali.tar.gz ali/`
 6. Upload your new archive `ali.tar.gz` on your FTP.
+
+##### Important (3):
+
+If you want override some options, you have to create an additional configuration file (same name as $PC variable).
 
 ##### Installation
 
@@ -29,7 +33,8 @@ mv arch-installer-master/ali /root
     ├── ali.sh               *
     ├── conf
     │   ├── apps.conf        *
-    │   └── hp.conf          *
+    │   ├── core.conf        *
+    │   └── hp.conf          **
     ├── libs
     │   ├── lib-core.sh
     │   ├── lib-desktop.sh
@@ -42,7 +47,7 @@ mv arch-installer-master/ali /root
         └── wipe.sh          **
 
 ***
-\* Check/Update settings -- \*\* File not Required
+\* Check/Update settings -- \*\* File not required
 
 ##### Information
 
