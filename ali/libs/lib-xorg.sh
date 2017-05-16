@@ -12,7 +12,7 @@ installXorg ()
     title ":: Install X.Org Window System"; pause
 
     # Install xorg-* packages
-    installPkg 'xorg-server xorg-xset xorg-xinit xorg-xinput xorg-xdpyinfo xorg-fonts-type1 gsfonts'
+    installPkg 'xorg-server xorg-xset xorg-xinit xorg-xinput xorg-xrandr xorg-xdpyinfo xorg-fonts-type1 gsfonts'
     # Install misc fonts
     installPkg 'ttf-roboto ttf-dejavu ttf-freefont ttf-liberation ttf-fira-sans ttf-fira-mono ttf-bitstream-vera'
     # Install Alsa/PulseAudio utilities
