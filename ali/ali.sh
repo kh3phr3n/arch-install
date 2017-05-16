@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# +--------------------------------------------+
-# | File    : ali.sh                           |
-# | Email   : rc[dot]dev[at]tuxico[dot]com     |
-# | Licence : GPLv3 GNU General Public License |
-# +--------------------------------------------+
-
 # Main settings
 # -------------
 
@@ -35,7 +29,7 @@ information ()
     echo "  -p, --post-installation  [Part 4] Install X.Org, Desktop environment..."
 }
 
-# Download and source ALI's libraries
+# Source ALI's libraries
 # $@: MINLIBS / MAXLIBS
 loadLibs ()
 {

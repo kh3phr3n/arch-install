@@ -22,7 +22,7 @@ cd ali && chmod +x ali.sh
 Or
 
 ```
-curl -O https://git.tuxico.com/arch-installer/snapshot/arch-installer-master.tar.gz
+wget https://git.tuxico.com/arch-installer/snapshot/arch-installer-master.tar.gz
 tar xzf arch-installer-master.tar.gz
 mv arch-installer-master/ali /root
 ```

@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# +--------------------------------------------+
-# | File    : aur.sh                           |
-# | Email   : rc[dot]dev[at]tuxico[dot]com     |
-# | Licence : GPLv3 GNU General Public License |
-# +--------------------------------------------+
-
 # Root privileges required
 [[ "${UID}" -ne 0 ]] && exit 0 || clear
 

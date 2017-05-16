@@ -1,12 +1,6 @@
 #!/bin/bash
 
-# +--------------------------------------------+
-# | File    : lib-core.sh                      |
-# | Email   : rc[dot]dev[at]tuxico[dot]com     |
-# | Licence : GPLv3 GNU General Public License |
-# +--------------------------------------------+
-
-# [Part 1] Install the base system
+# [Part 1]
 installation ()
 {
     clear
@@ -26,7 +20,7 @@ installation ()
     generateFstabAndChroot
 }
 
-# [Part 2] Configure the base system (In chroot)
+# [Part 2]
 configuration ()
 {
     clear
@@ -42,7 +36,7 @@ configuration ()
     configureBootloader
 }
 
-# [Part 3] Unmount and reboot the system
+# [Part 3]
 endInstallation ()
 {
     clear
@@ -54,7 +48,7 @@ endInstallation ()
     restartArchSystem
 }
 
-# [Part 4] Install X.Org, Desktop environment
+# [Part 4]
 postInstallation ()
 {
     clear

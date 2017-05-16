@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# +--------------------------------------------+
-# | File    : lib-utils.sh                     |
-# | Email   : rc[dot]dev[at]tuxico[dot]com     |
-# | Licence : GPLv3 GNU General Public License |
-# +--------------------------------------------+
-
 # Display blue message
 title () { cecho "$1" blue; }
 # Pause installation

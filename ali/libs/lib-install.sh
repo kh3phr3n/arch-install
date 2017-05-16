@@ -1,12 +1,6 @@
 #!/bin/bash
 
-# +--------------------------------------------+
-# | File    : lib-install.sh                   |
-# | Email   : rc[dot]dev[at]tuxico[dot]com     |
-# | Licence : GPLv3 GNU General Public License |
-# +--------------------------------------------+
-
-# [Part 1] Install the base system
+# [Part 1]
 keyboardLayout ()
 {
     clear
@@ -88,7 +82,7 @@ generateFstabAndChroot ()
     nextPart 2; arch-chroot /mnt
 }
 
-# [Part 2] Configure the base system
+# [Part 2]
 configureMirrors ()
 {
     clear
@@ -171,7 +165,7 @@ configureBootloader ()
     nextPart 3
 }
 
-# [Part 3] Unmount and reboot the system
+# [Part 3]
 unmountPartitions ()
 {
     clear
