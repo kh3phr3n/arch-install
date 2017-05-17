@@ -1,8 +1,8 @@
 ##### Information
 
-PGP Key ID: [0x170FFC6CB3D12B30](https://pgp.mit.edu/pks/lookup?op=vindex&search=0x170FFC6CB3D12B30)
-Email: rc[dot]dev[at]tuxico[dot]com
-Licence : GPLv3 GNU General Public License
+PGP Key ID: [0x170FFC6CB3D12B30](https://pgp.mit.edu/pks/lookup?op=vindex&search=0x170FFC6CB3D12B30)  
+Email: rc[dot]dev[at]tuxico[dot]com  
+Licence : GPLv3 GNU General Public License  
 
 ##### Preparation
 
