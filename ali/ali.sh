@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Main settings
-# -------------
-
 # Target machine, this variable is used for:
 # Hostname -> /etc/hostname
 # Optional configuration -> conf/${PC}.conf
@@ -15,10 +12,7 @@ MINLIBS=(${CONFIGS[@]} 'lib-core.sh' 'lib-utils.sh' 'lib-install.sh')
 # Additional libraries required by Part 4
 MAXLIBS=(${MINLIBS[@]} 'apps.conf' 'lib-xorg.sh' 'lib-users.sh' 'lib-desktop.sh')
 
-# Main program
-# ------------
-
-# Display a quick help
+# Quick help
 information ()
 {
     echo "Syntax : $(basename $0) [Option]..."
@@ -78,7 +72,7 @@ else
             c ) loadLibs ${MINLIBS[@]} && configuration           ;;
             e ) loadLibs ${MINLIBS[@]} && endInstallation         ;;
 
-            # Start network dhcpcd unit
+            # At this point, no network available yet
             p ) systemctl start dhcpcd.service || exit 1
                 loadLibs ${MAXLIBS[@]} && postInstallation        ;;
 

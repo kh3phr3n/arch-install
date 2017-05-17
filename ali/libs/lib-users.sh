@@ -19,7 +19,6 @@ setupUsers ()
     dotfiles
 }
 
-# Create new user and assign groups
 createNewUser ()
 {
     cecho ":: User  : ${CYAN}${USERNAME}"
@@ -30,7 +29,6 @@ createNewUser ()
     useradd -m -s ${USERSHELL} ${USERNAME} && usermod -G ${USERGROUPS} ${USERNAME} && passwd ${USERNAME}
 }
 
-# Allow group wheel to execute any commands
 configureSudo ()
 {
     title "\n:: Configure sudo\n"
@@ -46,7 +44,6 @@ configureSudo ()
     fi; pause
 }
 
-# User's directories
 directories ()
 {
     clear
@@ -59,7 +56,6 @@ directories ()
     chown -R ${USERNAME}:${USERNAME} $homeUser
 }
 
-# User's dotfiles
 dotfiles ()
 {
     title "\n:: Get user's dotfiles\n"

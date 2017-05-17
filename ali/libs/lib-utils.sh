@@ -61,7 +61,6 @@ installNcPkg ()
 # System utils
 # ------------
 
-# Create an initial ramdisk environment
 initramfs ()
 {
     title "\n:: Generate new initial ramdisk\n"
@@ -70,7 +69,6 @@ initramfs ()
     mkinitcpio -p linux
 }
 
-# Add units to systemd
 # $@: Units list: 'kdm.service' 'cronie.service'
 addUnits ()
 {
@@ -84,7 +82,6 @@ addUnits ()
     done; pause
 }
 
-# Add hooks in /etc/mkinitcpio.conf
 # $@: Hooks list: 'consolefont' 'keymap'
 addHooks ()
 {
@@ -97,7 +94,6 @@ addHooks ()
     done
 }
 
-# Enable Time synchronization
 # wiki.archlinux.org/index.php/Systemd-timesyncd
 setupClock ()
 {
@@ -108,7 +104,6 @@ setupClock ()
     timedatectl set-ntp true && cecho ":: Service enabled: ${CYAN}systemd-timesyncd"; pause
 }
 
-# Add driver to mkinitcpio.conf
 # $1: Module: 'i915', 'amdgpu', 'radeon', 'nouveau', 'intel_agp i915'
 earlyStart ()
 {
@@ -119,9 +114,7 @@ earlyStart ()
     sed -i "/^MODULES=*/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && initramfs
 }
 
-# Secure MySQL installation
-# -> Define root password
-# -> Delete 'test' table
+# wiki.archlinux.org/index.php/MySQL
 secureMySQL ()
 {
     if [ -x /usr/bin/mysql_secure_installation ]

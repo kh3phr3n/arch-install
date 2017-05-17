@@ -70,10 +70,6 @@ fontConfiguration ()
 # Basic configuration files
 # Naming convention: xorg_10_<device>_conf ()
 
-# Monitor : 10-monitor.conf
-# Keyboard: 10-keyboard.conf
-# Touchpad: 10-touchpad.conf
-
 xorg_10_monitor_conf ()
 {
 cat > ${XCONFDIR}/10-monitor.conf << EOF
@@ -114,10 +110,6 @@ EOF
 
 # Driver configuration files
 # Naming convention: xorg_20_<driver>_conf ()
-
-# Intel   : 20-intel.conf
-# Nvidia  : 20-nvidia.conf
-# Nouveau : 20-nouveau.conf
 
 xorg_20_intel_conf ()
 {

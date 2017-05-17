@@ -1,3 +1,9 @@
+##### Information
+
+PGP Key ID: [0x170FFC6CB3D12B30](https://pgp.mit.edu/pks/lookup?op=vindex&search=0x170FFC6CB3D12B30)
+Email: rc[dot]dev[at]tuxico[dot]com
+Licence : GPLv3 GNU General Public License
+
 ##### Preparation
 
 1. Get zip archive: [Master](https://git.tuxico.com/arch-installer/snapshot/arch-installer-master.zip)
@@ -48,8 +54,4 @@ mv arch-installer-master/ali /root
 
 ***
 \* Check/Update settings -- \*\* File not required
-
-##### Information
-
-PGP: [0x170FFC6CB3D12B30](https://pgp.mit.edu/pks/lookup?op=vindex&search=0x170FFC6CB3D12B30)
 
