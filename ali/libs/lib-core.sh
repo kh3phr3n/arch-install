@@ -12,10 +12,11 @@ installation ()
     title ":: BaseSystem : ${CYAN}${BASESYSTEM}"
 
     pause
-    keyboardLayout
-    diskPartitions
-    diskFilesystems
-    mountPartitions
+    kbLayout
+    prepareDisk
+    encryptDisk
+    buildFileSystems
+    mountFileSystems
     installBaseSystem
     generateFstabAndChroot
 }
@@ -44,8 +45,8 @@ endInstallation ()
     title ":: HardDisk : ${CYAN}${HARDDISK}"
 
     pause
-    unmountPartitions
-    restartArchSystem
+    unmountFileSystems
+    restartLinuxSystem
 }
 
 # [Part 4]
@@ -64,6 +65,6 @@ postInstallation ()
     installXorg
     installDesktop
     install3rdParty
-    restartArchSystem
+    restartLinuxSystem
 }
 

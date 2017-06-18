@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # [Part 1]
-keyboardLayout ()
+kbLayout ()
 {
     clear
     title ":: Change keyboard layout\n"
     loadkeys ${KEYBOARD} && cecho ":: Layout updated: ${CYAN}${KEYBOARD}"
 }
 
-diskPartitions ()
+prepareDisk ()
 {
-    title "\n:: Create disk partitions\n"
+    title "\n:: Prepare disk partitions\n"
 
     partitioningTools=('fdisk' 'gdisk' 'cgdisk' 'parted')
     PS3=":: Enter your option: "
@@ -25,41 +25,28 @@ diskPartitions ()
     done; pause
 }
 
-diskFilesystems ()
+encryptDisk ()
 {
-    clear
-    title ":: Format disk partitions\n"
-
-    for partition in "${PARTITIONS[@]}"
-    do
-        local hdd=$(echo $partition | cut -d":" -f1)
-        local lfs=$(echo $partition | cut -d":" -f3)
-
-        title ":: Format partition: ${CYAN}$hdd => $lfs\n"
-
-        if [ "$lfs" == "swap" ]
-            then mkswap $hdd && cecho "\n:: $hdd formated"
-            else mkfs.$lfs $hdd && cecho ":: $hdd formated\n"; fsck $hdd && cecho "\n:: $hdd verified"
-        fi; pause; clear
-    done
+    title "\n:: Prepare LUKS partition\n"
+    cryptsetup --verbose --verify-passphrase --hash sha256 --key-size 256 --iter-time 5000 luksFormat ${ROOTFS}
+    cryptsetup luksOpen ${ROOTFS} ${LUKSFS##*/}
 }
 
-mountPartitions ()
+buildFileSystems ()
 {
-    clear
-    title ":: Mount disk partitions\n"
-
-    for partition in "${PARTITIONS[@]}"
+    title "\n:: Build Linux filesystems\n"
+    for partition in ${BOOTFS} ${LUKSFS}
     do
-        local hdd=$(echo $partition | cut -d":" -f1)
-        local mnt=$(echo $partition | cut -d":" -f2)
+        mkfs.ext4 $partition && fsck $partition && cecho "\n:: $partition formated and verified"
+    done; pause; clear
+}
 
-        case "$mnt" in
-            swap ) swapon $hdd && cecho ":: Swap mounted: ${CYAN}$hdd => $mnt"                    ;;
-            /mnt ) mount  $hdd $mnt && cecho ":: Disk mounted: ${CYAN}$hdd => $mnt"               ;;
-            *    ) mkdir  $mnt && mount $hdd $mnt && cecho ":: Disk mounted: ${CYAN}$hdd => $mnt" ;;
-        esac
-    done; pause
+mountFileSystems ()
+{
+    title "\n:: Mount Linux filesystems\n"
+    mkdir /mnt/boot
+    mount ${LUKSFS} /mnt      && cecho ":: Linux filesystem mounted: ${CYAN}${LUKSFS}"
+    mount ${BOOTFS} /mnt/boot && cecho ":: Linux filesystem mounted: ${CYAN}${BOOTFS}"; pause
 }
 
 installBaseSystem ()
@@ -105,7 +92,7 @@ configureMirrors ()
 configureEtcFiles ()
 {
     clear
-    title ":: Update configuration files\n"
+    title ":: Update /etc/* configuration files\n"
 
     for file in vconsole.conf locale.conf locale.gen localtime hostname adjtime hosts
     do
@@ -130,11 +117,11 @@ configureEtcFiles ()
 
 configureBaseSystem ()
 {
-    # Append additionals hooks
-    [[ "${#NEWHOOKS[@]}" -gt 0 ]] && addHooks ${NEWHOOKS[@]}
-
     # Blacklist Kernel Modules
-    [[ "${#BLKMODS[@]}" -gt 0 ]] && blacklistMods ${BLKMODS[@]}; pause
+    [[ "${#BLKMODS[@]}" -gt 0 ]] && blacklistMods ${BLKMODS[@]}
+
+    # Add hooks for LUKS support
+    updateHooks; pause
 
     clear
     title ":: Generate locales system\n"
@@ -154,10 +141,12 @@ configureBootloader ()
         # Grub2 installation
         grub-install --target=i386-pc --recheck ${HARDDISK}
 
-        # Enable Grub2 logs
-        sed -i "s/\<quiet\>//g" /etc/default/grub
         # Fix error messages at boot
         cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+
+        # Edit /etc/default/grub
+        sed -i "s/\<quiet\>//g" /etc/default/grub
+        sed -i "/^GRUB_CMDLINE_LINUX=/s/\"$/cryptdevice=UUID=$(lsblk -no UUID ${ROOTFS}):${LUKSFS##*/} root=\/dev\/mapper\/${LUKSFS##*/}&/g" /etc/default/grub
 
         title "\n:: Generate new /boot/grub/grub.cfg\n"
         grub-mkconfig -o /boot/grub/grub.cfg
@@ -166,21 +155,14 @@ configureBootloader ()
 }
 
 # [Part 3]
-unmountPartitions ()
+unmountFileSystems ()
 {
     clear
-    title ":: Unmount disk partitions\n"
-
-    for (( i=${#PARTITIONS[@]}-1 ; i>=0 ; i-- ))
-    do
-        local hdd=$(echo ${PARTITIONS[$i]} | cut -d":" -f1)
-        local mnt=$(echo ${PARTITIONS[$i]} | cut -d":" -f2)
-
-        [[ "$mnt" != "swap" ]] && umount $mnt && cecho ":: Disk unmounted: ${CYAN}$mnt => $hdd"
-    done; nextPart 4
+    title "::Unmount Linux filesystems\n"
+    umount --verbose --recursive /mnt && cecho ":: Linux filesystems unmounted: ${CYAN}/mnt/*"; nextPart 4
 }
 
-restartArchSystem ()
+restartLinuxSystem ()
 {
     title "\n:: Reboot ArchLinux system\n"
 

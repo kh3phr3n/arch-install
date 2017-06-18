@@ -84,16 +84,18 @@ addUnits ()
     done; pause
 }
 
-# $@: Hooks list: 'consolefont' 'keymap'
-addHooks ()
+# wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#Configuring_mkinitcpio
+updateHooks ()
 {
-    title "\n:: Add hook(s) in /etc/mkinitcpio.conf\n"
+    title "\n:: Update /etc/mkinitcpio.conf\n"
 
-    # Append hook(s) in HOOKS="" string
-    for hook in "$@"
-    do
-        sed -i "/^HOOKS=*/s/\"$/ $hook&/" /etc/mkinitcpio.conf && cecho ":: Hook added: ${CYAN}$hook"
-    done
+    # Update consolefont, keyboard, keymap, encrypt
+    sed -i "/^HOOKS=*/s/ keyboard//" /etc/mkinitcpio.conf && \
+    sed -i "/^HOOKS=*/s/block/& encrypt/" /etc/mkinitcpio.conf && \
+    sed -i "/^HOOKS=*/s/block/consolefont keyboard keymap &/" /etc/mkinitcpio.conf && \
+
+    # Updated successfully
+    cecho ":: Hooks updated: ${CYAN}consolefont keyboard keymap encrypt"
 }
 
 # wiki.archlinux.org/index.php/Systemd-timesyncd
@@ -110,7 +112,7 @@ setupClock ()
 earlyStart ()
 {
     clear
-    title ":: Add module(s) in /etc/mkinitcpio.conf\n"
+    title ":: Update /etc/mkinitcpio.conf\n"
 
     # Kernel Mode Setting: wiki.archlinux.org/index.php/KMS
     sed -i "/^MODULES=*/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && initramfs
@@ -131,7 +133,7 @@ secureMySQL ()
 # wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
 blacklistMods ()
 {
-    title "\n:: Add module(s) in /etc/modprobe.d/blacklist.conf\n"
+    title "\n:: Update /etc/modprobe.d/blacklist.conf\n"
 
     # Blacklist Kernel Module(s)
     for module in "$@"
