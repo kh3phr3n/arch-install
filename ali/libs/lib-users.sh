@@ -26,7 +26,7 @@ createNewUser ()
 
     title "\n:: Set user password\n"
     # Create user/groups and define password
-    useradd -m -s ${USERSHELL} ${USERNAME} && usermod -G ${USERGROUPS} ${USERNAME} && passwd ${USERNAME}
+    useradd -m -s ${USERSHELL} ${USERNAME} && usermod -G ${USERGROUPS} ${USERNAME} && password ${USERNAME} ${USERPASS}
 }
 
 configureSudo ()

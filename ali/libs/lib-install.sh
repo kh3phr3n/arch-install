@@ -142,7 +142,7 @@ configureBaseSystem ()
 
     clear
     title ":: Set root password\n"
-    passwd; pause
+    password root ${ROOTPASS}
 }
 
 configureBootloader ()

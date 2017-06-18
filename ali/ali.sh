@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Passwords
+ROOTPASS=''
+USERPASS=''
+
 # Target machine, this variable is used for:
 # Hostname -> /etc/hostname
 # Optional configuration -> conf/${PC}.conf
@@ -50,6 +54,10 @@ then
 elif [ $(pwd) != "/root/ali" ]
 then
     clear; echo "Run '$(basename $0)' into '/root/ali' directory."
+
+elif [ -z "${ROOTPASS}" ] || [ -z "${USERPASS}" ]
+then
+    clear; echo "Passwords are required in '/root/ali/$(basename $0)'."
 
 else
     clear
