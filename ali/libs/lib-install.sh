@@ -27,26 +27,36 @@ prepareDisk ()
 
 encryptDisk ()
 {
-    title "\n:: Prepare LUKS partition\n"
-    cryptsetup --verbose --verify-passphrase --hash sha256 --key-size 256 --iter-time 5000 luksFormat ${ROOTFS}
-    cryptsetup luksOpen ${ROOTFS} ${LUKSFS##*/}
+    clear
+    title ":: Prepare LUKS partition\n"
+    cryptsetup --verbose --verify-passphrase --hash sha256 --key-size 256 --iter-time 2000 luksFormat ${ROOTFS}
+
+    title "\n:: Open LUKS partition\n"
+    cryptsetup --verbose luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
 }
 
 buildFileSystems ()
 {
-    title "\n:: Build Linux filesystems\n"
     for partition in ${BOOTFS} ${LUKSFS}
     do
-        mkfs.ext4 $partition && fsck $partition && cecho "\n:: $partition formated and verified"
-    done; pause; clear
+        clear
+        title ":: Build Linux filesystem\n"
+        mkfs.ext4 $partition && cecho "\n:: Linux filesystem formated: ${CYAN}$partition"
+
+        title "\n:: Check Linux filesystem\n"
+        fsck.ext4 $partition && cecho "\n:: Linux filesystem verified: ${CYAN}$partition"; pause
+    done
 }
 
 mountFileSystems ()
 {
-    title "\n:: Mount Linux filesystems\n"
-    mkdir /mnt/boot
-    mount ${LUKSFS} /mnt      && cecho ":: Linux filesystem mounted: ${CYAN}${LUKSFS}"
-    mount ${BOOTFS} /mnt/boot && cecho ":: Linux filesystem mounted: ${CYAN}${BOOTFS}"; pause
+    clear
+    title ":: Mount Linux filesystems\n"
+
+    # Root partition
+    mount ${LUKSFS} /mnt && cecho ":: Linux filesystem mounted: ${CYAN}${LUKSFS}"
+    # Boot partition
+    mkdir /mnt/boot && mount ${BOOTFS} /mnt/boot && cecho ":: Linux filesystem mounted: ${CYAN}${BOOTFS}"; pause
 }
 
 installBaseSystem ()
@@ -145,8 +155,8 @@ configureBootloader ()
         cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 
         # Edit /etc/default/grub
-        sed -i "s/\<quiet\>//g" /etc/default/grub
-        sed -i "/^GRUB_CMDLINE_LINUX=/s/\"$/cryptdevice=UUID=$(lsblk -no UUID ${ROOTFS}):${LUKSFS##*/} root=\/dev\/mapper\/${LUKSFS##*/}&/g" /etc/default/grub
+        sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/s/quiet//" /etc/default/grub
+        sed -i "/^GRUB_CMDLINE_LINUX=/s/\"$/cryptdevice=UUID=$(blkid -o value -s UUID ${ROOTFS}):${LUKSFS##*/} root=\/dev\/mapper\/${LUKSFS##*/}&/" /etc/default/grub
 
         title "\n:: Generate new /boot/grub/grub.cfg\n"
         grub-mkconfig -o /boot/grub/grub.cfg
@@ -159,7 +169,7 @@ unmountFileSystems ()
 {
     clear
     title "::Unmount Linux filesystems\n"
-    umount --verbose --recursive /mnt && cecho ":: Linux filesystems unmounted: ${CYAN}/mnt/*"; nextPart 4
+    umount --recursive /mnt && cecho ":: Linux filesystems unmounted: ${CYAN}/mnt/*"; nextPart 4
 }
 
 restartLinuxSystem ()
