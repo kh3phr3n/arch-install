@@ -130,8 +130,8 @@ configureBaseSystem ()
     # Blacklist Kernel Modules
     [[ "${#BLKMODS[@]}" -gt 0 ]] && blacklistMods ${BLKMODS[@]}
 
-    # Add hooks for LUKS support
-    updateHooks; pause
+    # Configure Zram and LUKS hooks
+    setupZramSwap; updateHooks; pause
 
     clear
     title ":: Generate locales system\n"

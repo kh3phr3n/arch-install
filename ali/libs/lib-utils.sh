@@ -74,7 +74,6 @@ initramfs ()
 # $@: Units list: 'kdm.service' 'cronie.service'
 addUnits ()
 {
-    clear
     title ":: Enable systemd unit(s)\n"
 
     # Enable *.service, *.target, ...
@@ -93,7 +92,6 @@ updateHooks ()
     sed -i "/^HOOKS=*/s/ keyboard//" /etc/mkinitcpio.conf && \
     sed -i "/^HOOKS=*/s/block/& encrypt/" /etc/mkinitcpio.conf && \
     sed -i "/^HOOKS=*/s/block/consolefont keyboard keymap &/" /etc/mkinitcpio.conf && \
-
     # Updated successfully
     cecho ":: Hooks updated: ${CYAN}consolefont keyboard keymap encrypt"
 }
@@ -128,6 +126,21 @@ secureMySQL ()
         # Start MySQL server, securize and reload
         systemctl start mysqld && mysql_secure_installation && systemctl restart mysqld; pause
     fi
+}
+
+# github.com/Nefelim4ag/systemd-swap
+setupZramSwap ()
+{
+    title "\n:: Update /etc/systemd/swap.conf\n"
+
+    # Disable Zswap and enable Zram
+    sed -i "/^zswap_enabled=/s/1/0/" /etc/systemd/swap.conf && \
+    sed -i "/^zram_enabled=/s/0/1/" /etc/systemd/swap.conf && \
+    # Enabled successfully
+    cecho ":: Swap enabled: ${CYAN}Zram module\n"
+
+    # Enable systemd unit
+    addUnits 'systemd-swap.service'
 }
 
 # wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
