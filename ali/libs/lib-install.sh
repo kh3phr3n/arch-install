@@ -28,7 +28,7 @@ prepareDisk ()
 encryptDisk ()
 {
     clear
-    title ":: Prepare LUKS partition\n"
+    title ":: Prepare LUKS partition"
     cryptsetup --verbose --verify-passphrase --hash sha256 --key-size 256 --iter-time 2000 luksFormat ${ROOTFS}
 
     title "\n:: Open LUKS partition\n"
@@ -40,11 +40,9 @@ buildFileSystems ()
     for partition in ${BOOTFS} ${LUKSFS}
     do
         clear
-        title ":: Build Linux filesystem\n"
-        mkfs.ext4 $partition && cecho "\n:: Linux filesystem formated: ${CYAN}$partition"
-
-        title "\n:: Check Linux filesystem\n"
-        fsck.ext4 $partition && cecho "\n:: Linux filesystem verified: ${CYAN}$partition"; pause
+        title ":: Build Linux filesystem: ${CYAN}$partition\n"
+        mkfs.ext4 $partition && cecho ":: Linux filesystem formated\n"
+        fsck.ext4 $partition && cecho "\n:: Linux filesystem verified"; pause
     done
 }
 
@@ -116,22 +114,20 @@ configureEtcFiles ()
             locale.gen    ) sed  -i "2,22d;/${LOCALE}/s/^#//" /etc/locale.gen                         ;;
             locale.conf   ) echo -e "LANG=${LOCALE}.UTF-8\nLC_COLLATE=C" > /etc/locale.conf           ;;
             vconsole.conf ) echo -e "KEYMAP=${KEYBOARD}\nFONT=Lat2-Terminus16" > /etc/vconsole.conf   ;;
-
-            # File not found
-            *             ) cecho ":: File not found, check your ETCFILES variable in conf/<pc>.conf" ;;
         esac
 
         [[ -f "/etc/$file" ]] && cecho ":: File updated: ${CYAN}/etc/$file"
-    done
+    done; pause
 }
 
 configureBaseSystem ()
 {
+    clear
     # Blacklist Kernel Modules
     [[ "${#BLKMODS[@]}" -gt 0 ]] && blacklistMods ${BLKMODS[@]}
 
-    # Configure Zram and LUKS hooks
-    setupZramSwap; updateHooks; pause
+    # Configure LUKS hooks and Zram swap
+    updateHooks && setupZramSwap; pause
 
     clear
     title ":: Generate locales system\n"
@@ -154,9 +150,14 @@ configureBootloader ()
         # Fix error messages at boot
         cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 
+        # Cryptdevice arguments
+        local dmname=${LUKSFS##*/}
+        local device="\/dev\/mapper\/${LUKSFS##*/}"
+        local dsuuid=$(blkid -o value -s UUID ${ROOTFS})
+
         # Edit /etc/default/grub
         sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/s/quiet//" /etc/default/grub
-        sed -i "/^GRUB_CMDLINE_LINUX=/s/\"$/cryptdevice=UUID=$(blkid -o value -s UUID ${ROOTFS}):${LUKSFS##*/} root=\/dev\/mapper\/${LUKSFS##*/}&/" /etc/default/grub
+        sed -i "/^GRUB_CMDLINE_LINUX=/s/\"$/cryptdevice=UUID=$dsuuid:$dmname root=$device&/" /etc/default/grub
 
         title "\n:: Generate new /boot/grub/grub.cfg\n"
         grub-mkconfig -o /boot/grub/grub.cfg
@@ -169,7 +170,10 @@ unmountFileSystems ()
 {
     clear
     title "::Unmount Linux filesystems\n"
-    umount --recursive /mnt && cecho ":: Linux filesystems unmounted: ${CYAN}/mnt/*"; nextPart 4
+    umount --recursive /mnt && cecho ":: Linux filesystems unmounted: ${CYAN}/mnt/*"
+
+    title "\n:: Close LUKS partition\n"
+    cryptsetup --verbose luksClose ${LUKSFS##*/}; nextPart 4
 }
 
 restartLinuxSystem ()

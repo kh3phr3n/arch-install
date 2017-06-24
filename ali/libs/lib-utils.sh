@@ -79,8 +79,8 @@ addUnits ()
     # Enable *.service, *.target, ...
     for unit in "$@"
     do
-        systemctl --quiet enable $unit && cecho ":: Unit enabled: ${CYAN}$unit"
-    done; pause
+        systemctl --quiet enable $unit > /dev/null 2>&1 && cecho ":: Unit enabled: ${CYAN}$unit"
+    done
 }
 
 # wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#Configuring_mkinitcpio
@@ -93,7 +93,7 @@ updateHooks ()
     sed -i "/^HOOKS=*/s/block/& encrypt/" /etc/mkinitcpio.conf && \
     sed -i "/^HOOKS=*/s/block/consolefont keyboard keymap &/" /etc/mkinitcpio.conf && \
     # Updated successfully
-    cecho ":: Hooks updated: ${CYAN}consolefont keyboard keymap encrypt"
+    cecho ":: Hooks updated: ${CYAN}consolefont keyboard keymap encrypt"; pause
 }
 
 # wiki.archlinux.org/index.php/Systemd-timesyncd
@@ -131,13 +131,14 @@ secureMySQL ()
 # github.com/Nefelim4ag/systemd-swap
 setupZramSwap ()
 {
-    title "\n:: Update /etc/systemd/swap.conf\n"
+    clear
+    title ":: Update /etc/systemd/swap.conf\n"
 
     # Disable Zswap and enable Zram
     sed -i "/^zswap_enabled=/s/1/0/" /etc/systemd/swap.conf && \
     sed -i "/^zram_enabled=/s/0/1/" /etc/systemd/swap.conf && \
     # Enabled successfully
-    cecho ":: Swap enabled: ${CYAN}Zram module\n"
+    cecho ":: Swap enabled: ${CYAN}Zram\n"
 
     # Enable systemd unit
     addUnits 'systemd-swap.service'

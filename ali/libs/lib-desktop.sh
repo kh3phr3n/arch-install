@@ -4,7 +4,6 @@ installDesktop ()
 {
     case "${DESKTOP}" in
         plasma5 ) installPlasma5 ;;
-        gnome3  ) installGnome3  ;;
         i3      ) installI3      ;;
     esac
 }
@@ -20,21 +19,7 @@ installPlasma5 ()
     [[ "${#KDEPKGS[@]}" -gt 0 ]] && installPkg "${KDEPKGS[@]}"
 
     # Enable systemd units
-    addUnits 'sddm.service' 'NetworkManager.service'
-}
-
-installGnome3 ()
-{
-    clear
-    title ":: Install GNOME environment"; pause
-
-    # Install GNOME minimal
-    installPkg 'gnome zeitgeist gnome-tweak-tool'
-    # Install Additional Applications
-    [[ "${#GNOMEPKGS[@]}" -gt 0 ]] && installPkg "${GNOMEPKGS[@]}"
-
-    # Enable systemd units
-    addUnits 'gdm.service' 'NetworkManager.service'
+    addUnits 'sddm.service' 'NetworkManager.service'; pause
 }
 
 installI3 ()
@@ -48,7 +33,7 @@ installI3 ()
     [[ "${#I3PKGS[@]}" -gt 0 ]] && installPkg "${I3PKGS[@]}"
 
     # Enable systemd units
-    addUnits 'sddm.service' 'connman.service'
+    addUnits 'sddm.service' 'connman.service'; pause
     # Force style for Qt5
     setQtStyleOverride 'gtk2'
 }
