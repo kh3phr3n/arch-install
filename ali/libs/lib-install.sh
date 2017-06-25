@@ -28,8 +28,8 @@ prepareDisk ()
 encryptDisk ()
 {
     clear
-    title ":: Prepare LUKS partition"
-    cryptsetup --verbose --verify-passphrase --hash sha256 --key-size 256 --iter-time 2000 luksFormat ${ROOTFS}
+    title ":: Prepare LUKS partition\n"
+    cryptsetup --verbose --batch-mode --verify-passphrase --hash sha256 --key-size 256 --iter-time 2000 luksFormat ${ROOTFS}
 
     title "\n:: Open LUKS partition\n"
     cryptsetup --verbose luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
@@ -169,11 +169,11 @@ configureBootloader ()
 unmountFileSystems ()
 {
     clear
-    title "::Unmount Linux filesystems\n"
+    title ":: Unmount Linux filesystems\n"
     umount --recursive /mnt && cecho ":: Linux filesystems unmounted: ${CYAN}/mnt/*"
 
     title "\n:: Close LUKS partition\n"
-    cryptsetup --verbose luksClose ${LUKSFS##*/}; nextPart 4
+    cryptsetup luksClose ${LUKSFS##*/} && cecho ":: Linux Unified Key Setup closed: ${CYAN}${LUKSFS}"; nextPart 4
 }
 
 restartLinuxSystem ()

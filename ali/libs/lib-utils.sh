@@ -89,9 +89,9 @@ updateHooks ()
     title "\n:: Update /etc/mkinitcpio.conf\n"
 
     # Update consolefont, keyboard, keymap, encrypt
-    sed -i "/^HOOKS=*/s/ keyboard//" /etc/mkinitcpio.conf && \
-    sed -i "/^HOOKS=*/s/block/& encrypt/" /etc/mkinitcpio.conf && \
-    sed -i "/^HOOKS=*/s/block/consolefont keyboard keymap &/" /etc/mkinitcpio.conf && \
+    sed -i "/^HOOKS=/s/ keyboard//" /etc/mkinitcpio.conf && \
+    sed -i "/^HOOKS=/s/block/& encrypt/" /etc/mkinitcpio.conf && \
+    sed -i "/^HOOKS=/s/block/consolefont keyboard keymap &/" /etc/mkinitcpio.conf && \
     # Updated successfully
     cecho ":: Hooks updated: ${CYAN}consolefont keyboard keymap encrypt"; pause
 }
@@ -113,7 +113,7 @@ earlyStart ()
     title ":: Update /etc/mkinitcpio.conf\n"
 
     # Kernel Mode Setting: wiki.archlinux.org/index.php/KMS
-    sed -i "/^MODULES=*/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && initramfs
+    sed -i "/^MODULES=/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && initramfs
 }
 
 # wiki.archlinux.org/index.php/MySQL
