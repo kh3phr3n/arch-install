@@ -4,46 +4,39 @@ installDesktop ()
 {
     case "${DESKTOP}" in
         plasma5 ) installPlasma5 ;;
-        i3      ) installI3      ;;
-    esac
+        i3wm    ) installI3wm    ;;
+    esac; pause
 }
 
 installPlasma5 ()
 {
-    block ":: Install Plasma environment"
-
     # Install KDE minimal
     installPkg 'sddm plasma phonon-qt5-gstreamer'
     # Install Additional Applications
     [[ "${#KDEPKGS[@]}" -gt 0 ]] && installPkg "${KDEPKGS[@]}"
 
     # Enable systemd units
-    addUnits 'sddm.service' 'NetworkManager.service'; pause
+    addUnits 'sddm.service' 'NetworkManager.service'
 }
 
-installI3 ()
+installI3wm ()
 {
-    block ":: Install i3 environment"
-
-    # Install i3 environment
+    # Install i3wm environment
     installPkg 'i3 sddm connman sysstat rxvt-unicode'
     # Install Additional Applications
-    [[ "${#I3PKGS[@]}" -gt 0 ]] && installPkg "${I3PKGS[@]}"
+    [[ "${#I3WMPKGS[@]}" -gt 0 ]] && installPkg "${I3WMPKGS[@]}"
 
     # Enable systemd units
-    addUnits 'sddm.service' 'connman.service'; pause
+    addUnits 'sddm.service' 'connman.service'
     # Force style for Qt5
     setQtStyleOverride 'gtk2'
 }
 
 install3rdParty ()
 {
-    block ":: Install additional applications"
-    cecho ":: Packages available: ${#ADDPKGS[@]}"; pause
+    # Install additional applications
     [[ "${#ADDPKGS[@]}" -gt 0 ]] && installPkg "${ADDPKGS[@]}"
-
-    block ":: Install development applications"
-    cecho ":: Packages available: ${#DEVPKGS[@]}"; pause
+    # Install development applications
     [[ "${#DEVPKGS[@]}" -gt 0 ]] && installPkg "${DEVPKGS[@]}"
 }
 

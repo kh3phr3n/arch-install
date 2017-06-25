@@ -2,8 +2,6 @@
 
 installXorg ()
 {
-    block ":: Install X.Org Window System"
-
     # Install xorg-* packages
     installPkg 'xorg-server xorg-xset xorg-xinit xorg-xinput xorg-xrandr xorg-xdpyinfo xorg-fonts-type1 gsfonts'
     # Install misc fonts
@@ -21,18 +19,14 @@ installXorg ()
 
 installGraphicsDriver ()
 {
-    # Install graphics drivers
     # Create configuration file if available
     case "${XDRIVER}" in
         # Infos: wiki.archlinux.org/index.php/Intel
         intel   ) installPkg "xf86-video-intel libva-intel-driver" && xorg_20_intel_conf && earlyStart "i915" ;;
-
         # Infos: wiki.archlinux.org/index.php/Nouveau
         nouveau ) installPkg "xf86-video-nouveau" && xorg_20_nouveau_conf && earlyStart "nouveau" ;;
-
         # Infos: wiki.archlinux.org/index.php/Nvidia
-        nvidia-304xx | nvidia-340xx | nvidia ) installPkg "${XDRIVER}" && xorg_20_nvidia_conf ;;
-
+        nvidia* ) installPkg "${XDRIVER}" && xorg_20_nvidia_conf ;;
         # Infos: archlinux.org/groups/x86_64/xorg-drivers
         *       ) installPkg "xf86-video-${XDRIVER}" ;;
     esac; pause
@@ -46,7 +40,6 @@ xorgConfiguration ()
     xorg_10_monitor_conf  && cecho ":: Monitor configured: ${CYAN}${RESOLUTION}"
     # Create keyboard configuration file
     xorg_10_keyboard_conf && cecho ":: Keyboard configured: ${CYAN}${XKBLAYOUT}, ${XKBVARIANT}"
-
     # Create touchpad configuration file
     [[ ${TOUCHPAD} -ne 0 ]] && xorg_10_touchpad_conf && cecho ":: Touchpad configured: ${CYAN}${ACCELSPEED}, ${CLICKMETHOD}"
 

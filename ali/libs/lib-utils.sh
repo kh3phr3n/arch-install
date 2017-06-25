@@ -51,17 +51,6 @@ installPkg ()
     done
 }
 
-# Install packages without confirmation
-# $@: cf. installPkg()
-installNcPkg ()
-{
-    for package in "$@"
-    do
-        block ":: Package(s): ${CYAN}$package"
-        pacman --sync --noconfirm $package; sleep 1
-    done
-}
-
 # System utils
 # ------------
 
