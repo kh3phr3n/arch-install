@@ -10,8 +10,7 @@ installDesktop ()
 
 installPlasma5 ()
 {
-    clear
-    title ":: Install Plasma environment"; pause
+    block ":: Install Plasma environment"
 
     # Install KDE minimal
     installPkg 'sddm plasma phonon-qt5-gstreamer'
@@ -24,8 +23,7 @@ installPlasma5 ()
 
 installI3 ()
 {
-    clear
-    title ":: Install i3 environment"; pause
+    block ":: Install i3 environment"
 
     # Install i3 environment
     installPkg 'i3 sddm connman sysstat rxvt-unicode'
@@ -40,12 +38,12 @@ installI3 ()
 
 install3rdParty ()
 {
-    clear
-    title ":: Install additional applications"; pause
+    block ":: Install additional applications"
+    cecho ":: Packages available: ${#ADDPKGS[@]}"; pause
     [[ "${#ADDPKGS[@]}" -gt 0 ]] && installPkg "${ADDPKGS[@]}"
 
-    clear
-    title ":: Install development applications"; pause
+    block ":: Install development applications"
+    cecho ":: Packages available: ${#DEVPKGS[@]}"; pause
     [[ "${#DEVPKGS[@]}" -gt 0 ]] && installPkg "${DEVPKGS[@]}"
 }
 

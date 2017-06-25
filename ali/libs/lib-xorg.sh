@@ -2,8 +2,7 @@
 
 installXorg ()
 {
-    clear
-    title ":: Install X.Org Window System"; pause
+    block ":: Install X.Org Window System"
 
     # Install xorg-* packages
     installPkg 'xorg-server xorg-xset xorg-xinit xorg-xinput xorg-xrandr xorg-xdpyinfo xorg-fonts-type1 gsfonts'
@@ -41,8 +40,7 @@ installGraphicsDriver ()
 
 xorgConfiguration ()
 {
-    clear
-    title ":: Configure X.Org Window System\n"
+    block ":: Configure X.Org Window System"
 
     # Create monitor configuration file
     xorg_10_monitor_conf  && cecho ":: Monitor configured: ${CYAN}${RESOLUTION}"
@@ -58,7 +56,7 @@ xorgConfiguration ()
 
 fontConfiguration ()
 {
-    title "\n:: Configure Fontconfig presets\n"
+    split ":: Configure Fontconfig presets"
 
     for link in "${FCGLINKS[@]}"
     do

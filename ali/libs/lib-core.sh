@@ -3,13 +3,12 @@
 # [Part 1]
 installation ()
 {
-    clear
-    title ":: [Part 1] Install base system\n"
-    title ":: Computer   : ${CYAN}${PC}"
-    title ":: Keyboard   : ${CYAN}${KEYBOARD}"
-    title ":: HardDisk   : ${CYAN}${HARDDISK}"
-    title ":: BootLoader : ${CYAN}${BOOTLOADER}"
-    title ":: BaseSystem : ${CYAN}${BASESYSTEM}"
+    block ":: [Part 1] Install base system"
+    label ":: Computer   : ${CYAN}${PC}"
+    label ":: Keyboard   : ${CYAN}${KEYBOARD}"
+    label ":: HardDisk   : ${CYAN}${HARDDISK}"
+    label ":: BootLoader : ${CYAN}${BOOTLOADER}"
+    label ":: BaseSystem : ${CYAN}${BASESYSTEM}"
 
     pause
     kbLayout
@@ -24,11 +23,10 @@ installation ()
 # [Part 2]
 configuration ()
 {
-    clear
-    title ":: [Part 2] Configure base system\n"
-    title ":: Zone       : ${CYAN}${ZONE}"
-    title ":: SubZone    : ${CYAN}${SUBZONE}"
-    title ":: BootLoader : ${CYAN}${BOOTLOADER}"
+    block ":: [Part 2] Configure base system"
+    label ":: Zone       : ${CYAN}${ZONE}"
+    label ":: SubZone    : ${CYAN}${SUBZONE}"
+    label ":: BootLoader : ${CYAN}${BOOTLOADER}"
 
     pause
     configureMirrors
@@ -40,9 +38,8 @@ configuration ()
 # [Part 3]
 endInstallation ()
 {
-    clear
-    title ":: [Part 3] Unmount and reboot system\n"
-    title ":: HardDisk : ${CYAN}${HARDDISK}"
+    block ":: [Part 3] Unmount and reboot system"
+    label ":: HardDisk : ${CYAN}${HARDDISK}"
 
     pause
     unmountFileSystems
@@ -52,12 +49,11 @@ endInstallation ()
 # [Part 4]
 postInstallation ()
 {
-    clear
-    title ":: [Part 4] Create new user, install X.Org...\n"
-    title ":: XDriver    : ${CYAN}${XDRIVER}"
-    title ":: UserName   : ${CYAN}${USERNAME}"
-    title ":: UserShell  : ${CYAN}${USERSHELL}"
-    title ":: UserGroups : ${CYAN}${USERGROUPS}"
+    block ":: [Part 4] Create new user, install X.Org..."
+    label ":: XDriver    : ${CYAN}${XDRIVER}"
+    label ":: UserName   : ${CYAN}${USERNAME}"
+    label ":: UserShell  : ${CYAN}${USERSHELL}"
+    label ":: UserGroups : ${CYAN}${USERGROUPS}"
 
     pause
     setupClock

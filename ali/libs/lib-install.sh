@@ -3,14 +3,13 @@
 # [Part 1]
 kbLayout ()
 {
-    clear
-    title ":: Change keyboard layout\n"
+    block ":: Change keyboard layout"
     loadkeys ${KEYBOARD} && cecho ":: Layout updated: ${CYAN}${KEYBOARD}"
 }
 
 prepareDisk ()
 {
-    title "\n:: Prepare disk partitions\n"
+    split ":: Prepare disk partitions"
 
     partitioningTools=('fdisk' 'gdisk' 'cgdisk' 'parted')
     PS3=":: Enter your option: "
@@ -27,11 +26,10 @@ prepareDisk ()
 
 encryptDisk ()
 {
-    clear
-    title ":: Prepare LUKS partition\n"
+    block ":: Prepare LUKS partition"
     cryptsetup --verbose --batch-mode --verify-passphrase --hash sha256 --key-size 256 --iter-time 2000 luksFormat ${ROOTFS}
 
-    title "\n:: Open LUKS partition\n"
+    split ":: Open LUKS partition"
     cryptsetup --verbose luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
 }
 
@@ -39,8 +37,7 @@ buildFileSystems ()
 {
     for partition in ${BOOTFS} ${LUKSFS}
     do
-        clear
-        title ":: Build Linux filesystem: ${CYAN}$partition\n"
+        block ":: Build Linux filesystem: ${CYAN}$partition"
         mkfs.ext4 $partition && cecho ":: Linux filesystem formated\n"
         fsck.ext4 $partition && cecho "\n:: Linux filesystem verified"; pause
     done
@@ -48,9 +45,7 @@ buildFileSystems ()
 
 mountFileSystems ()
 {
-    clear
-    title ":: Mount Linux filesystems\n"
-
+    block ":: Mount Linux filesystems"
     # Root partition
     mount ${LUKSFS} /mnt && cecho ":: Linux filesystem mounted: ${CYAN}${LUKSFS}"
     # Boot partition
@@ -59,18 +54,16 @@ mountFileSystems ()
 
 installBaseSystem ()
 {
-    clear
-    title ":: Install minimal system\n"
+    block ":: Install minimal system"
     pacstrap /mnt ${BASESYSTEM} ${BOOTLOADER}; pause
 }
 
 generateFstabAndChroot ()
 {
-    clear
-    title ":: Generate new /etc/fstab\n"
+    block ":: Generate new /etc/fstab"
     genfstab -U -p /mnt >> /mnt/etc/fstab && cecho ":: File updated: ${CYAN}/etc/fstab"
 
-    title "\n:: Prepare Chroot environment\n"
+    split ":: Prepare Chroot environment"
     cp -r /root/ali /mnt/root && cecho ":: ALI updated: ${CYAN}/mnt/root/ali/"
 
     # chroot into our newly system
@@ -80,8 +73,7 @@ generateFstabAndChroot ()
 # [Part 2]
 configureMirrors ()
 {
-    clear
-    title ":: Generate new Pacman mirrorlist\n"
+    block ":: Generate new Pacman mirrorlist"
 
     # Enable Pacman colors
     sed -i "/Color/s/^#//" /etc/pacman.conf
@@ -99,8 +91,7 @@ configureMirrors ()
 
 configureEtcFiles ()
 {
-    clear
-    title ":: Update /etc/* configuration files\n"
+    block ":: Update /etc/* configuration files"
 
     for file in vconsole.conf locale.conf locale.gen localtime hostname adjtime hosts
     do
@@ -122,25 +113,22 @@ configureEtcFiles ()
 
 configureBaseSystem ()
 {
-    clear
     # Blacklist Kernel Modules
     [[ "${#BLKMODS[@]}" -gt 0 ]] && blacklistMods ${BLKMODS[@]}
 
     # Configure LUKS hooks and Zram swap
     updateHooks && setupZramSwap; pause
 
-    clear
-    title ":: Generate locales system\n"
+    block ":: Generate locales system"
     locale-gen && initramfs; pause
 
-    clear
-    title ":: Set root password\n"
+    block ":: Set root password"
     password root ${ROOTPASS}
 }
 
 configureBootloader ()
 {
-    title ":: Configure bootloader\n"
+    title ":: Configure bootloader"
 
     if [ "${BOOTLOADER}" == "grub" ]
     then
@@ -159,7 +147,7 @@ configureBootloader ()
         sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/s/quiet//" /etc/default/grub
         sed -i "/^GRUB_CMDLINE_LINUX=/s/\"$/cryptdevice=UUID=$dsuuid:$dmname root=$device&/" /etc/default/grub
 
-        title "\n:: Generate new /boot/grub/grub.cfg\n"
+        split ":: Generate new /boot/grub/grub.cfg"
         grub-mkconfig -o /boot/grub/grub.cfg
     fi
     nextPart 3
@@ -168,17 +156,16 @@ configureBootloader ()
 # [Part 3]
 unmountFileSystems ()
 {
-    clear
-    title ":: Unmount Linux filesystems\n"
+    block ":: Unmount Linux filesystems"
     umount --recursive /mnt && cecho ":: Linux filesystems unmounted: ${CYAN}/mnt/*"
 
-    title "\n:: Close LUKS partition\n"
+    split ":: Close LUKS partition"
     cryptsetup luksClose ${LUKSFS##*/} && cecho ":: Linux Unified Key Setup closed: ${CYAN}${LUKSFS}"; nextPart 4
 }
 
 restartLinuxSystem ()
 {
-    title "\n:: Reboot ArchLinux system\n"
+    split ":: Reboot ArchLinux system"
 
     for (( i=10 ; i>0 ; i-- ))
     do
@@ -191,15 +178,15 @@ nextPart ()
 {
     case "$1" in
         2 )
-            title "\n:: Next Part: Configuration\n"
+            split ":: Next Part: Configuration"
             cecho ":: Change directory to /root/ali"
             cecho ":: Run $(basename $0) -c or --configuration" ;;
         3 )
-            title "\n:: Next Part: End-Installation\n"
+            split ":: Next Part: End-Installation"
             cecho ":: Quit Chroot environment with Ctrl-D"
             cecho ":: Run $(basename $0) -e or --end-installation" ;;
         4 )
-            title "\n:: Next Part: Post-Installation\n"
+            split ":: Next Part: Post-Installation"
             cecho ":: After reboot, Run $(basename $0) -p or --post-installation" ;;
     esac
 }

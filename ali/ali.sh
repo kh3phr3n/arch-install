@@ -33,7 +33,7 @@ loadLibs ()
 {
     for library in "$@"
     do
-        [[ "$library" == "apps.conf" ]] && title "\n:: Load 3rd libraries:\n"
+        [[ "$library" == "apps.conf" ]] && split ":: Load 3rd libraries:"
 
         if [[ "$library" =~ ".conf" ]]
             then source conf/$library && echo ":: Library loaded: $library" || exit 1

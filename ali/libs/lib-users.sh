@@ -2,8 +2,7 @@
 
 setupUsers ()
 {
-    clear
-    title ":: Create new user account\n"
+    block ":: Create new user account"
 
     # Define home location
     local homeUser="/home/${USERNAME}"
@@ -24,14 +23,14 @@ createNewUser ()
     cecho ":: User  : ${CYAN}${USERNAME}"
     cecho ":: Groups: ${CYAN}${USERGROUPS}"
 
-    title "\n:: Set user password\n"
+    split ":: Set user password"
     # Create user/groups and define password
     useradd -m -s ${USERSHELL} ${USERNAME} && usermod -G ${USERGROUPS} ${USERNAME} && password ${USERNAME} ${USERPASS}
 }
 
 configureSudo ()
 {
-    title ":: Configure sudo\n"
+    title ":: Configure sudo"
 
     if [ -f "/etc/sudoers" ]
     then
@@ -46,8 +45,7 @@ configureSudo ()
 
 directories ()
 {
-    clear
-    title ":: Create user's directories\n"
+    block ":: Create user's directories"
 
     for directory in "${HOMEDIRS[@]}"
     do
@@ -58,7 +56,7 @@ directories ()
 
 dotfiles ()
 {
-    title "\n:: Get user's dotfiles\n"
+    split ":: Get user's dotfiles"
 
     for dotfile in bashrc bash_profile bash_aliases
     do

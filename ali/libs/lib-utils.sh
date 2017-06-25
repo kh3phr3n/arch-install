@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Display blue message
-title () { cecho "$1" blue; }
+# Display blue messages
+label () { cecho "$1" blue; }
+title () { cecho "$1\n" blue; }
+split () { cecho "\n$1\n" blue; }
+block () { clear; cecho "$1\n" blue; }
+
 # Pause installation
 pause () { cecho "\n:: Press any key to continue..." yellow; read; }
 # Check if an element exist in a string -- $1: Choice, $2: List of Choices
@@ -33,7 +37,7 @@ cecho ()
 # Update/Upgrade system
 updatePkg ()
 {
-    title ":: Synchronize and upgrade packages\n"
+    title ":: Synchronize and upgrade packages"
     pacman --sync --refresh --sysupgrade; pause
 }
 
@@ -42,8 +46,7 @@ installPkg ()
 {
     for package in "$@"
     do
-        clear
-        title ":: Package(s): ${CYAN}$package\n"
+        block ":: Package(s): ${CYAN}$package"
         pacman --sync $package; sleep 1
     done
 }
@@ -54,8 +57,7 @@ installNcPkg ()
 {
     for package in "$@"
     do
-        clear
-        title ":: Package(s): ${CYAN}$package\n"
+        block ":: Package(s): ${CYAN}$package"
         pacman --sync --noconfirm $package; sleep 1
     done
 }
@@ -65,7 +67,7 @@ installNcPkg ()
 
 initramfs ()
 {
-    title "\n:: Generate new initial ramdisk\n"
+    split ":: Generate new initial ramdisk"
 
     # wiki.archlinux.org/index.php/Initramfs
     mkinitcpio -p linux
@@ -74,7 +76,7 @@ initramfs ()
 # $@: Units list: 'kdm.service' 'cronie.service'
 addUnits ()
 {
-    title ":: Enable systemd unit(s)\n"
+    title ":: Enable systemd unit(s)"
 
     # Enable *.service, *.target, ...
     for unit in "$@"
@@ -86,7 +88,7 @@ addUnits ()
 # wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#Configuring_mkinitcpio
 updateHooks ()
 {
-    title "\n:: Update /etc/mkinitcpio.conf\n"
+    split ":: Update /etc/mkinitcpio.conf"
 
     # Update consolefont, keyboard, keymap, encrypt
     sed -i "/^HOOKS=/s/ keyboard//" /etc/mkinitcpio.conf && \
@@ -99,8 +101,7 @@ updateHooks ()
 # wiki.archlinux.org/index.php/Systemd-timesyncd
 setupClock ()
 {
-    clear
-    title ":: Configure Network Time Protocol\n"
+    block ":: Configure Network Time Protocol"
 
     # Enable systemd-timesyncd daemon for synchronizing the system clock across the network
     timedatectl set-ntp true && cecho ":: Service enabled: ${CYAN}systemd-timesyncd"; pause
@@ -109,8 +110,7 @@ setupClock ()
 # $1: Module: 'i915', 'amdgpu', 'radeon', 'nouveau', 'intel_agp i915'
 earlyStart ()
 {
-    clear
-    title ":: Update /etc/mkinitcpio.conf\n"
+    block ":: Update /etc/mkinitcpio.conf"
 
     # Kernel Mode Setting: wiki.archlinux.org/index.php/KMS
     sed -i "/^MODULES=/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && initramfs
@@ -121,7 +121,7 @@ secureMySQL ()
 {
     if [ -x /usr/bin/mysql_secure_installation ]
     then
-        title ":: Secure MySQL installation\n"
+        title ":: Secure MySQL installation"
 
         # Start MySQL server, securize and reload
         systemctl start mysqld && mysql_secure_installation && systemctl restart mysqld; pause
@@ -131,8 +131,7 @@ secureMySQL ()
 # github.com/Nefelim4ag/systemd-swap
 setupZramSwap ()
 {
-    clear
-    title ":: Update /etc/systemd/swap.conf\n"
+    block ":: Update /etc/systemd/swap.conf"
 
     # Disable Zswap and enable Zram
     sed -i "/^zswap_enabled=/s/1/0/" /etc/systemd/swap.conf && \
@@ -147,7 +146,7 @@ setupZramSwap ()
 # wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
 blacklistMods ()
 {
-    title "\n:: Update /etc/modprobe.d/blacklist.conf\n"
+    block ":: Update /etc/modprobe.d/blacklist.conf"
 
     # Blacklist Kernel Module(s)
     for module in "$@"
@@ -160,8 +159,7 @@ blacklistMods ()
 # wiki.archlinux.org/index.php/Uniform_Look_for_Qt_and_GTK_Applications
 setQtStyleOverride ()
 {
-    clear
-    title ":: Set GTK+ style for Qt5\n"
+    block ":: Set GTK+ style for Qt5"
 
     local file='/etc/profile.d/qt5-style.sh'
     # Force GTK+ style for all Qt5 applications
