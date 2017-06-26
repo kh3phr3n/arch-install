@@ -152,6 +152,6 @@ setQtStyleOverride ()
 
     local file='/etc/profile.d/qt5-style.sh'
     # Force GTK+ style for all Qt5 applications
-    echo "export QT_STYLE_OVERRIDE=$1" > $file && chmod 755 $file && cecho ":: File updated: ${CYAN}$file"; pause
+    echo "export QT_QPA_PLATFORMTHEME=$1" > $file && chmod 755 $file && cecho ":: File updated: ${CYAN}$file"; pause
 }
 

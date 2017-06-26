@@ -9,27 +9,21 @@ kbLayout ()
 
 prepareDisk ()
 {
-    split ":: Prepare disk partitions"
+    split ":: Prepare hard disk drive partitions"
+    cecho ":: HardDisk: ${CYAN}${HARDDISK}"
+    cecho ":: BootDisk: ${CYAN}${BOOTFS}"
+    cecho ":: RootDisk: ${CYAN}${ROOTFS}"
 
-    partitioningTools=('fdisk' 'gdisk' 'cgdisk' 'parted')
-    PS3=":: Enter your option: "
-
-    select partitioningTool in "${partitioningTools[@]}"
-    do
-        if contains "$partitioningTool" "${partitioningTools[@]}"
-        then
-            $partitioningTool ${HARDDISK}
-            break
-        fi
-    done; pause
+    split ":: Launch hard disk drive tool"
+    ${HARDDISKTOOL} ${HARDDISK}; pause
 }
 
 encryptDisk ()
 {
-    block ":: Prepare LUKS partition"
+    block ":: Format Linux Unified Key Setup: ${CYAN}${ROOTFS}"
     cryptsetup --verbose --batch-mode --verify-passphrase --hash sha256 --key-size 256 --iter-time 2000 luksFormat ${ROOTFS}
 
-    split ":: Open LUKS partition"
+    split ":: Open Linux Unified Key Setup: ${CYAN}${LUKSFS}"
     cryptsetup --verbose luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
 }
 
@@ -156,11 +150,11 @@ configureBootloader ()
 # [Part 3]
 unmountFileSystems ()
 {
-    block ":: Unmount Linux filesystems"
-    umount --recursive /mnt && cecho ":: Linux filesystems unmounted: ${CYAN}/mnt/*"
+    block ":: Unmount Linux filesystems: ${CYAN}/mnt/*"
+    umount --verbose --recursive /mnt
 
-    split ":: Close LUKS partition"
-    cryptsetup luksClose ${LUKSFS##*/} && cecho ":: Linux Unified Key Setup closed: ${CYAN}${LUKSFS}"; nextPart 4
+    split ":: Close Linux Unified Key Setup: ${CYAN}${LUKSFS}"
+    cryptsetup --verbose luksClose ${LUKSFS##*/}; nextPart 4
 }
 
 restartLinuxSystem ()
