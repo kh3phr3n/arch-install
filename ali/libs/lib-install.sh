@@ -4,7 +4,7 @@
 kbLayout ()
 {
     block ":: Change keyboard layout"
-    loadkeys ${KEYBOARD} && cecho ":: Layout updated: ${CYAN}${KEYBOARD}"
+    loadkeys ${KEYMAP} && cecho ":: Layout updated: ${CYAN}${KEYMAP}"
 }
 
 prepareDisk ()
@@ -90,15 +90,14 @@ configureEtcFiles ()
     for file in vconsole.conf locale.conf locale.gen localtime hostname adjtime hosts
     do
         case "$file" in
-            adjtime       ) hwclock --systohc --utc                                                   ;;
-            hostname      ) echo ${PC} > /etc/hostname                                                ;;
-            localtime     ) ln -sf /usr/share/zoneinfo/${ZONE}/${SUBZONE} /etc/localtime              ;;
-            hosts         ) sed -i "/^127.0.0.1/s/$/ ${PC}/;/^::1/s/$/ ${PC}/" /etc/hosts             ;;
-
+            adjtime       ) hwclock --systohc --utc                                          ;;
+            hostname      ) echo ${PC} > /etc/hostname                                       ;;
+            localtime     ) ln -sf /usr/share/zoneinfo/${ZONE}/${SUBZONE} /etc/localtime     ;;
+            hosts         ) sed -i "/^127.0.0.1/s/$/ ${PC}/;/^::1/s/$/ ${PC}/" /etc/hosts    ;;
             # Locales
-            locale.gen    ) sed  -i "2,22d;/${LOCALE}/s/^#//" /etc/locale.gen                         ;;
-            locale.conf   ) echo -e "LANG=${LOCALE}.UTF-8\nLC_COLLATE=C" > /etc/locale.conf           ;;
-            vconsole.conf ) echo -e "KEYMAP=${KEYBOARD}\nFONT=Lat2-Terminus16" > /etc/vconsole.conf   ;;
+            locale.gen    ) sed  -i "2,22d;/${LOCALE}/s/^#//" /etc/locale.gen                ;;
+            locale.conf   ) echo -e "LANG=${LOCALE}.UTF-8\nLC_COLLATE=C" > /etc/locale.conf  ;;
+            vconsole.conf ) echo -e "KEYMAP=${KEYMAP}\nFONT=${TTYFONT}" > /etc/vconsole.conf ;;
         esac
 
         [[ -f "/etc/$file" ]] && cecho ":: File updated: ${CYAN}/etc/$file"
