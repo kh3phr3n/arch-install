@@ -21,10 +21,10 @@ prepareDisk ()
 encryptDisk ()
 {
     block ":: Format Linux Unified Key Setup: ${CYAN}${ROOTFS}"
-    cryptsetup --verbose --batch-mode --verify-passphrase --hash sha${BITS} --key-size ${BITS} --iter-time 2000 luksFormat ${ROOTFS}
+    printf "${LUKSPASS}" | cryptsetup --verbose --key-file - --key-size ${BITS} --hash sha${BITS} --iter-time 2000 luksFormat ${ROOTFS}
 
     split ":: Open Linux Unified Key Setup: ${CYAN}${LUKSFS}"
-    cryptsetup --verbose luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
+    printf "${LUKSPASS}" | cryptsetup --verbose --key-file - luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
 }
 
 buildFileSystems ()

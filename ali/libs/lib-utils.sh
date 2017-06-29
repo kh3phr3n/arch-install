@@ -11,7 +11,7 @@ pause () { cecho "\n:: Press any key to continue..." yellow; read; }
 # Initialize terminal colors
 colors () { PURPLE='\e[0;35m' YELLOW='\e[1;33m' GREEN='\e[0;32m' CYAN='\e[0;36m' BLUE='\e[1;34m' RED='\e[0;31m' OFF='\e[0m'; }
 # Update user's password -- $1: Username, $2: Password
-password () { echo "$1:$2" | chpasswd --crypt-method SHA${BITS} --sha-rounds 5000 && cecho ":: $1's password updated successfully\n"; }
+password () { printf "$1:$2" | chpasswd --crypt-method SHA${BITS} --sha-rounds 5000 && cecho ":: $1's password updated successfully\n"; }
 
 # Display colored message
 # $1: Message
