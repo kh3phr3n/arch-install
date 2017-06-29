@@ -116,15 +116,10 @@ setupZramSwap ()
 {
     # Enable systemd unit
     addUnits 'systemd-swap.service'
-
     # github.com/Nefelim4ag/systemd-swap
     split ":: Update /etc/systemd/swap.conf"
-
     # Disable Zswap and enable Zram
-    sed -i "/^zswap_enabled=/s/1/0/" /etc/systemd/swap.conf && \
-    sed -i "/^zram_enabled=/s/0/1/" /etc/systemd/swap.conf && \
-    # Enabled successfully
-    cecho ":: Swap enabled: ${CYAN}Zram"
+    sed -i "/^zswap_enabled=/s/1/0/;/^zram_enabled=/s/0/1/" /etc/systemd/swap.conf && cecho ":: Swap enabled: ${CYAN}Zram"
 }
 
 # wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
