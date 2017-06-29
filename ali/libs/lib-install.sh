@@ -21,7 +21,7 @@ prepareDisk ()
 encryptDisk ()
 {
     block ":: Format Linux Unified Key Setup: ${CYAN}${ROOTFS}"
-    cryptsetup --verbose --batch-mode --verify-passphrase --hash sha256 --key-size 256 --iter-time 2000 luksFormat ${ROOTFS}
+    cryptsetup --verbose --batch-mode --verify-passphrase --hash sha${BITS} --key-size ${BITS} --iter-time 2000 luksFormat ${ROOTFS}
 
     split ":: Open Linux Unified Key Setup: ${CYAN}${LUKSFS}"
     cryptsetup --verbose luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
