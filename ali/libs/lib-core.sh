@@ -6,7 +6,6 @@ installation ()
     block ":: [Part 1] Install base system"
     label ":: Computer   : ${CYAN}${PC}"
     label ":: Keyboard   : ${CYAN}${KEYBOARD}"
-    label ":: HardDisk   : ${CYAN}${HARDDISK}"
     label ":: BootLoader : ${CYAN}${BOOTLOADER}"
     label ":: BaseSystem : ${CYAN}${BASESYSTEM}"
 

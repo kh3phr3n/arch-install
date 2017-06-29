@@ -1,15 +1,13 @@
 #!/bin/bash
 
-# Display blue messages
+# Display blue message
 label () { cecho "$1" blue; }
-title () { cecho "$1\n" blue; }
-split () { cecho "\n$1\n" blue; }
-block () { clear; cecho "$1\n" blue; }
-
+# Variants of label function
+title () { label "$1\n"; }
+split () { label "\n$1\n"; }
+block () { clear; label "$1\n"; }
 # Pause installation
 pause () { cecho "\n:: Press any key to continue..." yellow; read; }
-# Check if an element exist in a string -- $1: Choice, $2: List of Choices
-contains () { for e in "${@:2}"; do [[ $e == $1 ]] && break; done; }
 # Initialize terminal colors
 colors () { PURPLE='\e[0;35m' YELLOW='\e[1;33m' GREEN='\e[0;32m' CYAN='\e[0;36m' BLUE='\e[1;34m' RED='\e[0;31m' OFF='\e[0m'; }
 # Update user's password -- $1: Username, $2: Password
@@ -57,7 +55,6 @@ installPkg ()
 initramfs ()
 {
     split ":: Generate new initial ramdisk"
-
     # wiki.archlinux.org/index.php/Initramfs
     mkinitcpio -p linux
 }
@@ -91,7 +88,6 @@ updateHooks ()
 setupClock ()
 {
     block ":: Configure Network Time Protocol"
-
     # Enable systemd-timesyncd daemon for synchronizing the system clock across the network
     timedatectl set-ntp true && cecho ":: Service enabled: ${CYAN}systemd-timesyncd"; pause
 }
@@ -100,7 +96,6 @@ setupClock ()
 earlyStart ()
 {
     block ":: Update /etc/mkinitcpio.conf"
-
     # Kernel Mode Setting: wiki.archlinux.org/index.php/KMS
     sed -i "/^MODULES=/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && initramfs
 }
@@ -111,7 +106,6 @@ secureMySQL ()
     if [ -x /usr/bin/mysql_secure_installation ]
     then
         title ":: Secure MySQL installation"
-
         # Start MySQL server, securize and reload
         systemctl start mysqld && mysql_secure_installation && systemctl restart mysqld; pause
     fi
