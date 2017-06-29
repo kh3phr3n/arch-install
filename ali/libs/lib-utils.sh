@@ -71,17 +71,16 @@ addUnits ()
     done
 }
 
-# wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#Configuring_mkinitcpio
+# wiki.archlinux.org/index.php/Mkinitcpio
 updateHooks ()
 {
     split ":: Update /etc/mkinitcpio.conf"
 
-    # Update consolefont, keyboard, keymap, encrypt
-    sed -i "/^HOOKS=/s/ keyboard//" /etc/mkinitcpio.conf && \
-    sed -i "/^HOOKS=/s/block/& encrypt/" /etc/mkinitcpio.conf && \
-    sed -i "/^HOOKS=/s/block/consolefont keyboard keymap &/" /etc/mkinitcpio.conf && \
-    # Updated successfully
-    cecho ":: Hooks updated: ${CYAN}consolefont keyboard keymap encrypt"; pause
+    # Hooks required by LUKS
+    for hook in encrypt keymap
+    do
+        sed -i "/^HOOKS=/s/block/& $hook/" /etc/mkinitcpio.conf && cecho ":: Hook added: ${CYAN}$hook"
+    done; pause
 }
 
 # wiki.archlinux.org/index.php/Systemd-timesyncd
