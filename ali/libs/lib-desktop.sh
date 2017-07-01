@@ -27,7 +27,7 @@ installI3wm ()
     [[ "${#I3WMPKGS[@]}" -gt 0 ]] && installPkg "${I3WMPKGS[@]}"
 
     # Force style for Qt5
-    setQtStyleOverride 'gtk2'
+    setupQtStyle 'gtk2'
     # Enable systemd units
     addUnits 'sddm.service' 'connman.service'
 }

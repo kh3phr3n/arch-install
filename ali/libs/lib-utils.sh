@@ -135,7 +135,7 @@ blacklistMods ()
 
 # wiki.archlinux.org/index.php/Qt
 # wiki.archlinux.org/index.php/Uniform_Look_for_Qt_and_GTK_Applications
-setQtStyleOverride ()
+setupQtStyle ()
 {
     block ":: Set GTK+ style for Qt5"
 
