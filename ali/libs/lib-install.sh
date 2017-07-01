@@ -21,10 +21,10 @@ prepareDisk ()
 encryptDisk ()
 {
     block ":: Format Linux Unified Key Setup: ${CYAN}${ROOTFS}"
-    printf "${LUKSPASS}" | cryptsetup --verbose --key-file - --key-size ${BITS} --hash sha${BITS} --iter-time 2000 luksFormat ${ROOTFS}
+    printf "${LUKSPASS}" | cryptsetup --verbose --key-file=- --key-size=${BITS} --hash=sha${BITS} luksFormat ${ROOTFS}
 
     split ":: Open Linux Unified Key Setup: ${CYAN}${LUKSFS}"
-    printf "${LUKSPASS}" | cryptsetup --verbose --key-file - luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
+    printf "${LUKSPASS}" | cryptsetup --verbose --key-file=- luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
 }
 
 buildFileSystems ()
@@ -158,7 +158,7 @@ unmountFileSystems ()
 
 restartLinuxSystem ()
 {
-    split ":: Reboot ArchLinux system"
+    title ":: Reboot ArchLinux system"
 
     for (( i=10 ; i>0 ; i-- ))
     do
@@ -173,14 +173,14 @@ nextPart ()
         2 )
             split ":: Next Part: Configuration"
             cecho ":: Change directory to /root/ali"
-            cecho ":: Run $(basename $0) -c or --configuration" ;;
+            cecho ":: Run $(basename $0) -c or --configuration\n" ;;
         3 )
             split ":: Next Part: End-Installation"
             cecho ":: Quit Chroot environment with Ctrl-D"
-            cecho ":: Run $(basename $0) -e or --end-installation" ;;
+            cecho ":: Run $(basename $0) -e or --end-installation\n" ;;
         4 )
             split ":: Next Part: Post-Installation"
-            cecho ":: After reboot, Run $(basename $0) -p or --post-installation" ;;
+            cecho ":: After reboot, Run $(basename $0) -p or --post-installation\n" ;;
     esac
 }
 
