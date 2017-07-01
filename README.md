@@ -15,7 +15,16 @@ Licence : GPLv3 GNU General Public License
 
 ##### Important (3):
 
-If you want override some options, you have to create an additional configuration file (same name as $PC variable).
+- If you want override some options, you have to create an additional configuration file (same name as $PC variable)
+- Swap is managed by ZRam through systemd-swap (Improves SSD lifetime)
+- Only simple partition layout with LUKS is supported
+
+```
++--------------------+--------------------------------------+----------------------------------------------+
+|Boot partition      |LUKS encrypted system partition       |Optional free space for additional partitions |
+|/dev/sdaY           |/dev/sdaX                             |or swap to be setup later                     |
++--------------------+--------------------------------------+----------------------------------------------+
+```
 
 ##### Installation
 
