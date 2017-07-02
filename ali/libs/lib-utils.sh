@@ -122,6 +122,15 @@ secureMySQL ()
     fi
 }
 
+# Clean *PASS variables
+# Wiki.archlinux.org/index.php/Securely_wipe_disk#shred
+secureEraseData ()
+{
+    block ":: Secure Erase /root/ali/ali.sh"
+    # Overwrite a file to hide its contents and delete it
+    shred --zero --verbose --iterations=10 --remove=wipesync /root/ali/ali.sh
+}
+
 # Kernel.org/doc/Documentation/blockdev/zram.txt
 setupZramSwap ()
 {
@@ -154,14 +163,5 @@ setupQtStyle ()
     local file='/etc/profile.d/qt5-style.sh'
     # Force GTK+ style for all Qt5 applications
     echo "export QT_QPA_PLATFORMTHEME=$1" > $file && chmod 755 $file && cecho ":: File updated: ${CYAN}$file"; pause
-}
-
-# Clean *PASS variables
-# Wiki.archlinux.org/index.php/Securely_wipe_disk#shred
-secureEraseData ()
-{
-    block ":: Secure Erase /root/ali/ali.sh"
-    # Overwrite a file to hide its contents and delete it
-    shred --zero --verbose --iterations=10 --remove=wipesync /root/ali/ali.sh
 }
 

@@ -13,7 +13,7 @@ Licence : GPLv3 GNU General Public License
 5. Create new installer archive: `cd arch-installer-master && tar czf ali.tar.gz ali/`
 6. Upload your new archive `ali.tar.gz` on your FTP.
 
-##### Important (3):
+##### Important
 
 - If you want override some options, you have to create an additional configuration file (same name as $PC variable)
 - Swap is managed by ZRam through systemd-swap (Improves SSD lifetime)
