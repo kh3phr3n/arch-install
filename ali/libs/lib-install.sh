@@ -90,17 +90,21 @@ configureEtcFiles ()
     for file in vconsole.conf locale.conf locale.gen localtime hostname adjtime hosts
     do
         case "$file" in
+            # Wiki.archlinux.org/index.php/Time
             adjtime       ) hwclock --systohc --utc                                          ;;
-            hostname      ) echo ${PC} > /etc/hostname                                       ;;
             localtime     ) ln -sf /usr/share/zoneinfo/${ZONE}/${SUBZONE} /etc/localtime     ;;
+
+            # Wiki.archlinux.org/index.php/Network
+            hostname      ) echo ${PC} > /etc/hostname                                       ;;
             hosts         ) sed -i "/^127.0.0.1/s/$/ ${PC}/;/^::1/s/$/ ${PC}/" /etc/hosts    ;;
 
-            # Locales
+            # Wiki.archlinux.org/index.php/Locale
             locale.gen    ) sed  -i "2,22d;/${LOCALE}/s/^#//" /etc/locale.gen                ;;
             locale.conf   ) echo -e "LANG=${LOCALE}.UTF-8\nLC_COLLATE=C" > /etc/locale.conf  ;;
+
+            # Wiki.archlinux.org/index.php/Fonts#Console_fonts
             vconsole.conf ) echo -e "KEYMAP=${KEYMAP}\nFONT=${TTYFONT}" > /etc/vconsole.conf ;;
         esac
-
         [[ -f "/etc/$file" ]] && cecho ":: File updated: ${CYAN}/etc/$file"
     done; pause
 }
