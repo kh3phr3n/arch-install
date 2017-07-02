@@ -21,13 +21,13 @@ installGraphicsDriver ()
 {
     # Create configuration file if available
     case "${XDRIVER}" in
-        # Infos: wiki.archlinux.org/index.php/Intel
+        # Wiki.archlinux.org/index.php/Intel
         intel   ) installPkg "xf86-video-intel libva-intel-driver" && xorg_20_intel_conf && earlyStart "i915" ;;
-        # Infos: wiki.archlinux.org/index.php/Nouveau
+        # Wiki.archlinux.org/index.php/Nouveau
         nouveau ) installPkg "xf86-video-nouveau" && xorg_20_nouveau_conf && earlyStart "nouveau" ;;
-        # Infos: wiki.archlinux.org/index.php/Nvidia
+        # Wiki.archlinux.org/index.php/Nvidia
         nvidia* ) installPkg "${XDRIVER}" && xorg_20_nvidia_conf ;;
-        # Infos: archlinux.org/groups/x86_64/xorg-drivers
+        # Archlinux.org/groups/x86_64/xorg-drivers
         *       ) installPkg "xf86-video-${XDRIVER}" ;;
     esac; pause
 }

@@ -23,7 +23,7 @@ createNewUser ()
     cecho ":: User  : ${CYAN}${USERNAME}"
     cecho ":: Groups: ${CYAN}${USERGROUPS}"
 
-    split ":: Set user password"
+    split ":: Set ${USERNAME} password"
     # Create user/groups and define password
     useradd -m -s ${USERSHELL} ${USERNAME} && usermod -G ${USERGROUPS} ${USERNAME} && password ${USERNAME} ${USERPASS}
 }

@@ -2,16 +2,28 @@
 
 # Display blue message
 label () { cecho "$1" blue; }
+
 # Variants of label function
 title () { label "$1\n"; }
 split () { label "\n$1\n"; }
 block () { clear; label "$1\n"; }
+
 # Pause installation
 pause () { cecho "\n:: Press any key to continue..." yellow; read; }
-# Initialize terminal colors
-colors () { PURPLE='\e[0;35m' YELLOW='\e[1;33m' GREEN='\e[0;32m' CYAN='\e[0;36m' BLUE='\e[1;34m' RED='\e[0;31m' OFF='\e[0m'; }
 # Update user's password -- $1: Username, $2: Password
-password () { printf "$1:$2" | chpasswd --crypt-method=SHA${BITS} --sha-rounds=5000 && cecho ":: $1's password updated successfully\n"; }
+password () { printf "$1:$2" | chpasswd --crypt-method=SHA${BITS} --sha-rounds=5000 && cecho ":: Password updated successfully\n"; }
+
+# Initialize colors
+colors ()
+{
+    PURPLE='\e[0;35m'
+    YELLOW='\e[1;33m'
+    GREEN='\e[0;32m'
+    CYAN='\e[0;36m'
+    BLUE='\e[1;34m'
+    RED='\e[0;31m'
+    OFF='\e[0m'
+}
 
 # Display colored message
 # $1: Message
@@ -55,7 +67,7 @@ installPkg ()
 initramfs ()
 {
     split ":: Generate new initial ramdisk"
-    # wiki.archlinux.org/index.php/Initramfs
+    # Wiki.archlinux.org/index.php/Initramfs
     mkinitcpio -p linux
 }
 
@@ -71,7 +83,7 @@ addUnits ()
     done
 }
 
-# wiki.archlinux.org/index.php/Mkinitcpio
+# Wiki.archlinux.org/index.php/Mkinitcpio
 updateHooks ()
 {
     split ":: Update /etc/mkinitcpio.conf"
@@ -83,7 +95,7 @@ updateHooks ()
     done; pause
 }
 
-# wiki.archlinux.org/index.php/Systemd-timesyncd
+# Wiki.archlinux.org/index.php/Systemd-timesyncd
 setupClock ()
 {
     block ":: Configure Network Time Protocol"
@@ -99,7 +111,7 @@ earlyStart ()
     sed -i "/^MODULES=/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && initramfs
 }
 
-# wiki.archlinux.org/index.php/MySQL
+# Wiki.archlinux.org/index.php/MySQL
 secureMySQL ()
 {
     if [ -x /usr/bin/mysql_secure_installation ]
@@ -110,18 +122,18 @@ secureMySQL ()
     fi
 }
 
-# kernel.org/doc/Documentation/blockdev/zram.txt
+# Kernel.org/doc/Documentation/blockdev/zram.txt
 setupZramSwap ()
 {
     # Enable systemd unit
     addUnits 'systemd-swap.service'
-    # github.com/Nefelim4ag/systemd-swap
+    # Github.com/Nefelim4ag/systemd-swap
     split ":: Update /etc/systemd/swap.conf"
     # Disable Zswap and enable Zram
     sed -i "/^zswap_enabled=/s/1/0/;/^zram_enabled=/s/0/1/" /etc/systemd/swap.conf && cecho ":: Swap enabled: ${CYAN}Zram"
 }
 
-# wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
+# Wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
 blacklistMods ()
 {
     block ":: Update /etc/modprobe.d/blacklist.conf"
@@ -133,8 +145,8 @@ blacklistMods ()
     done
 }
 
-# wiki.archlinux.org/index.php/Qt
-# wiki.archlinux.org/index.php/Uniform_Look_for_Qt_and_GTK_Applications
+# Wiki.archlinux.org/index.php/Qt
+# Wiki.archlinux.org/index.php/Uniform_Look_for_Qt_and_GTK_Applications
 setupQtStyle ()
 {
     block ":: Set GTK+ style for Qt5"

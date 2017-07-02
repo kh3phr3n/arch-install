@@ -163,7 +163,7 @@ unmountFileSystems ()
 
 restartLinuxSystem ()
 {
-    title ":: Reboot ArchLinux system"
+    split ":: Reboot ArchLinux system"
 
     for (( i=10 ; i>0 ; i-- ))
     do
@@ -185,7 +185,7 @@ nextPart ()
             cecho ":: Run $(basename $0) -e or --end-installation\n" ;;
         4 )
             split ":: Next Part: Post-Installation"
-            cecho ":: After reboot, Run $(basename $0) -p or --post-installation\n" ;;
+            cecho ":: After reboot, Run $(basename $0) -p or --post-installation" ;;
     esac
 }
 
