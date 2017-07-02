@@ -60,6 +60,7 @@ postInstallation ()
     installXorg
     installDesktop
     install3rdParty
+    secureEraseData
     restartLinuxSystem
 }
 
