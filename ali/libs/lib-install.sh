@@ -4,26 +4,29 @@
 kbLayout ()
 {
     block ":: Change keyboard layout"
-    loadkeys ${KEYMAP} && cecho ":: Layout updated: ${CYAN}${KEYMAP}"
+    loadkeys ${KEYMAP} && cecho ":: Layout updated: ${CYAN}${KEYMAP}"; pause
 }
 
 prepareDisk ()
 {
-    split ":: Prepare hard disk drive partitions"
-    cecho ":: HardDisk: ${CYAN}${HARDDISK}"
-    cecho ":: BootDisk: ${CYAN}${BOOTFS}"
-    cecho ":: RootDisk: ${CYAN}${ROOTFS}"
+    block ":: Prepare Hard Disk Drive partitions"
+    cecho ":: Boot partition: ${CYAN}${BOOTFS}"
+    cecho ":: Root partition: ${CYAN}${ROOTFS}"
 
-    split ":: Launch hard disk drive tool"
+    split ":: Launch Hard Disk Drive tool"
     ${HARDDISKTOOL} ${HARDDISK}; pause
 }
 
 encryptDisk ()
 {
-    block ":: Format Linux Unified Key Setup: ${CYAN}${ROOTFS}"
-    printf "${LUKSPASS}" | cryptsetup --verbose --key-file=- --key-size=${BITS} --hash=sha${BITS} luksFormat ${ROOTFS}
+    block ":: Prepare Linux Unified Key Setup"
+    cecho ":: Hash Algorithm: ${CYAN}SHA-${BITS}"
+    cecho ":: Root partition: ${CYAN}${ROOTFS}"
+    cecho ":: Luks partition: ${CYAN}${LUKSFS}"
 
-    split ":: Open Linux Unified Key Setup: ${CYAN}${LUKSFS}"
+    split ":: Format Linux Unified Key Setup"
+    printf "${LUKSPASS}" | cryptsetup --verbose --key-file=- --key-size=${BITS} --hash=sha${BITS} luksFormat ${ROOTFS}
+    split ":: Open Linux Unified Key Setup"
     printf "${LUKSPASS}" | cryptsetup --verbose --key-file=- luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
 }
 
@@ -154,10 +157,10 @@ configureBootloader ()
 # [Part 3]
 unmountFileSystems ()
 {
-    block ":: Unmount Linux filesystems: ${CYAN}/mnt/*"
+    block ":: Unmount Linux filesystems"
     umount --verbose --recursive /mnt
 
-    split ":: Close Linux Unified Key Setup: ${CYAN}${LUKSFS}"
+    split ":: Close Linux Unified Key Setup"
     cryptsetup --verbose luksClose ${LUKSFS##*/}; nextPart 4
 }
 
@@ -174,17 +177,19 @@ restartLinuxSystem ()
 # Third-party functions
 nextPart ()
 {
+    pause
+    # Whats next
     case "$1" in
         2 )
-            split ":: Next Part: Configuration"
+            block ":: Next Part: Configuration"
             cecho ":: Change directory to /root/ali"
             cecho ":: Run $(basename $0) -c or --configuration\n" ;;
         3 )
-            split ":: Next Part: End-Installation"
+            block ":: Next Part: End-Installation"
             cecho ":: Quit Chroot environment with Ctrl-D"
             cecho ":: Run $(basename $0) -e or --end-installation\n" ;;
         4 )
-            split ":: Next Part: Post-Installation"
+            block ":: Next Part: Post-Installation"
             cecho ":: After reboot, Run $(basename $0) -p or --post-installation" ;;
     esac
 }
