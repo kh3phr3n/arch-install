@@ -19,15 +19,14 @@ prepareDisk ()
 
 encryptDisk ()
 {
-    block ":: Prepare Linux Unified Key Setup"
-    cecho ":: Hash Algorithm: ${CYAN}SHA-${BITS}"
+    block ":: Prepare Linux Unified Key Setup (LUKS)"
     cecho ":: Root partition: ${CYAN}${ROOTFS}"
     cecho ":: Luks partition: ${CYAN}${LUKSFS}"
 
     split ":: Format Linux Unified Key Setup"
-    printf "${LUKSPASS}" | cryptsetup --verbose --key-file=- --key-size=${BITS} --hash=sha${BITS} luksFormat ${ROOTFS}
+    printf "${LUKSPASS}" | cryptsetup --verbose --key-file=- --key-size=${BITS} --hash=sha${BITS} luksFormat ${ROOTFS} |& ofmt
     split ":: Open Linux Unified Key Setup"
-    printf "${LUKSPASS}" | cryptsetup --verbose --key-file=- luksOpen ${ROOTFS} ${LUKSFS##*/}; pause
+    printf "${LUKSPASS}" | cryptsetup --verbose --key-file=- luksOpen ${ROOTFS} ${LUKSFS##*/} |& ofmt; pause
 }
 
 buildFileSystems ()
@@ -44,9 +43,9 @@ mountFileSystems ()
 {
     block ":: Mount Linux filesystems"
     # Root partition
-    mount ${LUKSFS} /mnt && cecho ":: Linux filesystem mounted: ${CYAN}${LUKSFS}"
+    mount --verbose ${LUKSFS} /mnt |& ofmt
     # Boot partition
-    mkdir /mnt/boot && mount ${BOOTFS} /mnt/boot && cecho ":: Linux filesystem mounted: ${CYAN}${BOOTFS}"; pause
+    mkdir /mnt/boot && mount --verbose ${BOOTFS} /mnt/boot |& ofmt; pause
 }
 
 installBaseSystem ()
@@ -134,7 +133,7 @@ configureBootloader ()
     if [ "${BOOTLOADER}" == "grub" ]
     then
         # Grub2 installation
-        grub-install --target=i386-pc --recheck ${HARDDISK}
+        grub-install --target=i386-pc --recheck ${HARDDISK} |& ofmt
 
         # Fix error messages at boot
         cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
@@ -143,13 +142,12 @@ configureBootloader ()
         local dmname=${LUKSFS##*/}
         local device="\/dev\/mapper\/${LUKSFS##*/}"
         local dsuuid=$(blkid -o value -s UUID ${ROOTFS})
-
         # Edit /etc/default/grub
         sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/s/quiet//" /etc/default/grub
         sed -i "/^GRUB_CMDLINE_LINUX=/s/\"$/cryptdevice=UUID=$dsuuid:$dmname root=$device&/" /etc/default/grub
 
         split ":: Generate new /boot/grub/grub.cfg"
-        grub-mkconfig -o /boot/grub/grub.cfg
+        grub-mkconfig -o /boot/grub/grub.cfg |& ofmt
     fi
     nextPart 3
 }
@@ -158,10 +156,10 @@ configureBootloader ()
 unmountFileSystems ()
 {
     block ":: Unmount Linux filesystems"
-    umount --verbose --recursive /mnt
+    umount --verbose --recursive /mnt |& ofmt
 
     split ":: Close Linux Unified Key Setup"
-    cryptsetup --verbose luksClose ${LUKSFS##*/}; nextPart 4
+    cryptsetup --verbose luksClose ${LUKSFS##*/} |& ofmt; nextPart 4
 }
 
 restartLinuxSystem ()

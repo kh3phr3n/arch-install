@@ -2,12 +2,13 @@
 
 # Display blue message
 label () { cecho "$1" blue; }
-
 # Variants of label function
 title () { label "$1\n"; }
 split () { label "\n$1\n"; }
 block () { clear; label "$1\n"; }
 
+# Std* output format
+ofmt () { sed "s/^/:: /"; }
 # Pause installation
 pause () { cecho "\n:: Press any key to continue..." yellow; read; }
 # Update user's password -- $1: Username, $2: Password
