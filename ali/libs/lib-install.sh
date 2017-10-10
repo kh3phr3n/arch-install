@@ -120,7 +120,7 @@ configureBaseSystem ()
     updateHooks && setupZramSwap; pause
 
     block ":: Generate locales system"
-    locale-gen && initramfs; pause
+    locale-gen |& ofmt && mkinit; pause
 
     block ":: Set root password"
     password root ${ROOTPASS}

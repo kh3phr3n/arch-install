@@ -65,7 +65,7 @@ installPkg ()
 # System utils
 # ------------
 
-initramfs ()
+mkinit ()
 {
     split ":: Generate new initial ramdisk"
     # Wiki.archlinux.org/index.php/Initramfs
@@ -109,7 +109,7 @@ earlyStart ()
 {
     block ":: Update /etc/mkinitcpio.conf"
     # Kernel Mode Setting: wiki.archlinux.org/index.php/KMS
-    sed -i "/^MODULES=/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && initramfs
+    sed -i "/^MODULES=/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && mkinit
 }
 
 # Wiki.archlinux.org/index.php/MySQL
@@ -129,7 +129,7 @@ secureEraseData ()
 {
     block ":: Secure Erase /root/ali/ali.sh"
     # Overwrite a file to hide its contents and delete it
-    shred --zero --verbose --iterations=10 --remove=wipesync /root/ali/ali.sh
+    shred --zero --verbose --iterations=10 --remove=wipesync /root/ali/ali.sh |& ofmt
 }
 
 # Kernel.org/doc/Documentation/blockdev/zram.txt
