@@ -18,10 +18,8 @@ PACKAGES=(
     'cower/cower-17-2-x86_64.pkg.tar.xz'
     # Extras i3wm
     'i3wm/xcursor-oxygen-5.11.1-1-any.pkg.tar.xz'
-    'i3wm/qt5-styleplugins-5.0.0-8-x86_64.pkg.tar.xz'
     # Extras fonts
     'ttf-nonfree/ttf-nonfree-1.0-1-any.pkg.tar.xz'
-    'ttf-awesome/ttf-font-awesome-4.7.0-3-any.pkg.tar.xz'
     'ttf-iosevka/ttf-iosevka-custom-1.13.3-1-any.pkg.tar.xz'
     # Extras utils
     'ttf-iosevka/otfcc-0.7.0-2-x86_64.pkg.tar.xz'

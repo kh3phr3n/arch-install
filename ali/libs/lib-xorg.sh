@@ -5,7 +5,7 @@ installXorg ()
     # Install xorg-* packages
     installPkg 'xorg-server xorg-xset xorg-xinit xorg-xinput xorg-xrandr xorg-xdpyinfo xorg-fonts-type1 gsfonts'
     # Install misc fonts
-    installPkg 'ttf-roboto ttf-dejavu ttf-freefont ttf-liberation ttf-fira-sans ttf-fira-mono ttf-bitstream-vera'
+    installPkg 'ttf-roboto ttf-dejavu ttf-freefont ttf-liberation ttf-fira-sans ttf-fira-mono ttf-font-awesome'
     # Install Alsa/PulseAudio utilities
     installPkg 'alsa-utils pulseaudio pulseaudio-alsa'
 
