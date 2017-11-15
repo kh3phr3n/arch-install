@@ -109,7 +109,7 @@ earlyStart ()
 {
     block ":: Update /etc/mkinitcpio.conf"
     # Kernel Mode Setting: wiki.archlinux.org/index.php/KMS
-    sed -i "/^MODULES=/s/\"$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && mkInit
+    sed -i "/^MODULES=/s/)$/$1&/" /etc/mkinitcpio.conf && cecho ":: Module added: ${CYAN}$1" && mkInit
 }
 
 # Wiki.archlinux.org/index.php/MySQL
