@@ -140,11 +140,15 @@ configureBootloader ()
 
         # Cryptdevice arguments
         local dmname=${LUKSFS##*/}
+        local dsname=${HARDDISK##*/}
         local device="\/dev\/mapper\/${LUKSFS##*/}"
         local dsuuid=$(blkid -o value -s UUID ${ROOTFS})
+
         # Edit /etc/default/grub
         sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/s/quiet//" /etc/default/grub
         sed -i "/^GRUB_CMDLINE_LINUX=/s/\"$/cryptdevice=UUID=$dsuuid:$dmname root=$device&/" /etc/default/grub
+        # Enable TRIM support for SSD
+        [[ $(cat /sys/block/$dsname/queue/rotational) -eq 0 ]] && sed -i "/^GRUB_CMDLINE_LINUX=/s/:$dmname/&:allow-discards/" /etc/default/grub
 
         split ":: Generate new /boot/grub/grub.cfg"
         grub-mkconfig -o /boot/grub/grub.cfg |& ofmt
