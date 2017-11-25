@@ -87,25 +87,21 @@ configureMirrors ()
 
 configureEtcFiles ()
 {
-    block ":: Update /etc/* configuration files"
+    block ":: Create /etc/* configuration files"
 
+    # File: /etc/hostname
+    hostnamectl set-hostname ${PC}
+    # File: /etc/locale.conf
+    localectl set-locale LANG=${LOCALE}.UTF-8
+    # File: /etc/vconsole.conf
+    localectl set-keymap --no-convert ${KEYMAP}
+    # File: /etc/{adjtime,localtime}
+    hwclock --systohc --utc && ln -sf /usr/share/zoneinfo/${ZONE}/${SUBZONE} /etc/localtime
+
+    # Check if files have been created
     for file in vconsole.conf locale.conf localtime hostname adjtime
     do
-        case "$file" in
-            # Wiki.archlinux.org/index.php/Time
-            adjtime       ) hwclock --systohc --utc                                          ;;
-            localtime     ) ln -sf /usr/share/zoneinfo/${ZONE}/${SUBZONE} /etc/localtime     ;;
-
-            # Wiki.archlinux.org/index.php/Network
-            hostname      ) echo ${PC} > /etc/hostname                                       ;;
-
-            # Wiki.archlinux.org/index.php/Locale
-            locale.conf   ) echo -e "LANG=${LOCALE}.UTF-8\nLC_COLLATE=C" > /etc/locale.conf  ;;
-
-            # Wiki.archlinux.org/index.php/Fonts#Console_fonts
-            vconsole.conf ) echo -e "KEYMAP=${KEYMAP}\nFONT=${TTYFONT}" > /etc/vconsole.conf ;;
-        esac
-        [[ -f "/etc/$file" ]] && cecho ":: File updated: ${CYAN}/etc/$file"
+        [[ -e "/etc/$file" ]] && cecho ":: File created: ${CYAN}/etc/$file"
     done; pause
 }
 
