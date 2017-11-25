@@ -87,13 +87,13 @@ addUnits ()
 # Wiki.archlinux.org/index.php/Mkinitcpio
 updateHooks ()
 {
-    split ":: Update /etc/mkinitcpio.conf"
+    block ":: Update /etc/mkinitcpio.conf"
 
     # Hooks required by LUKS
     for hook in encrypt keymap
     do
         sed -i "/^HOOKS=/s/block/& $hook/" /etc/mkinitcpio.conf && cecho ":: Hook added: ${CYAN}$hook"
-    done; pause
+    done
 }
 
 # Wiki.archlinux.org/index.php/Locale
@@ -101,7 +101,7 @@ updateLocales ()
 {
     block ":: Update /etc/locale.gen"
     # Enable UTF-8/ISO-8859-1 locales
-    sed -i "/${LOCALE}/s/^#//" /etc/locale.gen && locale-gen |& ofmt
+    sed -i "/${LOCALE}/s/^#//" /etc/locale.gen && locale-gen |& ofmt; pause
 }
 
 # Wiki.archlinux.org/index.php/Systemd-timesyncd
@@ -154,7 +154,7 @@ setupZramSwap ()
 # Wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
 blacklistMods ()
 {
-    block ":: Update /etc/modprobe.d/blacklist.conf"
+    split ":: Update /etc/modprobe.d/blacklist.conf"
 
     # Blacklist Kernel Module(s)
     for module in "${BLKMODS[@]}"

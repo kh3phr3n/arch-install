@@ -111,14 +111,13 @@ configureEtcFiles ()
 
 configureBaseSystem ()
 {
-    # Configure LUKS hooks and Zram swap
-    blacklistMods && updateHooks && setupZramSwap; pause
-
-    # Update locales
-    updateLocales && mkInit; pause
+    # Update /etc/locale.gen, /etc/*/{swap.conf,blacklist.conf}
+    updateLocales && setupZramSwap && blacklistMods; pause
+    # Update /etc/mkinitcpio.conf
+    updateHooks && mkInit; pause
 
     block ":: Set root password"
-    password root ${ROOTPASS}
+    password root ${ROOTPASS}; pause
 }
 
 configureBootloader ()
