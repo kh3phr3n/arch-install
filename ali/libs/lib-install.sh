@@ -89,7 +89,7 @@ configureEtcFiles ()
 {
     block ":: Update /etc/* configuration files"
 
-    for file in vconsole.conf locale.conf locale.gen localtime hostname adjtime hosts
+    for file in vconsole.conf locale.conf locale.gen localtime hostname adjtime
     do
         case "$file" in
             # Wiki.archlinux.org/index.php/Time
@@ -98,7 +98,6 @@ configureEtcFiles ()
 
             # Wiki.archlinux.org/index.php/Network
             hostname      ) echo ${PC} > /etc/hostname                                       ;;
-            hosts         ) sed -i "/^127.0.0.1/s/$/ ${PC}/;/^::1/s/$/ ${PC}/" /etc/hosts    ;;
 
             # Wiki.archlinux.org/index.php/Locale
             locale.gen    ) sed  -i "2,22d;/${LOCALE}/s/^#//" /etc/locale.gen                ;;
