@@ -96,6 +96,14 @@ updateHooks ()
     done; pause
 }
 
+# Wiki.archlinux.org/index.php/Locale
+updateLocales ()
+{
+    block ":: Update /etc/locale.gen"
+    # Enable UTF-8/ISO-8859-1 locales
+    sed -i "/${LOCALE}/s/^#//" /etc/locale.gen && locale-gen |& ofmt
+}
+
 # Wiki.archlinux.org/index.php/Systemd-timesyncd
 setupClock ()
 {

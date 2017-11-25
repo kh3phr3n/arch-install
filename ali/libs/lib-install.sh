@@ -89,7 +89,7 @@ configureEtcFiles ()
 {
     block ":: Update /etc/* configuration files"
 
-    for file in vconsole.conf locale.conf locale.gen localtime hostname adjtime
+    for file in vconsole.conf locale.conf localtime hostname adjtime
     do
         case "$file" in
             # Wiki.archlinux.org/index.php/Time
@@ -100,7 +100,6 @@ configureEtcFiles ()
             hostname      ) echo ${PC} > /etc/hostname                                       ;;
 
             # Wiki.archlinux.org/index.php/Locale
-            locale.gen    ) sed  -i "2,22d;/${LOCALE}/s/^#//" /etc/locale.gen                ;;
             locale.conf   ) echo -e "LANG=${LOCALE}.UTF-8\nLC_COLLATE=C" > /etc/locale.conf  ;;
 
             # Wiki.archlinux.org/index.php/Fonts#Console_fonts
@@ -115,8 +114,8 @@ configureBaseSystem ()
     # Configure LUKS hooks and Zram swap
     blacklistMods && updateHooks && setupZramSwap; pause
 
-    block ":: Generate locales system"
-    locale-gen |& ofmt && mkInit; pause
+    # Update locales
+    updateLocales && mkInit; pause
 
     block ":: Set root password"
     password root ${ROOTPASS}
