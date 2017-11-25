@@ -149,7 +149,7 @@ blacklistMods ()
     block ":: Update /etc/modprobe.d/blacklist.conf"
 
     # Blacklist Kernel Module(s)
-    for module in "$@"
+    for module in "${BLKMODS[@]}"
     do
         echo "blacklist $module" >> /etc/modprobe.d/blacklist.conf && cecho ":: Module blacklisted: ${CYAN}$module"
     done

@@ -112,11 +112,8 @@ configureEtcFiles ()
 
 configureBaseSystem ()
 {
-    # Blacklist Kernel Modules
-    [[ "${#BLKMODS[@]}" -gt 0 ]] && blacklistMods ${BLKMODS[@]}
-
     # Configure LUKS hooks and Zram swap
-    updateHooks && setupZramSwap; pause
+    blacklistMods && updateHooks && setupZramSwap; pause
 
     block ":: Generate locales system"
     locale-gen |& ofmt && mkInit; pause
