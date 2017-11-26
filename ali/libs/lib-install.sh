@@ -100,7 +100,7 @@ configureEtcFiles ()
 
     local files=('vconsole.conf' 'locale.conf' 'localtime' 'hostname' 'adjtime')
     # Check if files have been created
-    for file in $files; do test -e "/etc/$file" && cecho ":: File created: ${CYAN}/etc/$file"; done; pause
+    for file in ${files[@]}; do test -e "/etc/$file" && cecho ":: File created: ${CYAN}/etc/$file"; done; pause
 }
 
 configureBaseSystem ()

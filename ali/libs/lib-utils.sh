@@ -75,7 +75,7 @@ mkInit ()
 # $@: Units list: 'kdm.service' 'cronie.service'
 addUnits ()
 {
-    block ":: Enable systemd unit(s)"
+    block ":: Enable new systemd unit(s) on bootup"
 
     # Enable *.service, *.target, ...
     for unit in "$@"
