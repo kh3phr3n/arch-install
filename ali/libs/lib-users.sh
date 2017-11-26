@@ -30,7 +30,7 @@ createNewUser ()
 
 configureSudo ()
 {
-    title ":: Configure sudo"
+    split ":: Configure sudo"
 
     if [ -f "/etc/sudoers" ]
     then

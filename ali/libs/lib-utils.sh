@@ -12,7 +12,7 @@ ofmt () { sed "s/^/:: /"; }
 # Pause installation
 pause () { cecho "\n:: Press any key to continue..." yellow; read; }
 # Update user's password -- $1: Username, $2: Password
-password () { printf "$1:$2" | chpasswd --crypt-method=SHA${BITS} --sha-rounds=5000 && cecho ":: Password updated successfully\n"; }
+password () { printf "$1:$2" | chpasswd --crypt-method=SHA${BITS} --sha-rounds=5000 && cecho ":: Password updated successfully"; }
 
 # Initialize colors
 colors ()
@@ -101,7 +101,7 @@ updateLocales ()
 {
     block ":: Update /etc/locale.gen"
     # Enable UTF-8/ISO-8859-1 locales
-    sed -i "/${LOCALE}/s/^#//" /etc/locale.gen && locale-gen |& ofmt; pause
+    sed -i "2,22d;/${LOCALE}/s/^#//" /etc/locale.gen && locale-gen |& ofmt; pause
 }
 
 # Wiki.archlinux.org/index.php/Systemd-timesyncd
@@ -148,13 +148,13 @@ setupZramSwap ()
     # Github.com/Nefelim4ag/systemd-swap
     split ":: Update /etc/systemd/swap.conf"
     # Disable Zswap and enable Zram
-    sed -i "/^zswap_enabled=/s/1/0/;/^zram_enabled=/s/0/1/" /etc/systemd/swap.conf && cecho ":: Swap enabled: ${CYAN}Zram"
+    sed -i "/^zswap_enabled=/s/1/0/;/^zram_enabled=/s/0/1/" /etc/systemd/swap.conf && cecho ":: Swap enabled: ${CYAN}Zram"; pause
 }
 
 # Wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
 blacklistMods ()
 {
-    split ":: Update /etc/modprobe.d/blacklist.conf"
+    block ":: Update /etc/modprobe.d/blacklist.conf"
 
     # Blacklist Kernel Module(s)
     for module in "${BLKMODS[@]}"

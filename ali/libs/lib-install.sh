@@ -89,20 +89,18 @@ configureEtcFiles ()
 {
     block ":: Create /etc/* configuration files"
 
-    # File: /etc/hostname
-    hostnamectl set-hostname ${PC}
-    # File: /etc/locale.conf
-    localectl set-locale LANG=${LOCALE}.UTF-8
-    # File: /etc/vconsole.conf
-    localectl set-keymap --no-convert ${KEYMAP}
-    # File: /etc/{adjtime,localtime}
+    # Wiki.archlinux.org/index.php/Network
+    echo ${PC} > /etc/hostname
+    # Wiki.archlinux.org/index.php/Fonts
+    echo KEYMAP=${KEYMAP} > /etc/vconsole.conf
+    # Wiki.archlinux.org/index.php/Locale
+    echo LANG=${LOCALE}.UTF-8 > /etc/locale.conf
+    # Wiki.archlinux.org/index.php/Time
     hwclock --systohc --utc && ln -sf /usr/share/zoneinfo/${ZONE}/${SUBZONE} /etc/localtime
 
+    local files=('vconsole.conf' 'locale.conf' 'localtime' 'hostname' 'adjtime')
     # Check if files have been created
-    for file in vconsole.conf locale.conf localtime hostname adjtime
-    do
-        [[ -e "/etc/$file" ]] && cecho ":: File created: ${CYAN}/etc/$file"
-    done; pause
+    for file in $files; do test -e "/etc/$file" && cecho ":: File created: ${CYAN}/etc/$file"; done; pause
 }
 
 configureBaseSystem ()
@@ -118,7 +116,7 @@ configureBaseSystem ()
 
 configureBootloader ()
 {
-    title ":: Configure bootloader"
+    block ":: Configure bootloader"
 
     if [ "${BOOTLOADER}" == "grub" ]
     then
