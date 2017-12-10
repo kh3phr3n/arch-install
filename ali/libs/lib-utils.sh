@@ -99,7 +99,7 @@ updateHooks ()
 # Wiki.archlinux.org/index.php/Locale
 updateLocales ()
 {
-    block ":: Update /etc/locale.gen"
+    split ":: Update /etc/locale.gen"
     # Enable UTF-8/ISO-8859-1 locales
     sed -i "2,22d;/${LOCALE}/s/^#//" /etc/locale.gen && locale-gen |& ofmt; pause
 }
