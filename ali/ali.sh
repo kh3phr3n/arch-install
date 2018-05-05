@@ -12,7 +12,7 @@ PC='msi'
 
 # Configuration files
 CONFIGS=('core.conf'); [[ -e "conf/${PC}.conf" ]] && CONFIGS+=(${PC}.conf)
-# Arch Linux Installer libraries
+# Arch Linux Install libraries
 MINLIBS=(${CONFIGS[@]} 'lib-core.sh' 'lib-utils.sh' 'lib-install.sh')
 # Additional libraries required by Part 4
 MAXLIBS=(${MINLIBS[@]} 'apps.conf' 'lib-xorg.sh' 'lib-users.sh' 'lib-desktop.sh')
@@ -43,7 +43,7 @@ loadLibs ()
     done; colors; pause
 }
 
-# Run Arch Linux Installer
+# Run Arch Linux Install
 if [ "${UID}" -ne 0 ]
 then
     clear; echo "Root privileges are required for running ALI."
