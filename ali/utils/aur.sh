@@ -19,14 +19,14 @@ PACKAGES=(
     # Extras i3wm
     'i3wm/xcursor-oxygen-5.11.1-1-any.pkg.tar.xz'
     # Extras tools
-    'vscode/visual-studio-code-bin-1.20.1-1-x86_64.pkg.tar.xz'
+    'vscode/visual-studio-code-bin-1.23.0-1-x86_64.pkg.tar.xz'
     # Extras fonts
     'ttf-nonfree/ttf-nonfree-1.0-1-any.pkg.tar.xz'
     'ttf-awesome/ttf-font-awesome-4-4.7.0-5-any.pkg.tar.xz'
     'ttf-iosevka/ttf-iosevka-custom-1.14.0-1-any.pkg.tar.xz'
     # Extras utils
-    'ttf-iosevka/otfcc-0.9.6-1-x86_64.pkg.tar.xz'
-    'ttf-iosevka/ttfautohint-1.8.1-1-x86_64.pkg.tar.xz'
+    'ttf-iosevka/ttfautohint-1.8.1-2-x86_64.pkg.tar.xz'
+    'ttf-iosevka/otfcc-0.10.3.alpha-1-x86_64.pkg.tar.xz'
     'ttf-iosevka/premake-git-5.0.alpha2.r1194.g8e02b419-1-x86_64.pkg.tar.xz'
 )
 
