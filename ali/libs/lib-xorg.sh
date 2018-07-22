@@ -93,8 +93,8 @@ Section "InputClass"
     Driver          "libinput"
     Option          "Tapping" "on"
     Option          "AccelSpeed" "${ACCELSPEED}"
-    Option          "DisableWhileTyping" "on"
     Option          "ClickMethod" "${CLICKMETHOD}"
+    Option          "DisableWhileTyping" "on"
 EndSection
 EOF
 }
