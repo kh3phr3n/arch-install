@@ -48,6 +48,18 @@ mountFileSystems ()
     mkdir /mnt/boot && mount --verbose ${BOOTFS} /mnt/boot |& ofmt; pause
 }
 
+setupEfiPartition ()
+{
+    if [ "${UEFI}" -ne 0 ]
+    then
+        block ":: Build EFI system partition: ${CYAN}${UEFIFS}"
+        mkfs.vfat -F32 ${UEFIFS} && fsck.vfat ${UEFIFS}
+
+        split ":: Mount EFI system partition"
+        mkdir /mnt/boot/efi && mount --verbose ${UEFIFS} /mnt/boot/efi |& ofmt; pause
+    fi
+}
+
 installBaseSystem ()
 {
     block ":: Install minimal system"
@@ -118,29 +130,30 @@ configureBootloader ()
 {
     block ":: Configure bootloader"
 
-    if [ "${BOOTLOADER}" == "grub" ]
-    then
-        # Grub2 installation
-        grub-install --target=i386-pc --recheck ${HARDDISK} |& ofmt
-
-        # Fix error messages at boot
-        cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
-
-        # Cryptdevice arguments
-        local dmname=${LUKSFS##*/}
-        local dsname=${HARDDISK##*/}
-        local device="\/dev\/mapper\/${LUKSFS##*/}"
-        local dsuuid=$(blkid -o value -s UUID ${ROOTFS})
-
-        # Edit /etc/default/grub
-        sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/s/quiet//" /etc/default/grub
-        sed -i "/^GRUB_CMDLINE_LINUX=/s/\"$/cryptdevice=UUID=$dsuuid:$dmname root=$device&/" /etc/default/grub
-        # Enable TRIM support for SSD
-        [[ $(cat /sys/block/$dsname/queue/rotational) -eq 0 ]] && sed -i "/^GRUB_CMDLINE_LINUX=/s/:$dmname/&:allow-discards/" /etc/default/grub
-
-        split ":: Generate new /boot/grub/grub.cfg"
-        grub-mkconfig -o /boot/grub/grub.cfg |& ofmt
+    if [ "${UEFI}" -ne 0 ]
+        then grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB |& ofmt
+        else grub-install --target=i386-pc --recheck ${HARDDISK} |& ofmt
     fi
+
+    # Fix error messages at boot
+    cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+
+    # Cryptdevice arguments
+    local dmname=${LUKSFS##*/}
+    local dsname=${HARDDISK##*/}
+    local device="\/dev\/mapper\/${LUKSFS##*/}"
+    local dsuuid=$(blkid -o value -s UUID ${ROOTFS})
+
+    # Edit /etc/default/grub
+    sed -i "/^GRUB_CMDLINE_LINUX_DEFAULT=/s/quiet//" /etc/default/grub
+    sed -i "/^GRUB_CMDLINE_LINUX=/s/\"$/cryptdevice=UUID=$dsuuid:$dmname root=$device&/" /etc/default/grub
+    # Enable TRIM support for SSD
+    [[ $(cat /sys/block/$dsname/queue/rotational) -eq 0 ]] && sed -i "/^GRUB_CMDLINE_LINUX=/s/:$dmname/&:allow-discards/" /etc/default/grub
+
+    split ":: Generate new /boot/grub/grub.cfg"
+    grub-mkconfig -o /boot/grub/grub.cfg |& ofmt
+
+    # Let's go!
     nextPart 3
 }
 

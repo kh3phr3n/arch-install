@@ -16,6 +16,8 @@ When `ali.sh` is executed, `core.conf` is loaded and if `${PC}.conf` is found, e
 
 - Swap is managed by ZRam through systemd-swap (Improves SSD lifetime).
 - Only simple partition layout with LUKS is supported.
+- Only GRUB is supported (i386-pc and x86_64-efi).
+- UEFI and dual-boot windows are not supported yet.
 
 ```
 +----------------------+-----------------------------------+-----------------------------------------------+

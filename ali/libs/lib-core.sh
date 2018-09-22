@@ -15,6 +15,7 @@ installation ()
     encryptDisk
     buildFileSystems
     mountFileSystems
+    setupEfiPartition
     installBaseSystem
     generateFstabAndChroot
 }
