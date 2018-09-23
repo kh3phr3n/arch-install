@@ -7,12 +7,12 @@ Licence: GPLv3 GNU General Public License
 ##### Important
 
 - You can consider `conf/core.conf` as your primary machine, if you want override some settings for another one.  
-You have to create a new configuration file in `conf/` (Ex: `hp.conf` where `hp` is the future hostname).  
+You have to create a new configuration file in `conf/` (Ex: `dm3.conf` where `dm3` is the future hostname).  
 When `ali.sh` is executed, `core.conf` is loaded and if `${PC}.conf` is found, extra settings override core settings.
 
     In real life:  
-    - The name of my primary machine is `msi`, the variable `PC` in `ali.sh` is `msi`. So only `core.conf` is loaded because `msi.conf` does not exists.
-    - The name of my secondary machine is `hp`, the variable `PC` in `ali.sh` is `hp`. So `core.conf` is loaded and then `hp.conf`.
+    - My primary machine is `l380`, the variable `PC` in `ali.sh` is `l380`. So only `core.conf` is loaded because `l380.conf` does not exists.
+    - My secondary machine is `dm3`, the variable `PC` in `ali.sh` is `dm3`. So `core.conf` is loaded and then `dm3.conf`.
 
 - Swap is managed by ZRam through systemd-swap (Improves SSD lifetime).
 - Only simple partition layout with LUKS is supported.
@@ -51,7 +51,7 @@ cd ali && chmod +x ali
     ├── conf
     │   ├── apps.conf        *
     │   ├── core.conf        *
-    │   └── hp.conf          **
+    │   └── dm3.conf         **
     ├── libs
     │   ├── lib-core.sh
     │   ├── lib-desktop.sh

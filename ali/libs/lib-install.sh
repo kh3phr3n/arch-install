@@ -53,7 +53,7 @@ setupEfiPartition ()
     if [ "${UEFI}" -ne 0 ]
     then
         block ":: Build EFI system partition: ${CYAN}${UEFIFS}"
-        mkfs.vfat -F32 ${UEFIFS} && fsck.vfat ${UEFIFS}
+        mkfs.vfat -F32 ${UEFIFS} |& ofmt && fsck.vfat ${UEFIFS} |& ofmt
 
         split ":: Mount EFI system partition"
         mkdir /mnt/boot/efi && mount --verbose ${UEFIFS} /mnt/boot/efi |& ofmt; pause

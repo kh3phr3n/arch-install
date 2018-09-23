@@ -8,7 +8,7 @@ LUKSPASS=''
 # Target machine, this variable is used for:
 # Hostname -> /etc/hostname
 # Optional configuration -> conf/${PC}.conf
-PC='msi'
+PC='l380'
 
 # Configuration files
 CONFIGS=('core.conf'); [[ -e "conf/${PC}.conf" ]] && CONFIGS+=(${PC}.conf)
