@@ -18,6 +18,7 @@ PACKAGES=(
     'cower/cower-18-1-x86_64.pkg.tar.xz'
     # Extras i3wm
     'i3wm/xcursor-oxygen-5.13.1-1-any.pkg.tar.xz'
+    'i3wm/rxvt-unicode-patched-9.22-10-x86_64.pkg.tar.xz'
     # Extras tools
     'vscode/visual-studio-code-bin-1.27.1-1-x86_64.pkg.tar.xz'
     # Extras fonts
