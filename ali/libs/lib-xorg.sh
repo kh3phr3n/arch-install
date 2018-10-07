@@ -79,7 +79,6 @@ Section "InputClass"
     Identifier      "Keyboard"
     Option          "XkbLayout"  "${XKBLAYOUT}"
     Option          "XkbVariant" "${XKBVARIANT}"
-    Option          "XkbOptions" "compose:menu,terminate:ctrl_alt_bksp"
 EndSection
 EOF
 }
