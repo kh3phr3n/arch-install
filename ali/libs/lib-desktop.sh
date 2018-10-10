@@ -22,7 +22,7 @@ installPlasma5 ()
 installI3wm ()
 {
     # Install i3wm environment
-    installPkg 'i3 sddm connman sysstat'
+    installPkg 'i3 sddm connman sysstat qt5-svg qt5-graphicaleffects'
     # Install Additional Applications
     [[ "${#I3WMPKGS[@]}" -gt 0 ]] && installPkg "${I3WMPKGS[@]}"
 
