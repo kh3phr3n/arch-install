@@ -44,25 +44,3 @@ cd ali && chmod +x ali
 ./ali.sh -i
 ```
 
-##### Arch Linux Install files
-
-    ali/
-    ├── ali.sh               *
-    ├── conf
-    │   ├── apps.conf        *
-    │   ├── core.conf        *
-    │   └── dm3.conf         **
-    ├── libs
-    │   ├── lib-core.sh
-    │   ├── lib-desktop.sh
-    │   ├── lib-install.sh
-    │   ├── lib-users.sh
-    │   ├── lib-utils.sh
-    │   └── lib-xorg.sh
-    └── utils                **
-        ├── aur.sh           **
-        └── wipe.sh          **
-
-***
-\* Check settings -- \*\* Not required
-
