@@ -22,7 +22,7 @@ PACKAGES=(
     # Extras fonts
     'ttf-nonfree/ttf-nonfree-1.0-1-any.pkg.tar.xz'
     'ttf-awesome/ttf-font-awesome-4-4.7.0-5-any.pkg.tar.xz'
-    'ttf-iosevka/ttf-iosevka-custom-1.14.3-1-any.pkg.tar.xz'
+    'ttf-iosevka/ttf-iosevka-custom-2.0.2-1-any.pkg.tar.xz'
     # Extras utils
     'ttf-iosevka/ttfautohint-1.8.2-1-x86_64.pkg.tar.xz'
     'ttf-iosevka/otfcc-0.10.3.alpha-1-x86_64.pkg.tar.xz'
