@@ -17,7 +17,7 @@ PACKAGES=(
     # AUR helper
     'auracle/auracle-git-r261.342de84-1-x86_64.pkg.tar.xz'
     # Extras i3wm
-    'i3wm/xcursor-oxygen-5.13.1-1-any.pkg.tar.xz'
+    'i3wm/xcursor-oxygen-5.16.1-1-any.pkg.tar.xz'
     'i3wm/rxvt-unicode-patched-9.22-11-x86_64.pkg.tar.xz'
     # Extras fonts
     'ttf-nonfree/ttf-nonfree-1.0-1-any.pkg.tar.xz'
