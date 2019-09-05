@@ -136,7 +136,7 @@ configureBootloader ()
     fi
 
     # Fix error messages at boot
-    cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+    #cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 
     # Cryptdevice arguments
     local dmname=${LUKSFS##*/}
