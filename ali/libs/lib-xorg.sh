@@ -37,16 +37,16 @@ xorgConfiguration ()
     block ":: Configure X.Org Window System"
 
     # Create pointer configuration file
-    [[ ${POINT} -ne 0 ]] && xorg_10_pointer_conf && cecho ":: Pointer configured: ${CYAN}${POINTACCEL}"
+    [[ ${POINTER} -ne 0 ]] && xorg_10_pointer_conf && cecho ":: Pointer configured: ${CYAN}${POINTACCEL}"
     # Create touchpad configuration file
-    [[ ${TOUCH} -ne 0 ]] && xorg_10_touchpad_conf && cecho ":: Touchpad configured: ${CYAN}${TOUCHACCEL}"
+    [[ ${TOUCHPAD} -ne 0 ]] && xorg_10_touchpad_conf && cecho ":: Touchpad configured: ${CYAN}${TOUCHACCEL}"
 
     # Create keyboard configuration file
     xorg_10_keyboard_conf && cecho ":: Keyboard configured: ${CYAN}${XKBLAYOUT}, ${XKBVARIANT}"
     # Create monitor configuration file
     xorg_10_monitor_conf && cecho ":: Monitor configured: ${CYAN}${RESOLUTION}"
 
-    # Check graphics drivers configuration file
+    # Check video driver configuration file
     [[ -f ${XCONFDIR}/20-${XDRIVER}.conf ]] && cecho ":: Video driver configured: ${CYAN}${XDRIVER}"
 }
 
