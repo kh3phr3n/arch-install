@@ -39,7 +39,7 @@ xorgConfiguration ()
     # Create pointer configuration file
     [[ ${POINTER} -ne 0 ]] && xorg_10_pointer_conf && cecho ":: Pointer configured: ${CYAN}${POINTERACCEL}"
     # Create touchpad configuration file
-    [[ ${TOUCHPAD} -ne 0 ]] && xorg_10_touchpad_conf && cecho ":: Touchpad configured: ${CYAN}${TOUCHACCEL}, ${CLICKMETHOD}"
+    [[ ${TOUCH} -ne 0 ]] && xorg_10_touchpad_conf && cecho ":: Touchpad configured: ${CYAN}${TOUCHACCEL}, ${CLICKMETHOD}"
 
     # Create keyboard configuration file
     xorg_10_keyboard_conf && cecho ":: Keyboard configured: ${CYAN}${XKBLAYOUT}, ${XKBVARIANT}"
