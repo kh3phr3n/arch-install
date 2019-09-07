@@ -37,7 +37,7 @@ xorgConfiguration ()
     block ":: Configure X.Org Window System"
 
     # Create pointer configuration file
-    [[ ${POINTER} -ne 0 ]] && xorg_10_pointer_conf && cecho ":: Pointer configured: ${CYAN}${POINTERACCEL}"
+    [[ ${POINT} -ne 0 ]] && xorg_10_pointer_conf && cecho ":: Pointer configured: ${CYAN}${POINTACCEL}"
     # Create touchpad configuration file
     [[ ${TOUCH} -ne 0 ]] && xorg_10_touchpad_conf && cecho ":: Touchpad configured: ${CYAN}${TOUCHACCEL}, ${CLICKMETHOD}"
 
@@ -81,7 +81,7 @@ Section "InputClass"
     MatchIsPointer "on"
     Identifier     "Pointer"
     Driver         "libinput"
-    Option         "AccelSpeed" "${POINTERACCEL}"
+    Option         "AccelSpeed" "${POINTACCEL}"
 EndSection
 EOF
 }
