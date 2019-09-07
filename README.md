@@ -1,7 +1,7 @@
 ##### Information
 
 Email: rc.dev@tuxico.com  
-PGP Key: [0x170FFC6CB3D12B30](https://pgp.mit.edu/pks/lookup?op=vindex&search=0x170FFC6CB3D12B30)  
+PGP Key: [0xF185DC316E659F24](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xF185DC316E659F24)  
 Licence: GPLv3 GNU General Public License  
 
 ##### Important
