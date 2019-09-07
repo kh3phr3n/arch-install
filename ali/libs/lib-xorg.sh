@@ -36,15 +36,18 @@ xorgConfiguration ()
 {
     block ":: Configure X.Org Window System"
 
-    # Create monitor configuration file
-    xorg_10_monitor_conf  && cecho ":: Monitor configured: ${CYAN}${RESOLUTION}"
-    # Create keyboard configuration file
-    xorg_10_keyboard_conf && cecho ":: Keyboard configured: ${CYAN}${XKBLAYOUT}, ${XKBVARIANT}"
+    # Create pointer configuration file
+    [[ ${POINTER} -ne 0 ]] && xorg_10_pointer_conf && cecho ":: Pointer configured: ${CYAN}${POINTERACCEL}"
     # Create touchpad configuration file
     [[ ${TOUCHPAD} -ne 0 ]] && xorg_10_touchpad_conf && cecho ":: Touchpad configured: ${CYAN}${TOUCHACCEL}, ${CLICKMETHOD}"
 
+    # Create keyboard configuration file
+    xorg_10_keyboard_conf && cecho ":: Keyboard configured: ${CYAN}${XKBLAYOUT}, ${XKBVARIANT}"
+    # Create monitor configuration file
+    xorg_10_monitor_conf && cecho ":: Monitor configured: ${CYAN}${RESOLUTION}"
+
     # Check graphics drivers configuration file
-    [[ -f ${XCONFDIR}/20-${XDRIVER}.conf ]] && cecho ":: Graphic driver configured: ${CYAN}${XDRIVER}"
+    [[ -f ${XCONFDIR}/20-${XDRIVER}.conf ]] && cecho ":: Video driver configured: ${CYAN}${XDRIVER}"
 }
 
 fontConfiguration ()
@@ -71,14 +74,14 @@ EndSection
 EOF
 }
 
-xorg_10_keyboard_conf ()
+xorg_10_pointer_conf ()
 {
-cat > ${XCONFDIR}/10-keyboard.conf << EOF
+cat > ${XCONFDIR}/10-pointer.conf << EOF
 Section "InputClass"
-    MatchIsKeyboard "on"
-    Identifier      "Keyboard"
-    Option          "XkbLayout"  "${XKBLAYOUT}"
-    Option          "XkbVariant" "${XKBVARIANT}"
+    MatchIsPointer "on"
+    Identifier     "Pointer"
+    Driver         "libinput"
+    Option         "AccelSpeed" "${POINTERACCEL}"
 EndSection
 EOF
 }
@@ -94,6 +97,18 @@ Section "InputClass"
     Option          "AccelSpeed" "${TOUCHACCEL}"
     Option          "ClickMethod" "${CLICKMETHOD}"
     Option          "DisableWhileTyping" "on"
+EndSection
+EOF
+}
+
+xorg_10_keyboard_conf ()
+{
+cat > ${XCONFDIR}/10-keyboard.conf << EOF
+Section "InputClass"
+    MatchIsKeyboard "on"
+    Identifier      "Keyboard"
+    Option          "XkbLayout"  "${XKBLAYOUT}"
+    Option          "XkbVariant" "${XKBVARIANT}"
 EndSection
 EOF
 }
