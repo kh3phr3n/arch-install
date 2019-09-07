@@ -41,7 +41,7 @@ xorgConfiguration ()
     # Create keyboard configuration file
     xorg_10_keyboard_conf && cecho ":: Keyboard configured: ${CYAN}${XKBLAYOUT}, ${XKBVARIANT}"
     # Create touchpad configuration file
-    [[ ${TOUCHPAD} -ne 0 ]] && xorg_10_touchpad_conf && cecho ":: Touchpad configured: ${CYAN}${ACCELSPEED}, ${CLICKMETHOD}"
+    [[ ${TOUCHPAD} -ne 0 ]] && xorg_10_touchpad_conf && cecho ":: Touchpad configured: ${CYAN}${TOUCHACCEL}, ${CLICKMETHOD}"
 
     # Check graphics drivers configuration file
     [[ -f ${XCONFDIR}/20-${XDRIVER}.conf ]] && cecho ":: Graphic driver configured: ${CYAN}${XDRIVER}"
@@ -91,7 +91,7 @@ Section "InputClass"
     Identifier      "Touchpad"
     Driver          "libinput"
     Option          "Tapping" "on"
-    Option          "AccelSpeed" "${ACCELSPEED}"
+    Option          "AccelSpeed" "${TOUCHACCEL}"
     Option          "ClickMethod" "${CLICKMETHOD}"
     Option          "DisableWhileTyping" "on"
 EndSection
