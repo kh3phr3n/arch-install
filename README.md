@@ -1,6 +1,6 @@
 ##### Information
 
-Email: rc.dev@tuxico.com  
+Email: kh3phr3n@nixsys.fr  
 PGP Key: [0xF185DC316E659F24](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xF185DC316E659F24)  
 Licence: GPLv3 GNU General Public License  
 
