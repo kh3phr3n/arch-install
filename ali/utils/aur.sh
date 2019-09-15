@@ -10,7 +10,7 @@ BLUE='\e[1;34m'
 YELLOW='\e[1;33m'
 
 # Packages url
-URL='https://aur.tuxico.com'
+URL='https://aur.nixsys.fr'
 
 # Packages list
 PACKAGES=(
