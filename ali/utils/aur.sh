@@ -16,7 +16,8 @@ URL='https://aur.nixsys.fr'
 PACKAGES=(
     # AUR helper
     'auracle/auracle-git-r261.342de84-1-x86_64.pkg.tar.xz'
-    # Extras i3wm
+    # Extras i3wm apps
+    'i3wm/postman-bin-7.7.3-1-x86_64.pkg.tar.xz'
     'i3wm/xcursor-oxygen-5.16.1-1-any.pkg.tar.xz'
     'i3wm/rxvt-unicode-patched-9.22-11-x86_64.pkg.tar.xz'
     # Extras fonts
@@ -24,7 +25,7 @@ PACKAGES=(
     'ttf-pt-public/ttf-pt-public-1.0-1-any.pkg.tar.xz'
     'ttf-awesome/ttf-font-awesome-4-4.7.0-5-any.pkg.tar.xz'
     'ttf-iosevka/ttf-iosevka-custom-2.2.1-1-any.pkg.tar.xz'
-    # Extras utils
+    # Extras fonts utils
     'ttf-iosevka/ttfautohint-1.8.3-1-x86_64.pkg.tar.xz'
     'ttf-iosevka/otfcc-0.10.3.alpha-1-x86_64.pkg.tar.xz'
     'ttf-iosevka/premake-git-5.0.alpha2.r1194.g8e02b419-1-x86_64.pkg.tar.xz'
