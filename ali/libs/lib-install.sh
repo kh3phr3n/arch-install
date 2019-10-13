@@ -63,7 +63,7 @@ setupEfiPartition ()
 installBaseSystem ()
 {
     block ":: Install minimal system"
-    pacstrap /mnt ${BASESYSTEM} ${BOOTLOADER}; pause
+    pacstrap /mnt ${BOOTLOADER} ${BASESYSTEM} ${BASECOMMON}; pause
 }
 
 generateFstabAndChroot ()
