@@ -14,7 +14,7 @@ When `ali.sh` is executed, `core.conf` is loaded and if `${PC}.conf` is found, e
     - My primary machine is `l380`, the variable `PC` in `ali.sh` is `l380`. So only `core.conf` is loaded because `l380.conf` does not exists.
     - My secondary machine is `dm3`, the variable `PC` in `ali.sh` is `dm3`. So `core.conf` is loaded and then `dm3.conf`.
 
-- Swap is managed by ZRam through systemd-swap (Improves SSD lifetime).
+- Swap is managed by ZRam through zram-generator (Improves SSD lifetime).
 - Only simple partition layout with LUKS is supported.
 - Only GRUB is supported (i386-pc and x86_64-efi).
 - UEFI and dual-boot windows are not supported yet.
