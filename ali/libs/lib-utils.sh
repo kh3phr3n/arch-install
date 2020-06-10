@@ -143,18 +143,15 @@ secureEraseData ()
 # Kernel.org/doc/Documentation/blockdev/zram.txt
 setupZramSwap ()
 {
-    # Enable systemd unit
-    addUnits 'systemd-swap.service'
-    # Github.com/Nefelim4ag/systemd-swap
-    split ":: Update /etc/systemd/swap.conf"
-    # Disable Zswap and enable Zram
-    sed -i "/^zswap_enabled=/s/1/0/;/^zram_enabled=/s/0/1/" /etc/systemd/swap.conf && cecho ":: Swap enabled: ${CYAN}Zram"; pause
+    block ":: Create /etc/systemd/zram-generator.conf"
+    # Generate pre-configured file
+    zram_generator_conf && cecho ":: Generator enabled: ${CYAN}swap-create@.service"
 }
 
 # Wiki.archlinux.org/index.php/Kernel_modules#Blacklisting
 blacklistMods ()
 {
-    block ":: Update /etc/modprobe.d/blacklist.conf"
+    split ":: Update /etc/modprobe.d/blacklist.conf"
 
     # Blacklist Kernel Module(s)
     for module in "${BLKMODS[@]}"
@@ -172,5 +169,19 @@ setupQtStyle ()
     local file='/etc/profile.d/qt5-style.sh'
     # Force GTK+ style for all Qt5 applications
     echo "export QT_QPA_PLATFORMTHEME=$1" > $file && chmod 755 $file && cecho ":: File updated: ${CYAN}$file"; pause
+}
+
+# Extras configuration files
+# Naming convention: *_conf ()
+
+zram_generator_conf ()
+{
+cat > /etc/systemd/zram-generator.conf << EOF
+[zram0]
+zram-fraction=0.10
+max-zram-size=2048
+host-memory-limit=none
+compression-algorithm=zstd
+EOF
 }
 
