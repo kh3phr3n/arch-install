@@ -26,7 +26,7 @@ PACKAGES=(
     'ttf-nonfree/ttf-nonfree-1.0-1-any.pkg.tar.xz'
     'ttf-pt-public/ttf-pt-public-1.0-1-any.pkg.tar.xz'
     'ttf-awesome/ttf-font-awesome-4-4.7.0-5-any.pkg.tar.xz'
-    'ttf-iosevka/ttf-iosevka-custom-2.3.2-1-any.pkg.tar.xz'
+    'ttf-iosevka/ttf-iosevka-custom-2.3.3-1-any.pkg.tar.zst'
     # Extras fonts utils
     'ttf-iosevka/ttfautohint-1.8.3-1-x86_64.pkg.tar.xz'
     'ttf-iosevka/otfcc-0.10.3.alpha-1-x86_64.pkg.tar.xz'
