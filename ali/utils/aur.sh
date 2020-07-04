@@ -17,7 +17,7 @@ PACKAGES=(
     # Extras apps
     'i3wm/xcursor-oxygen-5.16.1-1-any.pkg.tar.xz'
     'i3wm/postman-bin-7.19.1-1-x86_64.pkg.tar.zst'
-    'i3wm/rxvt-unicode-patched-9.22-11-x86_64.pkg.tar.xz'
+    'i3wm/rxvt-unicode-patched-9.22-11-x86_64.pkg.tar.zst'
     'i3wm/qt5-styleplugins-5.0.0.20170311-22-x86_64.pkg.tar.zst'
     # System apps
     'auracle/auracle-git-r313.b5b41d7-1-x86_64.pkg.tar.zst'
