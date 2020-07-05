@@ -18,17 +18,18 @@ BLOCKSIZE=$(blockdev --getsize64 ${NAMESPACE})
 
 # Util functions
 title () { echo -e "${BLUE}:: $1\n${OFF}"; }
+split () { echo -e "${BLUE}\n:: $1\n${OFF}"; }
 pause () { echo -e "${YELLOW}\n:: Press any key to continue...${OFF}"; read; }
 
 # Zero-fill
 title 'Zero-fill namespace'
-dd if=/dev/zero of=${NAMESPACE} bs=4096 count=${BLOCKSIZE} iflag=count_bytes status=progress && pause
+dd if=/dev/zero of=${NAMESPACE} bs=4096 count=${BLOCKSIZE} iflag=count_bytes status=progress
 
 # Nvme-format
-title 'Format namespace'
-nvme format ${NAMESPACE} --ses=1 --force && pause
+split 'Format namespace'
+nvme format ${NAMESPACE} --ses=1 --force
 
 # Nvme-smart-log
-title 'SMART log device'
-nvme smart-log ${NVME}
+split 'SMART log device'
+nvme smart-log ${NVME} && pause
 
