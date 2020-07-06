@@ -23,7 +23,7 @@ PACKAGES=(
     'auracle/auracle-git-r313.b5b41d7-1-x86_64.pkg.tar.zst'
     'systemd/zram-generator-git-0.1.2+42+g4eaf28a-1-x86_64.pkg.tar.zst'
     # Extras fonts
-    'ttf-nonfree/ttf-nonfree-1.0-1-any.pkg.tar.xz'
+    'ttf-nonfree/ttf-nonfree-1.0-1-any.pkg.tar.zst'
     'ttf-pt-public/ttf-pt-public-1.0-1-any.pkg.tar.xz'
     'ttf-awesome/ttf-font-awesome-4-4.7.0-5-any.pkg.tar.xz'
     'ttf-iosevka/ttf-iosevka-custom-2.3.3-1-any.pkg.tar.zst'
