@@ -32,9 +32,8 @@ When `ali.sh` is executed, `core.conf` is loaded and if `${PC}.conf` is found, e
 - Set your [keyboard layout](https://wiki.archlinux.org/index.php/Installation_guide#Set_the_keyboard_layout) (Default: us)
 
 ```
-wget https://github.com/kh3phr3n/arch-install/archive/master.tar.gz
-tar xzf arch-install-master.tar.gz
-mv arch-install-master/ali /root
+curl -O https://codeload.github.com/kh3phr3n/arch-install/tar.gz/master
+tar xzf master && mv arch-install-master/ali /root
 cd ali && chmod +x ali
 ```
 
