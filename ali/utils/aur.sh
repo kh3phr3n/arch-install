@@ -20,8 +20,11 @@ PACKAGES=(
     'i3wm/rxvt-unicode-patched-9.22-11-x86_64.pkg.tar.zst'
     'i3wm/qt5-styleplugins-5.0.0.20170311-22-x86_64.pkg.tar.zst'
     # System apps
+    'systemd/zram-generator-0.2.0-1-x86_64.pkg.tar.zst'
     'auracle/auracle-git-r313.b5b41d7-1-x86_64.pkg.tar.zst'
-    'systemd/zram-generator-git-0.1.2+42+g4eaf28a-1-x86_64.pkg.tar.zst'
+    # System apps utils
+    'systemd/ruby-nokogiri-1.11.0.rc2-1-any.pkg.tar.zst'
+    'systemd/ruby-ronn-ng-0.9.1-1-any.pkg.tar.zst'
     # Extras fonts
     'ttf-nonfree/ttf-nonfree-1.0-1-any.pkg.tar.zst'
     'ttf-pt-public/ttf-pt-public-1.0-1-any.pkg.tar.xz'
