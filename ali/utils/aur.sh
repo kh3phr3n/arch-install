@@ -29,7 +29,6 @@ PACKAGES=(
     # Extras fonts utils
     'ttf-iosevka/ttfautohint-1.8.3-1-x86_64.pkg.tar.xz'
     'ttf-iosevka/otfcc-0.10.3.alpha-1-x86_64.pkg.tar.xz'
-    'ttf-iosevka/premake-git-5.0.alpha2.r1194.g8e02b419-1-x86_64.pkg.tar.xz'
 )
 
 # Get/Install packages
