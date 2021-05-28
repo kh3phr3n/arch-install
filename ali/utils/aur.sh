@@ -20,7 +20,7 @@ PACKAGES=(
 
     # Extras fonts
     'fonts/ttf-nonfree-1.0-1-any.pkg.tar.zst'
-    'fonts/ttf-pt-public-1.0-1-any.pkg.tar.xz'
+    'fonts/ttf-pt-public-1.0-1-any.pkg.tar.zst'
     'fonts/ttf-font-awesome-4-4.7.0-5-any.pkg.tar.zst'
     'fonts/ttf-iosevka-custom-2.3.3-1-any.pkg.tar.zst'
 
@@ -30,7 +30,7 @@ PACKAGES=(
     'apps/rxvt-unicode-patched-9.22-11-x86_64.pkg.tar.zst'
 
     # Theme goodies
-    'goodies/xcursor-oxygen-5.16.1-1-any.pkg.tar.xz'
+    'goodies/xcursor-oxygen-5.21.1-1-any.pkg.tar.zst'
     'goodies/qt5-styleplugins-5.0.0.20170311-26-x86_64.pkg.tar.zst'
 )
 
