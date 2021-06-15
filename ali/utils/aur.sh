@@ -26,7 +26,7 @@ PACKAGES=(
 
     # Extras apps
     'apps/postman-bin-8.5.1-2-x86_64.pkg.tar.zst'
-    'apps/auracle-git-r313.b5b41d7-1-x86_64.pkg.tar.zst'
+    'apps/auracle-git-r366.8739929-1-x86_64.pkg.tar.zst'
 
     # Theme goodies
     'goodies/xcursor-oxygen-5.21.1-1-any.pkg.tar.zst'
