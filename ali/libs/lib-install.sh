@@ -88,7 +88,7 @@ configureMirrors ()
 
     # Pacman Mirrorlist Generator
     local file=$(mktemp --suffix=-mirrorlist)
-    local url="https://www.archlinux.org/mirrorlist"
+    local url="https://archlinux.org/mirrorlist"
     local arg="?country=${MIRRORS}&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on"
 
     # Get new mirrorlist
