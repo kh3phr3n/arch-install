@@ -97,6 +97,21 @@ configureMirrors ()
     mv $file /etc/pacman.d/mirrorlist && cecho ":: File updated: ${CYAN}/etc/pacman.d/mirrorlist\n" && updatePkg
 }
 
+configureFirewall ()
+{
+    block ":: Configure default Uncomplicated Firewall policies"
+
+    # Disable UFW IPv6 support + ping
+    sed -i "/^IPV6/s/yes/no/" /etc/default/ufw
+    sed -i "/input -p icmp --icmp-type echo/s/ACCEPT/DROP/" /etc/ufw/before.rules
+
+    # Set UFW default rules
+    ufw default deny incoming |& ofmt && ufw default allow outgoing |& ofmt
+
+    split ":: Enable Uncomplicated Firewall"
+    ufw enable |& ofmt; pause
+}
+
 configureEtcFiles ()
 {
     block ":: Create /etc/* configuration files"
@@ -134,9 +149,6 @@ configureBootloader ()
         then grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB |& ofmt
         else grub-install --target=i386-pc --recheck ${HARDDISK} |& ofmt
     fi
-
-    # Fix error messages at boot
-    #cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 
     # Cryptdevice arguments
     local dmname=${LUKSFS##*/}

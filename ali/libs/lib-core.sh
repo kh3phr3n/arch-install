@@ -30,6 +30,7 @@ configuration ()
 
     pause
     configureMirrors
+    configureFirewall
     configureEtcFiles
     configureBaseSystem
     configureBootloader
