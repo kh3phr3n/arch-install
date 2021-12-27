@@ -16,7 +16,7 @@ installPlasma5 ()
     [[ "${#KDEPKGS[@]}" -gt 0 ]] && installPkg "${KDEPKGS[@]}"
 
     # Enable systemd units
-    addUnits 'ufw.service sddm.service' 'NetworkManager.service'
+    addUnits 'ufw.service' 'sddm.service' 'NetworkManager.service'
 }
 
 installI3wm ()
@@ -29,7 +29,7 @@ installI3wm ()
     # Force style for Qt5
     setupQtStyle 'gtk2'
     # Enable systemd units
-    addUnits 'ufw.service sddm.service' 'connman.service'
+    addUnits 'ufw.service' 'sddm.service' 'connman.service'
 }
 
 install3rdParty ()
