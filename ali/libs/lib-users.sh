@@ -37,7 +37,7 @@ configureSudo ()
         # Create backup
         cp /etc/sudoers /etc/sudoers.backup
         # Allow only group wheel
-        sed -i "/%wheel ALL=(ALL) ALL/s/^# //" /etc/sudoers && cecho ":: File updated: ${CYAN}/etc/sudoers"
+        sed -i "/%wheel ALL=(ALL:ALL) ALL/s/^# //" /etc/sudoers && cecho ":: File updated: ${CYAN}/etc/sudoers"
         # Sudoers default file permissions
         chown -c root:root /etc/sudoers && chmod -c 0440 /etc/sudoers && cecho ":: Permissions updated: ${CYAN}(0440)(root)"
     fi; pause
