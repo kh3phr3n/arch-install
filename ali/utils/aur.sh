@@ -25,12 +25,13 @@ PACKAGES=(
     'fonts/ttf-iosevka-custom-2.3.3-1-any.pkg.tar.zst'
 
     # Extras apps
-    'apps/postman-bin-9.6.1-1-x86_64.pkg.tar.zst'
-    'apps/auracle-git-r366.8739929-2-x86_64.pkg.tar.zst'
+    'apps/staruml-5.0.2-1-x86_64.pkg.tar.zst'
+    'apps/postman-bin-9.24.2-1-x86_64.pkg.tar.zst'
+    'apps/auracle-git-r366.8739929-5-x86_64.pkg.tar.zst'
 
     # Theme goodies
     'goodies/xcursor-oxygen-5.23.1-1-any.pkg.tar.zst'
-    'goodies/qt5-styleplugins-5.0.0.20170311-26-x86_64.pkg.tar.zst'
+    'goodies/qt5-styleplugins-5.0.0.20170311-29-x86_64.pkg.tar.zst'
 )
 
 # Get/Install packages
