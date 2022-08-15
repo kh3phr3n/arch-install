@@ -17,6 +17,7 @@ PACKAGES=(
     # Extras utils
     'utils/otfcc-0.10.4-2-x86_64.pkg.tar.zst'
     'utils/ttfautohint-1.8.4-1-x86_64.pkg.tar.zst'
+    'utils/code-marketplace-1.70.0-2-any.pkg.tar.zst'
 
     # Extras fonts
     'fonts/ttf-nonfree-1.0-1-any.pkg.tar.zst'
