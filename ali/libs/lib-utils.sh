@@ -90,7 +90,7 @@ updateHooks ()
     block ":: Update /etc/mkinitcpio.conf"
 
     # Hooks required by LUKS
-    for hook in encrypt keymap
+    for hook in encrypt
     do
         sed -i "/^HOOKS=/s/block/& $hook/" /etc/mkinitcpio.conf && cecho ":: Hook added: ${CYAN}$hook"
     done
