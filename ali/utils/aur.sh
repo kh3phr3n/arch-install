@@ -17,7 +17,7 @@ PACKAGES=(
     # Extras utils
     'utils/otfcc-0.10.4-2-x86_64.pkg.tar.zst'
     'utils/ttfautohint-1.8.4-1-x86_64.pkg.tar.zst'
-    'utils/code-marketplace-1.70.0-2-any.pkg.tar.zst'
+    'utils/code-marketplace-1.87.0-2-any.pkg.tar.zst'
 
     # Extras fonts
     'fonts/ttf-nonfree-1.0-1-any.pkg.tar.zst'
@@ -26,13 +26,13 @@ PACKAGES=(
     'fonts/ttf-iosevka-custom-2.3.3-1-any.pkg.tar.zst'
 
     # Extras apps
-    'apps/staruml-5.0.2-1-x86_64.pkg.tar.zst'
-    'apps/postman-bin-9.24.2-1-x86_64.pkg.tar.zst'
-    'apps/auracle-git-r366.8739929-5-x86_64.pkg.tar.zst'
+    'apps/staruml-6.1.0-1-x86_64.pkg.tar.zst'
+    'apps/postman-bin-10.24.3-1-x86_64.pkg.tar.zst'
+    'apps/auracle-git-r373.fc335fc-1-x86_64.pkg.tar.zst'
 
     # Theme goodies
     'goodies/xcursor-oxygen-5.23.1-1-any.pkg.tar.zst'
-    'goodies/qt5-styleplugins-5.0.0.20170311-29-x86_64.pkg.tar.zst'
+    'goodies/qt5-styleplugins-5.0.0.20170311-35-x86_64.pkg.tar.zst'
 )
 
 # Get/Install packages
