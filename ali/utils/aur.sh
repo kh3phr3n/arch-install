@@ -33,6 +33,7 @@ PACKAGES=(
 
     # Theme goodies
     'goodies/xcursor-oxygen-5.23.1-1-any.pkg.tar.zst'
+    'goodies/nordic-gtk-theme-2.2.0-1-any.pkg.tar.zst'
     'goodies/qt5-styleplugins-5.0.0.20170311-35-x86_64.pkg.tar.zst'
 )
 
