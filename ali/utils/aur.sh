@@ -26,7 +26,7 @@ PACKAGES=(
     # Extras fonts
     'fonts/ttf-nonfree-1.0-1-any.pkg.tar.zst'
     'fonts/ttf-pt-public-1.0-1-any.pkg.tar.zst'
-    'fonts/ttf-iosevka-nerd-31.5.0-1-any.pkg.tar.zst'
+    'fonts/ttf-iosevka-nfm-31.5.0-1-any.pkg.tar.zst'
 
     # Theme goodies
     'goodies/xcursor-oxygen-5.23.1-1-any.pkg.tar.zst'
