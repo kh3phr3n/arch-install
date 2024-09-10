@@ -22,13 +22,15 @@ installGraphicsDriver ()
     # Create configuration file if available
     case "${XDRIVER}" in
         # Wiki.archlinux.org/index.php/Intel
-        intel   ) installPkg "xf86-video-intel libva-intel-driver" && xorg_20_intel_conf && earlyStart "i915" ;;
-        # Wiki.archlinux.org/index.php/Nouveau
-        nouveau ) installPkg "xf86-video-nouveau" && xorg_20_nouveau_conf && earlyStart "nouveau" ;;
+        intel ) installPkg "xf86-video-intel libva-intel-driver" && xorg_20_intel_conf ;;
         # Wiki.archlinux.org/index.php/Nvidia
-        nvidia* ) installPkg "${XDRIVER}" && xorg_20_nvidia_conf ;;
+        nvidia ) installPkg "${XDRIVER}" && xorg_20_nvidia_conf ;;
+        # Wiki.archlinux.org/index.php/Nouveau
+        nouveau ) installPkg "xf86-video-nouveau" && xorg_20_nouveau_conf ;;
+        # Man.archlinux.org/man/modesetting.4
+        modesetting ) installPkg "mesa" && xorg_20_modesetting_conf ;;
         # Archlinux.org/groups/x86_64/xorg-drivers
-        *       ) installPkg "xf86-video-${XDRIVER}" ;;
+        * ) installPkg "xf86-video-${XDRIVER}" ;;
     esac; pause
 }
 
@@ -120,7 +122,7 @@ xorg_20_nvidia_conf ()
 {
 cat > ${XCONFDIR}/20-nvidia.conf << EOF
 Section "Device"
-    Identifier "Nvidia Card"
+    Identifier "Nvidia Graphics"
     VendorName "NVIDIA Corporation"
     Driver     "nvidia"
     Option     "NoLogo" "true"
@@ -133,10 +135,20 @@ xorg_20_nouveau_conf ()
 {
 cat > ${XCONFDIR}/20-nouveau.conf << EOF
 Section "Device"
-    Identifier "Nvidia Card"
+    Identifier "Nvidia Graphics"
     Driver     "nouveau"
     Option     "SwapLimit" "2"
     Option     "GLXVBlank" "true"
+EndSection
+EOF
+}
+
+xorg_20_modesetting_conf ()
+{
+cat > ${XCONFDIR}/20-modesetting.conf << EOF
+Section "Device"
+    Identifier "KMS Graphics"
+    Driver     "modesetting"
 EndSection
 EOF
 }
