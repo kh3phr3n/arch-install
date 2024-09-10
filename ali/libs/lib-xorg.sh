@@ -43,8 +43,6 @@ xorgConfiguration ()
 
     # Create keyboard configuration file
     xorg_10_keyboard_conf && cecho ":: Keyboard configured: ${CYAN}${XKBLAYOUT}, ${XKBVARIANT}"
-    # Create monitor configuration file
-    xorg_10_monitor_conf && cecho ":: Monitor configured: ${CYAN}${RESOLUTION}"
 
     # Check video driver configuration file
     [[ -f ${XCONFDIR}/20-${XDRIVER}.conf ]] && cecho ":: Video driver configured: ${CYAN}${XDRIVER}"
@@ -63,16 +61,6 @@ fontConfiguration ()
 
 # Basic configuration files
 # Naming convention: xorg_10_<device>_conf ()
-
-xorg_10_monitor_conf ()
-{
-cat > ${XCONFDIR}/10-monitor.conf << EOF
-Section "Monitor"
-    Identifier "Monitor0"
-    Option     "PreferredMode" "${RESOLUTION}"
-EndSection
-EOF
-}
 
 xorg_10_pointer_conf ()
 {
