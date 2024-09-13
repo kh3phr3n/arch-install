@@ -21,14 +21,8 @@ installGraphicsDriver ()
 {
     # Create configuration file if available
     case "${XDRIVER}" in
-        # Wiki.archlinux.org/index.php/Intel
-        intel ) installPkg "xf86-video-intel libva-intel-driver" && xorg_20_intel_conf ;;
-        # Wiki.archlinux.org/index.php/Nvidia
-        nvidia ) installPkg "${XDRIVER}" && xorg_20_nvidia_conf ;;
-        # Wiki.archlinux.org/index.php/Nouveau
-        nouveau ) installPkg "xf86-video-nouveau" && xorg_20_nouveau_conf ;;
-        # Man.archlinux.org/man/modesetting.4
-        modesetting ) installPkg "mesa" && xorg_20_modesetting_conf ;;
+        # Wiki.archlinux.org/title/Xorg#Driver_installation
+        intel | radeon | nouveau ) installPkg "mesa vulkan-${XDRIVER}" && xorg_20_modesetting_conf ;;
         # Archlinux.org/groups/x86_64/xorg-drivers
         * ) installPkg "xf86-video-${XDRIVER}" ;;
     esac; pause
@@ -106,46 +100,9 @@ EOF
 # Driver configuration files
 # Naming convention: xorg_20_<driver>_conf ()
 
-xorg_20_intel_conf ()
-{
-cat > ${XCONFDIR}/20-intel.conf << EOF
-Section "Device"
-    Identifier "Intel Graphics"
-    Driver     "intel"
-    Option     "TearFree" "true"
-    Option     "AccelMethod" "sna"
-EndSection
-EOF
-}
-
-xorg_20_nvidia_conf ()
-{
-cat > ${XCONFDIR}/20-nvidia.conf << EOF
-Section "Device"
-    Identifier "Nvidia Graphics"
-    VendorName "NVIDIA Corporation"
-    Driver     "nvidia"
-    Option     "NoLogo" "true"
-    Option     "RegistryDwords" "EnableBrightnessControl=1"
-EndSection
-EOF
-}
-
-xorg_20_nouveau_conf ()
-{
-cat > ${XCONFDIR}/20-nouveau.conf << EOF
-Section "Device"
-    Identifier "Nvidia Graphics"
-    Driver     "nouveau"
-    Option     "SwapLimit" "2"
-    Option     "GLXVBlank" "true"
-EndSection
-EOF
-}
-
 xorg_20_modesetting_conf ()
 {
-cat > ${XCONFDIR}/20-modesetting.conf << EOF
+cat > ${XCONFDIR}/20-${XDRIVER}.conf << EOF
 Section "Device"
     Identifier "KMS Graphics"
     Driver     "modesetting"
