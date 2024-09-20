@@ -14,6 +14,11 @@ URL='https://cdn.nixsys.fr/aur'
 
 # Packages list
 PACKAGES=(
+    # Extras fonts
+    'fonts/ttf-nonfree-1.0-1-any.pkg.tar.zst'
+    'fonts/ttf-pt-public-1.0-1-any.pkg.tar.zst'
+    'fonts/ttf-iosevka-nfm-31.5.0-1-any.pkg.tar.zst'
+
     # Extras utils
     'utils/ttfautohint-1.8.4-1-x86_64.pkg.tar.zst'
     'utils/code-marketplace-1.90.0-1-any.pkg.tar.zst'
@@ -21,12 +26,7 @@ PACKAGES=(
     # Extras apps
     'apps/staruml-6.1.0-1-x86_64.pkg.tar.zst'
     'apps/postman-bin-11.10.0-1-x86_64.pkg.tar.zst'
-    'apps/auracle-git-r414.6131e35-1-x86_64.pkg.tar.zst'
-
-    # Extras fonts
-    'fonts/ttf-nonfree-1.0-1-any.pkg.tar.zst'
-    'fonts/ttf-pt-public-1.0-1-any.pkg.tar.zst'
-    'fonts/ttf-iosevka-nfm-31.5.0-1-any.pkg.tar.zst'
+    'apps/auracle-git-r420.f4cebb5-1-x86_64.pkg.tar.zst'
 
     # Theme goodies
     'goodies/xcursor-oxygen-5.23.1-1-any.pkg.tar.zst'
